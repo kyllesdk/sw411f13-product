@@ -1,0 +1,133 @@
+PARSER_BEGIN(ArduinoParser)
+
+/** ArduinoParser class */
+public class ArduinoParser {
+	/** Main entry point */
+	public static void main(String args[]) throws ParseException {
+		ArduinoParser parser = new ArduinoParser(System.in);
+		parser.Statement();
+	}
+}
+
+PARSER_END(ArduinoParser)
+
+/* Skip whitespace */
+SKIP :
+{
+	" "
+| "\t"
+| "\n"
+| "\r"	
+| "\f"
+}
+
+TOKEN : /* Reserved words and literals */
+{
+	< BOOLEAN: "boolean" >
+| 	< DO: "do" >
+|	< DOUBLE: "double" >
+| 	< END: "end" >
+|	< ELSE: "else" >
+|	< ELSEIF: "elseif" >
+|	< FALSE: "false" >
+|	< FLOAT: "float" >
+|	< IF: "if" >
+|	< INT: "int" >
+|	< STRING: "string" >
+|	< TRUE: "true" >
+|	< WHILE: "while" >
+}
+
+TOKEN : /* Seperators */
+{
+	< LPAREN: "(" >
+|	< RPAREN: ")" >
+|	< LBRACE: "{" >
+|	< RBRACE: "}" >
+|	< LBRACKET: "[" >
+|	< RBRACKET: "]" >
+|	< SEMICOLON: ";" >
+|	< COMMA: "," >
+|	< DOT: "." > 
+}
+
+TOKEN : /* Operators */
+{
+	< ASSIGN: "=" >
+|	< GT: ">" >
+|	< LT: "<" >
+|	< COLON: ":" >
+|	< EQ: "==" >
+|	< LE: "<=" >
+|	< GE: ">=" >
+|	< NE: "!=" >
+|	< SC_OR: "||" >
+|	< SC_AND: "&&" >
+|	< PLUS: "+" >
+|	< MINUS: "-" >
+|	< STAR: "*" >
+|	< SLASH: "/" >
+|	< REM: "%" >
+}
+
+/*TOKEN :
+{
+	< Id: ["a"-"z","A"-"Z"] ( ["a"-"z","A"-"Z","0"-"9"] )* >
+}*/
+
+/*********************************************
+*	LANGUAGE GRAMMAR STARTS HERE 							 *
+*********************************************/
+
+
+
+/** Root production */
+/*void Input() :
+{}
+{
+	( <Id> )+ <EOF>
+}*/
+
+/* If statement grammar */
+void IfStatement() :
+{}
+{
+	<IF> <LPAREN> Expression() <RPAREN> <DO> Statement() <END> SubStatement()
+}
+
+/* While loop */
+void WhileStatement() :
+{}
+{
+	<WHILE> <LPAREN> Expression() <RPAREN> <DO> Statement() <END>
+}
+
+/* Expression grammar */
+void Expression() :
+{}
+{
+	"abc" // SHOULD BE SOMETHING ELSE
+}
+
+/* Statement */
+void Statement() : 
+{}
+{
+	EmptyStatement()
+|	IfStatement()
+| WhileStatement()
+}
+
+void SubStatement() :
+{}
+{
+	LOOKAHEAD(1) <ELSEIF> <LPAREN> Expression() <RPAREN> <DO> Statement() <END> SubStatement()
+|	LOOKAHEAD(1) <ELSE> <DO> Statement() <END>
+| EmptyStatement()
+}
+
+void EmptyStatement() :
+{}
+{
+	";"
+}
