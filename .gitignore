@@ -4,3 +4,10 @@
 *.jar
 *.war
 *.ear
+Scanner/ArduinoParser.java
+Scanner/ArduinoParserConstants.java
+Scanner/ArduinoParserTokenManager.java
+Scanner/ParseException.java
+Scanner/SimpleCharStream.java
+Scanner/Token.java
+Scanner/TokenMgrError.java
