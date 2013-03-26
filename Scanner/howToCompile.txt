@@ -1,0 +1,8 @@
+################ HOW TO COMPILE ##############
+- Open terminal
+- Go to scanner ("dir", or "cd")
+- Run command "./javacc ArduinoParser.jj"
+- Run command "javac *.java"
+
+################ HOW TO RUN PARSER WHEN COMPILED ###############
+- Run command "java ArduinoParser"
