@@ -800,7 +800,9 @@ void Start() :
 void IfStatement() :
 {}
 {
-	<IF> <LPAREN> BooleanExpression() <RPAREN> <DO> Statement() <END> SubStatement()
+    (
+        <IF> <LPAREN> BooleanExpression() <RPAREN> <DO> Statement() <END> SubStatement()  [LOOKAHEAD(1)<ELSE> <DO> Statement() <END>]
+    )
 }
 
 /* While loop */
@@ -820,7 +822,7 @@ void Expression() :
 void VariableDeclaration() :
 {}
 {
-    PrimitiveTypes() Name() "=" Literal()";"
+    PrimitiveTypes() Name() <ASSIGN> Literal()<SEMICOLON>
 }
 
 void Name() :
@@ -900,9 +902,9 @@ void Statement() :
 void SubStatement() :
 {}
 {
-	LOOKAHEAD(1) <ELSEIF> <LPAREN> Expression() <RPAREN> <DO> Statement() <END> SubStatement()
-|	LOOKAHEAD(1) <ELSE> <DO> Statement() <END>
-| EmptyStatement()
+    LOOKAHEAD(1)<ELSEIF> <LPAREN> Expression() <RPAREN> <DO> Statement() <END>
+|   EmptyStatement()
+
 }
 
 void EmptyStatement() :
