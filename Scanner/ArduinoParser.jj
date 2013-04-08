@@ -5,7 +5,7 @@ public class ArduinoParser {
 	/** Main entry point */
 	public static void main(String args[]) throws ParseException {
 		ArduinoParser parser = new ArduinoParser(System.in);
-		parser.WhileStatement();
+		parser.Start();
 	}
 }
 
@@ -787,24 +787,56 @@ TOKEN : /* Operators */
 }*/
 
 /* If statement grammar */
+
+void Start() :
+{}
+{
+    ( 
+        Expression() 
+        |  IfStatement() 
+        | WhileStatement() 
+    )*
+}
 void IfStatement() :
 {}
 {
-	<IF> <LPAREN> Expression() <RPAREN> <DO> Statement() <END> SubStatement()
+	<IF> <LPAREN> BooleanExpression() <RPAREN> <DO> Statement() <END> SubStatement()
 }
 
 /* While loop */
 void WhileStatement() :
 {}
 {
-	<WHILE> <LPAREN> Expression() <RPAREN> <DO> Statement() <END>
+	<WHILE> <LPAREN> BooleanExpression() <RPAREN> <DO> Statement() <END>
 }
 
 void Expression() :
 {}
 {
-	Literal() [Expression()]
-|	ConditionalExpression() [AssignmentOperator() Expression()]
+    BooleanExpression()
+|   VariableDeclaration()
+}
+
+void VariableDeclaration() :
+{}
+{
+    PrimitiveTypes() Variable() "=" Literal()";"
+}
+
+void Variable() :
+{}
+{
+    <STRING_LITERAL>
+|   <CHARACTER_LITERAL>
+}
+
+void PrimitiveTypes() :
+{}
+{
+    <INT>
+|   <STRING>
+|   <DOUBLE>
+|   <FLOAT>
 }
 
 void AssignmentOperator() :
@@ -813,101 +845,32 @@ void AssignmentOperator() :
   "="
 }
 
-void ConditionalExpression() :
+void BooleanExpression() :
 {}
 {
-  ConditionalOrExpression() [ "?" Expression() ":" ConditionalExpression() ]
+    RelationalExpression()
 }
 
-void ConditionalOrExpression() :
-{}
-{
-	ConditionalAndExpression() ( <SC_OR> ConditionalAndExpression() )*
-}
-
-void ConditionalAndExpression() :
-{}
-{
-	EqualityExpression() ( <SC_AND> EqualityExpression() )*
-}
-
-void EqualityExpression() :
-{}
-{
-	RelationalExpression() ( ( <EQ> | <NE> ) RelationalExpression())*
-}
 
 void RelationalExpression() :
 {}
 {
-	AdditiveExpression() ( ( "<" | ">" | "<=" | ">=") AdditiveExpression() )*
-}
 
-void AdditiveExpression() :
-{}
-{
-	MultiplicativeExpression()  ( ( <PLUS> | <MINUS> ) MultiplicativeExpression() )*
+	Literal() ( ( "<" | ">" | "<=" | ">=" | "==" | "!=") Literal() )*
 }
-
-void MultiplicativeExpression() :
-{}
-{
-	UnaryExpression() ( ( <STAR> | <SLASH> | <REM> ) UnaryExpression() )*
-}
-
-void UnaryExpression() :
-{}
-{
-	(<PLUS> | <MINUS>) UnaryExpression()
-|	PreIncrementExpression()
-|	PreDecrementExpression()
-}
-
-void PreIncrementExpression() :
-{}
-{
-	"++" PrimaryExpression()
-	//"++" PrimaryExpression()
-}
-
-void PreDecrementExpression() :
-{}
-{
-	"--" PrimaryExpression()
-	//"--" PrimaryExpression()
-}
-
-void PrimaryExpression() :
-{}
-{
-	PrimaryPrefix() ( LOOKAHEAD(2) PrimarySuffix() )*
-}
-
-void PrimaryPrefix() :
-{}
-{
-	Literal()
-|	<LPAREN> Expression() <RPAREN>
-//|	Arguments()	
-}
-
-void PrimarySuffix() :
-{}
-{
-	<LBRACKET> Expression() <RBRACKET>
-}
-
 
 void Literal() :
 {}
 {
-	<INTEGER_LITERAL>
+    <INTEGER_LITERAL>
 |	<FLOATING_POINT_LITERAL>
 |	<CHARACTER_LITERAL>
 |	<STRING_LITERAL>
 |	BooleanLiteral()
 |	NullLiteral()
 }
+
+
 
 void BooleanLiteral() :
 {}
@@ -928,7 +891,9 @@ void Statement() :
 {
 	EmptyStatement()
 |	IfStatement()
-| WhileStatement()
+|   WhileStatement()
+|   Literal()
+|   VariableDeclaration()
 }
 
 void SubStatement() :
