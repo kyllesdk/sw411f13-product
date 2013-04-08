@@ -826,7 +826,7 @@ void VariableDeclaration() :
 void Name() :
 {}
 {
-    (<STRING_LITERAL> | <CHARACTER_LITERAL>)
+    <IDENTIFIER>
 }
 
 void PrimitiveTypes() :
