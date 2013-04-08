@@ -900,8 +900,8 @@ void Statement() :
 void SubStatement() :
 {}
 {
-	LOOKAHEAD(1) <ELSEIF> <LPAREN> Expression() <RPAREN> <DO> Statement() <END> SubStatement())
-|	(LOOKAHEAD(1) <ELSE> <DO> Statement() <END>
+	LOOKAHEAD(1) <ELSEIF> <LPAREN> Expression() <RPAREN> <DO> Statement() <END> SubStatement()
+|	LOOKAHEAD(1) <ELSE> <DO> Statement() <END>
 | EmptyStatement()
 }
 
