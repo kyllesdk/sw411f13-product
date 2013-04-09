@@ -793,11 +793,33 @@ void Start() :
 {}
 {
     ( 
-        Expression() 
-        |  IfStatement() 
-        | WhileStatement() 
+        Statement() 
     )*
 }
+
+/* Statement */
+void Statement() : 
+{}
+{        
+    EmptyStatement()
+|   IfStatement()
+|   WhileStatement()
+|   Literal()
+|   VariableDeclaration()
+}
+
+void SubStatement() :
+{}
+{
+    [LOOKAHEAD(1)<ELSEIF> <LPAREN> Expression() <RPAREN> <DO> Statement() <END>]
+}
+
+void EmptyStatement() :
+{}
+{
+    ";"
+}
+
 void IfStatement() :
 {}
 {
@@ -883,31 +905,4 @@ void NullLiteral() :
 {}
 {
 	<NULL>
-}
-
-/* Statement */
-void Statement() : 
-{}
-{
-    (
-        EmptyStatement()
-    |   IfStatement()
-    |   WhileStatement()
-    |   Literal()
-    |   VariableDeclaration()
-    )*
-}
-
-void SubStatement() :
-{}
-{
-    LOOKAHEAD(1)<ELSEIF> <LPAREN> Expression() <RPAREN> <DO> Statement() <END>
-|   EmptyStatement()
-
-}
-
-void EmptyStatement() :
-{}
-{
-	";"
 }
