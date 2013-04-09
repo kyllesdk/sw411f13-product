@@ -792,23 +792,19 @@ TOKEN : /* Operators */
 void Start() :
 {}
 {   
-    "setup() {" ( Statement() )* "}" "loop() {" ( Statement() )* "}"
+    //"setup()" < LBRACE > Statement()* < RBRACE > "loop()" < LBRACE > Statement()* < RBRACE >
+
+    [Statement()]
 }
 
 /* Statement */
 void Statement() : 
 {}
 {        
-    EmptyStatement()
-|   IfStatement()
+    //EmptyStatement()
+    IfStatement()
 |   WhileStatement()
 |   VariableDeclaration()
-}
-
-void SubStatement() :
-{}
-{
-    [LOOKAHEAD(1)<ELSEIF> <LPAREN> Expression() <RPAREN> <DO> Statement() <END>]
 }
 
 void EmptyStatement() :
@@ -820,7 +816,7 @@ void EmptyStatement() :
 void IfStatement() :
 {}
 {
-    <IF> <LPAREN> BooleanExpression() <RPAREN> <DO> Statement() <END> SubStatement() [<ELSE> <DO> Statement() <END>]
+    <IF> <LPAREN> BooleanExpression() <RPAREN> <DO> Statement() <END> [<ELSEIF> <LPAREN> Expression() <RPAREN> <DO> Statement() <END>] [<ELSE> <DO> Statement() <END>]
 }
 
 /* While loop */
@@ -840,7 +836,7 @@ void Expression() :
 void VariableDeclaration() :
 {}
 {
-    PrimitiveTypes() Name() <ASSIGN> (Literal() | < LPAREN > BooleanExpression() < RPAREN >)<SEMICOLON>
+    PrimitiveTypes() Name() <ASSIGN> (Literal() | < LPAREN > BooleanExpression() < RPAREN >)<SEMICOLON> [Statement()]
 }
 
 void Name() :
