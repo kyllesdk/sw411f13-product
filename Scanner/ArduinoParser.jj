@@ -763,9 +763,11 @@ TOKEN : /* Operators */
 |	< SC_AND: "&&" >
 |	< PLUS: "+" >
 |	< MINUS: "-" >
-|	< STAR: "*" >
-|	< SLASH: "/" >
-|	< REM: "%" >
+|	< MULTIPLY: "*" >
+|	< DIVIDE: "/" >
+|	< MOD: "%" >
+|	< SQRT: "sqrt" >
+|	< POW: "^" >
 |   < NOT: "!" >
 }
 
@@ -829,7 +831,8 @@ void WhileStatement() :
 void Expression() :
 {}
 {
-    BooleanExpression()
+	ArithmeticExpression()
+|   BooleanExpression()
 |   VariableDeclaration()
 }
 
@@ -848,10 +851,23 @@ void Name() :
 void PrimitiveTypes() :
 {}
 {
-    <INT>
+    Number()
 |   <STRING>
-|   <DOUBLE>
-|   <FLOAT>
+}
+
+void Number() :
+{}
+{
+	<INT>
+|	<DOUBLE>
+|	<FLOAT>
+}
+
+void ArithmeticExpression() :
+{}
+{
+	Number() (( <PLUS> | <MINUS> | <MULTIPLY> | <DIVIDE> | <MOD> | <SQRT> | <POW>) Number())*
+
 }
 
 void BooleanExpression() :
