@@ -843,7 +843,7 @@ void Expression() :
 void VariableDeclaration() :
 {}
 {
-    PrimitiveTypes() Name() <ASSIGN> Literal()<SEMICOLON>
+    PrimitiveTypes() Name() <ASSIGN> (Literal() | < LPAREN > BooleanExpression() < RPAREN >)<SEMICOLON>
 }
 
 void Name() :
@@ -859,12 +859,6 @@ void PrimitiveTypes() :
 |   <STRING>
 |   <DOUBLE>
 |   <FLOAT>
-}
-
-void AssignmentOperator() :
-{}
-{
-  "="
 }
 
 void BooleanExpression() :
