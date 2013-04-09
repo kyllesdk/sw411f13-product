@@ -791,10 +791,8 @@ TOKEN : /* Operators */
 
 void Start() :
 {}
-{
-    ( 
-        Statement() 
-    )*
+{   
+    "setup() {" ( Statement() )* "}" "loop() {" ( Statement() )* "}"
 }
 
 /* Statement */
@@ -804,7 +802,6 @@ void Statement() :
     EmptyStatement()
 |   IfStatement()
 |   WhileStatement()
-|   Literal()
 |   VariableDeclaration()
 }
 
