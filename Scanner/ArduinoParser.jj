@@ -766,6 +766,7 @@ TOKEN : /* Operators */
 |	< STAR: "*" >
 |	< SLASH: "/" >
 |	< REM: "%" >
+|   < NOT: "!" >
 }
 
 /*TOKEN :
@@ -800,9 +801,7 @@ void Start() :
 void IfStatement() :
 {}
 {
-    (
-        <IF> <LPAREN> BooleanExpression() <RPAREN> <DO> Statement() <END> SubStatement()  [LOOKAHEAD(1)<ELSE> <DO> Statement() <END>]
-    )
+    <IF> <LPAREN> BooleanExpression() <RPAREN> <DO> Statement() <END> SubStatement() [<ELSE> <DO> Statement() <END>]
 }
 
 /* While loop */
@@ -857,7 +856,7 @@ void RelationalExpression() :
 {}
 {
 
-	Literal() ( ( "<" | ">" | "<=" | ">=" | "==" | "!=") Literal() )*
+	Literal() ( ( <LT> | <GT> | <LE> | <GE> | <EQ> | <NE>) Literal() )*
 }
 
 void Literal() :
