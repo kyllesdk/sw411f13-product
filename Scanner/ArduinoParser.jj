@@ -793,13 +793,32 @@ TOKEN : /* Operators */
 
 void Start() :
 {}
-{
-    ( 
-        Expression() 
-        |  IfStatement() 
-        | WhileStatement() 
-    )*
+{   
+    "setup() {" ( Statement() )* "}" "loop() {" ( Statement() )* "}"
 }
+
+/* Statement */
+void Statement() : 
+{}
+{        
+    EmptyStatement()
+|   IfStatement()
+|   WhileStatement()
+|   VariableDeclaration()
+}
+
+void SubStatement() :
+{}
+{
+    [LOOKAHEAD(1)<ELSEIF> <LPAREN> Expression() <RPAREN> <DO> Statement() <END>]
+}
+
+void EmptyStatement() :
+{}
+{
+    ";"
+}
+
 void IfStatement() :
 {}
 {
@@ -824,7 +843,7 @@ void Expression() :
 void VariableDeclaration() :
 {}
 {
-    PrimitiveTypes() Name() <ASSIGN> Literal()<SEMICOLON>
+    PrimitiveTypes() Name() <ASSIGN> (Literal() | < LPAREN > BooleanExpression() < RPAREN >)<SEMICOLON>
 }
 
 void Name() :
@@ -853,12 +872,6 @@ void ArithmeticExpression() :
 {
 	Number() (( <PLUS> | <MINUS> | <MULTIPLY> | <DIVIDE> | <MOD> | <SQRT> | <POW>) Number())*
 
-}
-
-void AssignmentOperator() :
-{}
-{
-  "="
 }
 
 void BooleanExpression() :
@@ -899,31 +912,4 @@ void NullLiteral() :
 {}
 {
 	<NULL>
-}
-
-/* Statement */
-void Statement() : 
-{}
-{
-    (
-        EmptyStatement()
-    |   IfStatement()
-    |   WhileStatement()
-    |   Literal()
-    |   VariableDeclaration()
-    )*
-}
-
-void SubStatement() :
-{}
-{
-    LOOKAHEAD(1)<ELSEIF> <LPAREN> Expression() <RPAREN> <DO> Statement() <END>
-|   EmptyStatement()
-
-}
-
-void EmptyStatement() :
-{}
-{
-	";"
 }
