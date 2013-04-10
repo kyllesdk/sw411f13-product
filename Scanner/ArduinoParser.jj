@@ -37,6 +37,9 @@ TOKEN : /* Reserved words and literals */
 |	< WHILE: "while" >
 | 	< DO: "do" >
 | 	< END: "end" >
+|   < VOID: "void" >
+|   < FUNCTION: "function" >
+|   < RETURN: "return" >
 }
 
 /* Literals */
@@ -796,7 +799,7 @@ void Start() :
 {   
     //"setup()" < LBRACE > Statement()* < RBRACE > "loop()" < LBRACE > Statement()* < RBRACE >
 
-    [Statement()]
+    Statement()
 }
 
 /* Statement */
@@ -807,12 +810,19 @@ void Statement() :
     IfStatement()
 |   WhileStatement()
 |   VariableDeclaration()
+|   FunctionDeclaration()
 }
 
 void EmptyStatement() :
 {}
 {
     ";"
+}
+
+void FunctionDeclaration() :
+{}
+{
+    (<VOID> | PrimitiveTypes()) <FUNCTION> Name()<LPAREN><RPAREN> <DO> Statement() [<RETURN> Name() <SEMICOLON>] <END>
 }
 
 void IfStatement() :
@@ -839,7 +849,7 @@ void Expression() :
 void VariableDeclaration() :
 {}
 {
-    PrimitiveTypes() Name() <ASSIGN> (Literal() | < LPAREN > BooleanExpression() < RPAREN >)<SEMICOLON> [Statement()]
+    PrimitiveTypes() Name() <ASSIGN> (Literal() | < LPAREN > BooleanExpression() < RPAREN > | ArithmeticExpression()) <SEMICOLON> [Statement()]
 }
 
 void Name() :
@@ -851,8 +861,8 @@ void Name() :
 void PrimitiveTypes() :
 {}
 {
-    Number()
-|   <STRING>
+   Number()
+|  <STRING>
 }
 
 void Number() :
