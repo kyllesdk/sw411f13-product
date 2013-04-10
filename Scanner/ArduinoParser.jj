@@ -207,13 +207,14 @@ void Start() :
 /* Statement */
 void Statement() : 
 {}
-{        
-    //EmptyStatement()
-    IfStatement()
-|   WhileStatement()
-|   VariableDeclaration()
-|   FunctionDeclaration()
-|   Name()<SEMICOLON> // Function call
+{   
+	(    //EmptyStatement()
+		    IfStatement()
+		|   WhileStatement()
+		|   VariableDeclaration()
+		|   FunctionDeclaration()
+		|   Name()<SEMICOLON> // Function call
+	)+
 }
 
 void EmptyStatement() :
@@ -225,13 +226,13 @@ void EmptyStatement() :
 void FunctionDeclaration() :
 {}
 {
-    (<VOID> | PrimitiveTypes()) <FUNCTION> Name()<LPAREN><RPAREN> <DO> Statement() [<RETURN> Name() <SEMICOLON>] <END> [Statement()]
+    (<VOID> | PrimitiveTypes()) <FUNCTION> Name()<LPAREN><RPAREN> <DO> Statement() [<RETURN> Name() <SEMICOLON>] <END> 
 }
 
 void IfStatement() :
 {}
 {
-    <IF> <LPAREN> BooleanExpression() <RPAREN> <DO> Statement() <END> [<ELSEIF> <LPAREN> Expression() <RPAREN> <DO> Statement() <END>] [<ELSE> <DO> Statement() <END>][Statement()]
+    <IF> <LPAREN> BooleanExpression() <RPAREN> <DO> Statement() <END> [<ELSEIF> <LPAREN> Expression() <RPAREN> <DO> Statement() <END>] [<ELSE> <DO> Statement() <END>]
 }
 
 /* While loop */
@@ -252,7 +253,7 @@ void Expression() :
 void VariableDeclaration() :
 {}
 {
-    PrimitiveTypes() Name() <ASSIGN> (Name() | < LPAREN > BooleanExpression() < RPAREN > | ArithmeticExpression()) <SEMICOLON> [Statement()]
+    PrimitiveTypes() Name() <ASSIGN> (Literal() (ArithmeticExpression() Literal())* | Name() | < LPAREN > BooleanExpression() < RPAREN >) <SEMICOLON>
 }
 
 void Name() :
@@ -279,7 +280,7 @@ void NumberType() :
 void ArithmeticExpression() :
 {}
 {
-	NumberSize() (( <PLUS> | <MINUS> | <MULTIPLY> | <DIVIDE> | <MOD> | <SQRT> | <POW>) NumberSize())*
+	(<PLUS> | <MINUS> | <MULTIPLY> | <DIVIDE> | <MOD> | <SQRT> | <POW>)
 
 }
 
