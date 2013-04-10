@@ -10,7 +10,7 @@ public class ArduinoParser {
     System.out.println("Reading from standard input...");
     ArduinoParser parser = new ArduinoParser(System.in);
     try {
-      SimpleNode n = parser.Start();
+      SimpleNode n = parser.Program();
       n.dump("");
       System.out.println("Thank you.");
     } catch (Exception e) {
@@ -50,6 +50,7 @@ TOKEN : /* Reserved words and literals */
 |	< WHILE: "while" >
 | 	< DO: "do" >
 | 	< END: "end" >
+|   < CLASS: "class" >
 }
 
 /* Literals */
@@ -804,23 +805,22 @@ TOKEN : /* Operators */
    All other nonterminals have no result type (void). 
 */
 
-/* Ved ikke 100 procent hvad der skal gøres med denne del, lånt fra eksemplet eg1 */
-
-/* The start nonterminal and its productions. */
-/*
-SimpleNode Start() : {} // Start -> Exp
-{
-  Exp()
-  { return jjtThis; }
-}*/
-/* Other nonterminals and their productions */
-
 
 /*********************************************
 *	LANGUAGE GRAMMAR STARTS HERE 							 *
 *********************************************/
 
+SimpleNode Program() #Program :
+{}
+{
+ (Class_decl())* <EOF> {return jjtThis;}
+}
 
+void Class_decl() #ClassDecl :
+{}
+{
+ <CLASS> <Id> <SEMICOLON>
+}
 
 /** Root production */
 /*void Input() :
