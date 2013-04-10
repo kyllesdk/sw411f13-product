@@ -1,0 +1,41 @@
+
+setup() {}
+
+loop() {
+	/* Function Tests */
+	void function HelloWorld() do
+		string helloWorld = "Hello World!"; 
+		
+		return helloWorld;
+	end
+
+	void function HelloToYou() do
+		string helloToYou = "Hello Dude!";
+
+		return helloToYou;
+	end
+
+	void function Procedure() do
+		int h = 10 + 11;
+		int hello = "World!";
+	end
+
+	HelloWorld;
+	HelloToYou;
+	Procedure;
+	
+
+	/* Loop-if Nesting test*/
+	int i = 10;
+	while('b' <= 'i') do
+		if('b' == 9) do
+			int h = 10;
+
+			if('b' == 9) do
+				int h = 1;
+			end
+			int h = 10;
+		end
+		int h = 10;
+	end
+}
