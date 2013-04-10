@@ -1,18 +1,3 @@
-/* CalcParser.jjt */
-
-
-/* This example shows how to specify a simple parser for a toy calculator
-   language with floats, multiplication, and let-expressions.
-   Here is an example program in this language:
-   
-      let radius = 5.0 in
-        let pi = 3.14 in
-          2.0 * pi * radius 
-        ni
-      ni
-*/
-
-
 /* *** Specifcation of the parser class *** */
 
 PARSER_BEGIN(ArduinoParser)
@@ -20,11 +5,20 @@ PARSER_BEGIN(ArduinoParser)
 /** ArduinoParser class */
 public class ArduinoParser {
 
-	/** Main entry point */
-	public static void main(String args[]) throws ParseException {
-		ArduinoParser parser = new ArduinoParser(System.in);
-		parser.Start();
-	}
+	/** Main entry point. */
+  public static void main(String args[]) {
+    System.out.println("Reading from standard input...");
+    ArduinoParser parser = new ArduinoParser(System.in);
+    try {
+      SimpleNode n = parser.Start();
+      n.dump("");
+      System.out.println("Thank you.");
+    } catch (Exception e) {
+      System.out.println("Oops.");
+      System.out.println(e.getMessage());
+      e.printStackTrace();
+    }
+  }
 }
 PARSER_END(ArduinoParser)
 
@@ -810,44 +804,155 @@ TOKEN : /* Operators */
    All other nonterminals have no result type (void). 
 */
 
-/* The start nonterminal and its productions. */
+/* Ved ikke 100 procent hvad der skal gøres med denne del, lånt fra eksemplet eg1 */
 
+/* The start nonterminal and its productions. */
+/*
 SimpleNode Start() : {} // Start -> Exp
 {
   Exp()
   { return jjtThis; }
-}
-
+}*/
 /* Other nonterminals and their productions */
 
-void Exp() : {} // Exp -> Factor [MulExp]
+
+/*********************************************
+*	LANGUAGE GRAMMAR STARTS HERE 							 *
+*********************************************/
+
+
+
+/** Root production */
+/*void Input() :
+{}
 {
-  Factor() [ MulExp() ]
+	( <Id> )+ <EOF>
+}*/
+
+/* If statement grammar */
+
+void Start() :
+{}
+{   
+    //"setup()" < LBRACE > Statement()* < RBRACE > "loop()" < LBRACE > Statement()* < RBRACE >
+
+    Statement()
 }
 
-void Factor() : {} // Factor -> LetExp | FPLitExp | IDExp
-{
-  LetExp()
-| FPLitExp()
-| IDExp()
+/* Statement */
+void Statement() : 
+{}
+{        
+    //EmptyStatement()
+    IfStatement()
+|   WhileStatement()
+|   VariableDeclaration()
+|   FunctionDeclaration()
 }
 
-void LetExp() : {} // LetExp -> "let" IDExp "=" Exp "in" Exp "ni"
+void EmptyStatement() :
+{}
 {
-  <LET> IDExp() "=" Exp() <IN> Exp() <NI>
+    ";"
 }
 
-void MulExp() : {} // MulExp -> "*" Exp
+void FunctionDeclaration() :
+{}
 {
-  "*" Exp()
+    (<VOID> | PrimitiveTypes()) <FUNCTION> Name()<LPAREN><RPAREN> <DO> Statement() [<RETURN> Name() <SEMICOLON>] <END>
 }
 
-void FPLitExp() : {} // FPLitExp -> FPLIT
+void IfStatement() :
+{}
 {
-  <FPLIT>
+    <IF> <LPAREN> BooleanExpression() <RPAREN> <DO> Statement() <END> [<ELSEIF> <LPAREN> Expression() <RPAREN> <DO> Statement() <END>] [<ELSE> <DO> Statement() <END>]
 }
 
-void IDExp() : {} // IDExp -> ID
+/* While loop */
+void WhileStatement() :
+{}
 {
-  <ID>
+	<WHILE> <LPAREN> BooleanExpression() <RPAREN> <DO> Statement() <END>
+}
+
+void Expression() :
+{}
+{
+	ArithmeticExpression()
+|   BooleanExpression()
+|   VariableDeclaration()
+}
+
+void VariableDeclaration() :
+{}
+{
+    PrimitiveTypes() Name() <ASSIGN> (Literal() | < LPAREN > BooleanExpression() < RPAREN > | ArithmeticExpression()) <SEMICOLON> [Statement()]
+}
+
+void Name() :
+{}
+{
+    <IDENTIFIER>
+}
+
+void PrimitiveTypes() :
+{}
+{
+   Number()
+|  <STRING>
+}
+
+void Number() :
+{}
+{
+	<INT>
+|	<DOUBLE>
+|	<FLOAT>
+}
+
+void ArithmeticExpression() :
+{}
+{
+	Number() (( <PLUS> | <MINUS> | <MULTIPLY> | <DIVIDE> | <MOD> | <SQRT> | <POW>) Number())*
+
+}
+
+void BooleanExpression() :
+{}
+{
+    RelationalExpression()
+}
+
+
+void RelationalExpression() :
+{}
+{
+
+	Literal() ( ( <LT> | <GT> | <LE> | <GE> | <EQ> | <NE>) Literal() )*
+}
+
+void Literal() :
+{}
+{
+    <INTEGER_LITERAL>
+|	<FLOATING_POINT_LITERAL>
+|	<CHARACTER_LITERAL>
+|	<STRING_LITERAL>
+|	BooleanLiteral()
+|	NullLiteral()
+}
+
+
+
+void BooleanLiteral() :
+{}
+{
+	<TRUE>
+|	<FALSE>
+}
+
+void NullLiteral() :
+{}
+{
+	<NULL>
 }
