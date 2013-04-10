@@ -3,13 +3,13 @@ setup() {}
 
 loop() {
 	/* Function Tests */
-	string function HelloWorld() do
+	void function HelloWorld() do
 		string helloWorld = "Hello World!"; 
 		
 		return helloWorld;
 	end
 
-	string function HelloToYou(hello, world) do
+	void function HelloToYou(hello, world) do
 		string helloToYou = hello + world;
 
 		return helloToYou;
@@ -33,6 +33,10 @@ loop() {
 
 			if('b' == 9) do
 				int h = 1;
+			end elseif('a' == 1) do // Should produce an error!
+				int h = 1;
+			end else do
+				string Hello = "World!";
 			end
 			int h = 10;
 		end
