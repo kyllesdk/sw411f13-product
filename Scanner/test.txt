@@ -3,14 +3,14 @@ setup() {}
 
 loop() {
 	/* Function Tests */
-	void function HelloWorld() do
+	string function HelloWorld() do
 		string helloWorld = "Hello World!"; 
 		
 		return helloWorld;
 	end
 
-	void function HelloToYou() do
-		string helloToYou = "Hello Dude!";
+	string function HelloToYou(hello, world) do
+		string helloToYou = hello + world;
 
 		return helloToYou;
 	end
@@ -20,9 +20,9 @@ loop() {
 		int hello = "World!";
 	end
 
-	HelloWorld;
-	HelloToYou;
-	Procedure;
+	HelloWorld(hello, world);
+	lcd.Display.Print("Hello"); // Call of method in other class
+	Procedure();
 	
 
 	/* Loop-if Nesting test*/
