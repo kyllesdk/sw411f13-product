@@ -94,7 +94,7 @@ TOKEN :
 				)
 			  )
 
-		)
+		)	
 		"'"
 	>
 
@@ -199,9 +199,9 @@ TOKEN : /* Operators */
 void Start() :
 {}
 {   
-    //"setup()" < LBRACE > Statement()* < RBRACE > "loop()" < LBRACE > Statement()* < RBRACE >
+    "setup()" < LBRACE > [Statement()] < RBRACE > "loop()" < LBRACE > Statement()	 < RBRACE >
 
-    Statement()
+    //Statement()
 }
 
 /* Statement */
@@ -225,13 +225,13 @@ void EmptyStatement() :
 void FunctionDeclaration() :
 {}
 {
-    (<VOID> | PrimitiveTypes()) <FUNCTION> Name()<LPAREN><RPAREN> <DO> Statement() [<RETURN> Name() <SEMICOLON>] <END>
+    (<VOID> | PrimitiveTypes()) <FUNCTION> Name()<LPAREN><RPAREN> <DO> Statement() [<RETURN> Name() <SEMICOLON>] <END> [Statement()]
 }
 
 void IfStatement() :
 {}
 {
-    <IF> <LPAREN> BooleanExpression() <RPAREN> <DO> Statement() <END> [<ELSEIF> <LPAREN> Expression() <RPAREN> <DO> Statement() <END>] [<ELSE> <DO> Statement() <END>]
+    <IF> <LPAREN> BooleanExpression() <RPAREN> <DO> Statement() <END> [<ELSEIF> <LPAREN> Expression() <RPAREN> <DO> Statement() <END>] [<ELSE> <DO> Statement() <END>][Statement()]
 }
 
 /* While loop */
@@ -252,7 +252,7 @@ void Expression() :
 void VariableDeclaration() :
 {}
 {
-    PrimitiveTypes() Name() <ASSIGN> (Literal() | < LPAREN > BooleanExpression() < RPAREN > | ArithmeticExpression()) <SEMICOLON> [Statement()]
+    PrimitiveTypes() Name() <ASSIGN> (Name() | < LPAREN > BooleanExpression() < RPAREN > | ArithmeticExpression()) <SEMICOLON> [Statement()]
 }
 
 void Name() :
@@ -264,11 +264,11 @@ void Name() :
 void PrimitiveTypes() :
 {}
 {
-   Number()
+   NumberType()
 |  <STRING>
 }
 
-void Number() :
+void NumberType() :
 {}
 {
 	<INT>
@@ -279,8 +279,15 @@ void Number() :
 void ArithmeticExpression() :
 {}
 {
-	Number() (( <PLUS> | <MINUS> | <MULTIPLY> | <DIVIDE> | <MOD> | <SQRT> | <POW>) Number())*
+	NumberSize() (( <PLUS> | <MINUS> | <MULTIPLY> | <DIVIDE> | <MOD> | <SQRT> | <POW>) NumberSize())*
 
+}
+
+void NumberSize() :
+{}
+{
+	<INTEGER_LITERAL>
+|	<FLOATING_POINT_LITERAL>
 }
 
 void BooleanExpression() :
