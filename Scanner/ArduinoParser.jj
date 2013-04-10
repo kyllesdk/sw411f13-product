@@ -213,7 +213,7 @@ void Statement() :
 		|   WhileStatement()
 		|   VariableDeclaration()
 		|   FunctionDeclaration()
-		|   Name()<SEMICOLON> // Function call
+		|   FunctionCall()
 	)+
 }
 
@@ -227,6 +227,12 @@ void FunctionDeclaration() :
 {}
 {
     (<VOID> | PrimitiveTypes()) <FUNCTION> Name()<LPAREN><RPAREN> <DO> Statement() [<RETURN> Name() <SEMICOLON>] <END> 
+}
+
+void FunctionCall() :
+{}
+{
+	Name()(<DOT>Name())*<LPAREN>[(Name() | Literal())(<COMMA>(Name() | Literal()))*]<RPAREN><SEMICOLON> // Local function and call of method in other class
 }
 
 void IfStatement() :
@@ -255,6 +261,7 @@ void VariableDeclaration() :
 {
     PrimitiveTypes() Name() <ASSIGN> (Literal() (ArithmeticExpression() Literal())* | Name() | < LPAREN > BooleanExpression() < RPAREN >) <SEMICOLON>
 }
+
 
 void Name() :
 {}
