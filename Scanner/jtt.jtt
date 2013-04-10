@@ -1,15 +1,34 @@
+/* CalcParser.jjt */
+
+
+/* This example shows how to specify a simple parser for a toy calculator
+   language with floats, multiplication, and let-expressions.
+   Here is an example program in this language:
+   
+      let radius = 5.0 in
+        let pi = 3.14 in
+          2.0 * pi * radius 
+        ni
+      ni
+*/
+
+
+/* *** Specifcation of the parser class *** */
+
 PARSER_BEGIN(ArduinoParser)
 
 /** ArduinoParser class */
 public class ArduinoParser {
+
 	/** Main entry point */
 	public static void main(String args[]) throws ParseException {
 		ArduinoParser parser = new ArduinoParser(System.in);
 		parser.Start();
 	}
 }
-
 PARSER_END(ArduinoParser)
+
+/* *** Token specification *** */
 
 /* Skip whitespace */
 SKIP :
@@ -20,24 +39,6 @@ SKIP :
 | "\r"	
 | "\f"
 }
-
-/* Comments */
-MORE :
-{
-  "/*" : IN_MULTI_LINE_COMMENT
-}
-
-SPECIAL_TOKEN :
-{
-  <SINGLE_LINE_COMMENT: "//" (~["\n", "\r"])* ("\n" | "\r" | "\r\n")?>
-}
-
-<IN_MULTI_LINE_COMMENT>
-SPECIAL_TOKEN :
-{
-  <MULTI_LINE_COMMENT: "*/" > : DEFAULT
-}
-
 
 TOKEN : /* Reserved words and literals */
 {
@@ -55,9 +56,6 @@ TOKEN : /* Reserved words and literals */
 |	< WHILE: "while" >
 | 	< DO: "do" >
 | 	< END: "end" >
-|   < VOID: "void" >
-|   < FUNCTION: "function" >
-|   < RETURN: "return" >
 }
 
 /* Literals */
@@ -797,143 +795,59 @@ TOKEN : /* Operators */
 	< Id: ["a"-"z","A"-"Z"] ( ["a"-"z","A"-"Z","0"-"9"] )* >
 }*/
 
-/*********************************************
-*	LANGUAGE GRAMMAR STARTS HERE 							 *
-*********************************************/
 
 
 
-/** Root production */
-/*void Input() :
-{}
+
+/* *** Context-free grammar (EBNF) *** */
+
+/* Each nonterminal is written like a kind of method, containing all its
+   productions. JavaCC will generate a parsing method for each nonterminal.
+
+   Note: In the start nonterminal, the action "return jjtThis;" instructs
+   JavaCC to return the resulting parse tree from the generated parsing
+   method. Therefore the start nonterminal has a result type (SimpleNode).
+   All other nonterminals have no result type (void). 
+*/
+
+/* The start nonterminal and its productions. */
+
+SimpleNode Start() : {} // Start -> Exp
 {
-	( <Id> )+ <EOF>
-}*/
-
-/* If statement grammar */
-
-void Start() :
-{}
-{   
-    //"setup()" < LBRACE > Statement()* < RBRACE > "loop()" < LBRACE > Statement()* < RBRACE >
-
-    Statement()
+  Exp()
+  { return jjtThis; }
 }
 
-/* Statement */
-void Statement() : 
-{}
-{        
-    //EmptyStatement()
-    IfStatement()
-|   WhileStatement()
-|   VariableDeclaration()
-|   FunctionDeclaration()
+/* Other nonterminals and their productions */
+
+void Exp() : {} // Exp -> Factor [MulExp]
+{
+  Factor() [ MulExp() ]
 }
 
-void EmptyStatement() :
-{}
+void Factor() : {} // Factor -> LetExp | FPLitExp | IDExp
 {
-    ";"
+  LetExp()
+| FPLitExp()
+| IDExp()
 }
 
-void FunctionDeclaration() :
-{}
+void LetExp() : {} // LetExp -> "let" IDExp "=" Exp "in" Exp "ni"
 {
-    (<VOID> | PrimitiveTypes()) <FUNCTION> Name()<LPAREN><RPAREN> <DO> Statement() [<RETURN> Name() <SEMICOLON>] <END>
+  <LET> IDExp() "=" Exp() <IN> Exp() <NI>
 }
 
-void IfStatement() :
-{}
+void MulExp() : {} // MulExp -> "*" Exp
 {
-    <IF> <LPAREN> BooleanExpression() <RPAREN> <DO> Statement() <END> [<ELSEIF> <LPAREN> Expression() <RPAREN> <DO> Statement() <END>] [<ELSE> <DO> Statement() <END>]
+  "*" Exp()
 }
 
-/* While loop */
-void WhileStatement() :
-{}
+void FPLitExp() : {} // FPLitExp -> FPLIT
 {
-	<WHILE> <LPAREN> BooleanExpression() <RPAREN> <DO> Statement() <END>
+  <FPLIT>
 }
 
-void Expression() :
-{}
+void IDExp() : {} // IDExp -> ID
 {
-	ArithmeticExpression()
-|   BooleanExpression()
-|   VariableDeclaration()
-}
-
-void VariableDeclaration() :
-{}
-{
-    PrimitiveTypes() Name() <ASSIGN> (Literal() | < LPAREN > BooleanExpression() < RPAREN > | ArithmeticExpression()) <SEMICOLON> [Statement()]
-}
-
-void Name() :
-{}
-{
-    <IDENTIFIER>
-}
-
-void PrimitiveTypes() :
-{}
-{
-   Number()
-|  <STRING>
-}
-
-void Number() :
-{}
-{
-	<INT>
-|	<DOUBLE>
-|	<FLOAT>
-}
-
-void ArithmeticExpression() :
-{}
-{
-	Number() (( <PLUS> | <MINUS> | <MULTIPLY> | <DIVIDE> | <MOD> | <SQRT> | <POW>) Number())*
-
-}
-
-void BooleanExpression() :
-{}
-{
-    RelationalExpression()
-}
-
-
-void RelationalExpression() :
-{}
-{
-
-	Literal() ( ( <LT> | <GT> | <LE> | <GE> | <EQ> | <NE>) Literal() )*
-}
-
-void Literal() :
-{}
-{
-    <INTEGER_LITERAL>
-|	<FLOATING_POINT_LITERAL>
-|	<CHARACTER_LITERAL>
-|	<STRING_LITERAL>
-|	BooleanLiteral()
-|	NullLiteral()
-}
-
-
-
-void BooleanLiteral() :
-{}
-{
-	<TRUE>
-|	<FALSE>
-}
-
-void NullLiteral() :
-{}
-{
-	<NULL>
+  <ID>
 }
