@@ -213,6 +213,7 @@ void Statement() :
 |   WhileStatement()
 |   VariableDeclaration()
 |   FunctionDeclaration()
+|   Name()<SEMICOLON> // Function call
 }
 
 void EmptyStatement() :
@@ -286,6 +287,7 @@ void BooleanExpression() :
 {}
 {
     RelationalExpression()
+|   Name()
 }
 
 
