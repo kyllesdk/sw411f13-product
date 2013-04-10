@@ -226,7 +226,7 @@ void EmptyStatement() :
 void FunctionDeclaration() :
 {}
 {
-    (<VOID> | PrimitiveTypes()) <FUNCTION> Name()<LPAREN><RPAREN> <DO> Statement() [<RETURN> Name() <SEMICOLON>] <END> 
+    (<VOID> | PrimitiveTypes()) <FUNCTION> Name()<LPAREN>[Name()(<COMMA>Name())*]<RPAREN> <DO> Statement() [<RETURN> Name() <SEMICOLON>] <END> 
 }
 
 void FunctionCall() :
@@ -259,7 +259,7 @@ void Expression() :
 void VariableDeclaration() :
 {}
 {
-    PrimitiveTypes() Name() <ASSIGN> (Literal() (ArithmeticExpression() Literal())* | Name() | < LPAREN > BooleanExpression() < RPAREN >) <SEMICOLON>
+    PrimitiveTypes() Name() <ASSIGN> ((Literal() | Name()) (ArithmeticExpression() (Literal() | Name()))* | < LPAREN > BooleanExpression() < RPAREN >) <SEMICOLON>
 }
 
 
