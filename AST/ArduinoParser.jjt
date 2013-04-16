@@ -1,0 +1,341 @@
+PARSER_BEGIN(ArduinoParser)
+
+/** ArduinoParser class */
+public class ArduinoParser {
+	/** Main entry point */
+	public static void main(String args[]) throws ParseException {
+		ArduinoParser parser = new ArduinoParser(System.in);
+		SimpleNode root = parser.Start();
+		root.dump("");
+	}
+}
+
+PARSER_END(ArduinoParser)
+
+/* Skip whitespace */
+SKIP :
+{
+	" "
+| "\t"
+| "\n"
+| "\r"	
+| "\f"
+}
+
+/* Comments */
+MORE :
+{
+  "/*" : IN_MULTI_LINE_COMMENT
+}
+
+SPECIAL_TOKEN :
+{
+  <SINGLE_LINE_COMMENT: "//" (~["\n", "\r"])* ("\n" | "\r" | "\r\n")?>
+}
+
+<IN_MULTI_LINE_COMMENT>
+SPECIAL_TOKEN :
+{
+  <MULTI_LINE_COMMENT: "*/" > : DEFAULT
+}
+
+<IN_MULTI_LINE_COMMENT>
+MORE :
+{
+  < ~[] >
+}
+
+
+TOKEN : /* Reserved words and literals */
+{
+	< BOOLEAN: "boolean" >
+|	< DOUBLE: "double" >
+|	< ELSE: "else" >
+|	< ELSEIF: "elseif" >
+|	< FALSE: "false" >
+|	< FLOAT: "float" >
+|	< IF: "if" >
+|	< INT: "int" >
+|	< NULL: "null" >
+|	< STRING: "string" >
+|	< TRUE: "true" >
+|	< WHILE: "while" >
+| 	< DO: "do" >
+| 	< END: "end" >
+|   < VOID: "void" >
+|   < FUNCTION: "function" >
+|   < RETURN: "return" >
+}
+
+/* Literals */
+TOKEN : 
+{
+	< INTEGER_LITERAL: 
+		<DECIMAL_LITERAL> (["l", "L"])?
+	>
+
+|	< #DECIMAL_LITERAL: ["1"-"9"] (["0" - "9"])* >
+
+|	< FLOATING_POINT_LITERAL:
+		  (["0" - "9"])+ "." (["0" - "9"])* (<EXPONENT>)? (["f", "F", "d", "D"])?
+		| "." (["0" - "9"])+ <EXPONENT> (["f", "F", "d", "D"])?
+		| (["0" - "9"])+ <EXPONENT> (["f", "F", "d", "D"])?
+		| (["0" - "9"])+ (<EXPONENT>)? ["f", "F", "d", "D"]
+	>
+
+|	< #EXPONENT: ["e", "E"] (["+","-"])? (["0" - "9"])+ >
+
+|	< CHARACTER_LITERAL:
+		"'"
+		(	(~["'","\\","\n","\r"])
+			| ("\\"
+				( ["n","t","b","r","f","\\","'","\""]
+				| ["0" - "7"] ( ["0" - "7"] )?
+				| ["0" -"3"] ["0" -"7"] ["0" - "7"] 
+				)
+			  )
+
+		)	
+		"'"
+	>
+
+|	< STRING_LITERAL:
+		"\""
+		(	(~["'","\\","\n","\r"])
+			| ("\\"
+				( ["n","t","b","r","f","\\","'","\""]
+				| ["0" - "7"] ( ["0" - "7"] )?
+				| ["0" -"3"] ["0" -"7"] ["0" - "7"] 
+				)
+			  )
+
+		)*
+		"\""
+	>
+}
+
+/* Identifiers */
+TOKEN :
+{
+	< IDENTIFIER: <LETTER> (<PART_LETTER>)* >
+
+|	< #LETTER:
+      [  // all chars for which Character.isIdentifierStart is true
+		"$",
+		"A"-"Z",
+		"_",
+		"a"-"z"
+      ]
+	>
+
+|	< #PART_LETTER:
+      [  // all chars for which Character.isIdentifierPart is true
+         "\u0000"-"\u0008",
+         "\u000e"-"\u001b",
+         "$",
+         "0"-"9",
+         "A"-"Z",
+         "_",
+         "a"-"z"
+      ]
+
+	>	
+}
+
+TOKEN : /* Seperators */
+{
+	< LPAREN: "(" >
+|	< RPAREN: ")" >
+|	< LBRACE: "{" >
+|	< RBRACE: "}" >
+|	< LBRACKET: "[" >
+|	< RBRACKET: "]" >
+|	< SEMICOLON: ";" >
+|	< COMMA: "," >
+|	< DOT: "." > 
+}
+
+TOKEN : /* Operators */
+{
+	< ASSIGN: "=" >
+|	< GT: ">" >
+|	< LT: "<" >
+|	< COLON: ":" >
+|	< EQ: "==" >
+|	< LE: "<=" >
+|	< GE: ">=" >
+|	< NE: "!=" >
+|	< SC_OR: "||" >
+|	< SC_AND: "&&" >
+|	< PLUS: "+" >
+|	< MINUS: "-" >
+|	< MULTIPLY: "*" >
+|	< DIVIDE: "/" >
+|	< MOD: "%" >
+|	< SQRT: "sqrt" >
+|	< POW: "^" >
+|   < NOT: "!" >
+}
+
+/*TOKEN :
+{
+	< Id: ["a"-"z","A"-"Z"] ( ["a"-"z","A"-"Z","0"-"9"] )* >
+}*/
+
+/*********************************************
+*	LANGUAGE GRAMMAR STARTS HERE 							 *
+*********************************************/
+
+
+
+/** Root production */
+/*void Input() :
+{}
+{
+	( <Id> )+ <EOF> 
+}*/
+
+/* If statement grammar */
+
+SimpleNode Start() :
+{}
+{   
+    "setup()" < LBRACE > [Statement()] < RBRACE > "loop()" < LBRACE > Statement()	 < RBRACE > {return jjtThis;}
+
+    //Statement()
+}
+
+/* Statement */
+void Statement() : 
+{}
+{   
+	(    //EmptyStatement()
+		    IfStatement()
+		|   WhileStatement()
+		|   VariableDeclaration()
+		|   FunctionDeclaration()
+		|   FunctionCall()
+	)+
+}
+
+void EmptyStatement() :
+{}
+{
+    ";"
+}
+
+void FunctionDeclaration() :
+{}
+{
+    (<VOID> | PrimitiveTypes()) <FUNCTION> Name()<LPAREN>[Name()(<COMMA>Name())*]<RPAREN> <DO> Statement() [<RETURN> Name() <SEMICOLON>] <END> 
+}
+
+void FunctionCall() :
+{}
+{
+	Name()(<DOT>Name())*<LPAREN>[(Name() | Literal())(<COMMA>(Name() | Literal()))*]<RPAREN><SEMICOLON> // Local function and call of method in other class
+}
+
+void IfStatement() :
+{}
+{
+    <IF> <LPAREN> BooleanExpression() <RPAREN> <DO> Statement() <END> [<ELSEIF> <LPAREN> Expression() <RPAREN> <DO> Statement() <END>] [<ELSE> <DO> Statement() <END>]
+}
+
+/* While loop */
+void WhileStatement() :
+{}
+{
+	<WHILE> <LPAREN> BooleanExpression() <RPAREN> <DO> Statement() <END>
+}
+
+void Expression() :
+{}
+{
+	ArithmeticExpression()
+|   BooleanExpression()
+|   VariableDeclaration()
+}
+
+void VariableDeclaration() :
+{}
+{
+    PrimitiveTypes() Name() <ASSIGN> ((Literal() | Name()) (ArithmeticExpression() (Literal() | Name()))* | < LPAREN > BooleanExpression() < RPAREN >) <SEMICOLON>
+}
+
+
+void Name() #IDENTIFIER :
+{Token t;}
+{
+    t=<IDENTIFIER> {jjtThis.value = t.image;}
+}
+
+void PrimitiveTypes() :
+{}
+{
+   NumberType()
+|  <STRING>
+}
+
+void NumberType() #NUMBER :
+{Token t;}
+{
+	t=<INT> {jjtThis.value = t.image;}
+|	<DOUBLE>
+|	<FLOAT>
+}
+
+void ArithmeticExpression() :
+{}
+{
+	(<PLUS> | <MINUS> | <MULTIPLY> | <DIVIDE> | <MOD> | <SQRT> | <POW>)
+
+}
+
+void NumberSize() :
+{}
+{
+	<INTEGER_LITERAL>
+|	<FLOATING_POINT_LITERAL>
+}
+
+void BooleanExpression() :
+{}
+{
+    RelationalExpression()
+|   Name()
+}
+
+
+void RelationalExpression() :
+{}
+{
+
+	Literal() ( ( <LT> | <GT> | <LE> | <GE> | <EQ> | <NE>) Literal() )*
+}
+
+void Literal() :
+{}
+{
+    <INTEGER_LITERAL>
+|	<FLOATING_POINT_LITERAL>
+|	<CHARACTER_LITERAL>
+|	<STRING_LITERAL>
+|	BooleanLiteral()
+|	NullLiteral()
+}
+
+
+
+void BooleanLiteral() :
+{}
+{
+	<TRUE>
+|	<FALSE>
+}
+
+void NullLiteral() :
+{}
+{
+	<NULL>
+}
