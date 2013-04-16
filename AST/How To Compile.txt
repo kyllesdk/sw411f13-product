@@ -1,9 +1,9 @@
 ################ HOW TO COMPILE ##############
 - Open CMD
 - Go to scanner ("dir", or "cd")
-- Run command: java -cp javacc.jar jjtree ArduinoAST.jjt
-- Run command: java -cp javacc.jar javacc ArduinoAST.jj
-- Run command: javac -cp .;javacc.jar *.java (Windows) javac -cp .;javacc.jar *.java (FaggotOS)
+- Run command: jjtree *ArduinoAST.jjt
+- Run command: javacc ArduinoAST.jj
+- Run command: javac *.java
 
 ######## HOW TO GET AST WHEN COMPILED ########
 - Run command "java ArduinoAST"
