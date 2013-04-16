@@ -1,16 +1,16 @@
-PARSER_BEGIN(ArduinoParser)
+PARSER_BEGIN(ArduinoAST)
 
-/** ArduinoParser class */
-public class ArduinoParser {
+/** ArduinoAST class */
+public class ArduinoAST {
 	/** Main entry point */
 	public static void main(String args[]) throws ParseException {
-		ArduinoParser parser = new ArduinoParser(System.in);
+		ArduinoAST parser = new ArduinoAST(System.in);
 		SimpleNode root = parser.Start();
 		root.dump("");
 	}
 }
 
-PARSER_END(ArduinoParser)
+PARSER_END(ArduinoAST)
 
 /* Skip whitespace */
 SKIP :
