@@ -264,7 +264,7 @@ void VariableDeclaration() :
 }
 
 
-void Name() #IDENTIFIER :
+void Name() #Identifier :
 {Token t;}
 {
     t=<IDENTIFIER> {jjtThis.value = t.image;}
@@ -277,10 +277,10 @@ void PrimitiveTypes() :
 |  <STRING>
 }
 
-void NumberType() #NUMBER :
-{Token t;}
+void NumberType() :
+{}
 {
-	t=<INT> {jjtThis.value = t.image;}
+	<INT>
 |	<DOUBLE>
 |	<FLOAT>
 }
