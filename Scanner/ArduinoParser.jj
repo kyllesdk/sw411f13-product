@@ -160,12 +160,12 @@ TOKEN : /* Operators */
 |	< GT: ">" >
 |	< LT: "<" >
 |	< COLON: ":" >
-|	< EQ: "==" >
+|	< EQ: "equals" >
 |	< LE: "<=" >
 |	< GE: ">=" >
-|	< NE: "!=" >
-|	< SC_OR: "||" >
-|	< SC_AND: "&&" >
+|	< NE: "notequals" >
+|	< SC_OR: "or" >
+|	< SC_AND: "and" >
 |	< PLUS: "+" >
 |	< MINUS: "-" >
 |	< MULTIPLY: "*" >
@@ -173,7 +173,7 @@ TOKEN : /* Operators */
 |	< MOD: "%" >
 |	< SQRT: "sqrt" >
 |	< POW: "^" >
-|   < NOT: "!" >
+|   < NOT: "not" >
 }
 
 /*TOKEN :
