@@ -37,7 +37,7 @@ public class ArduinoLang/*@bgen(jjtree)*/implements ArduinoLangTreeConstants/*@e
 
 		root.dump(" ");
 
-		System.out.println();
+		System.out.println("==========================================");
 		System.out.println("Symbol table:"); // Prints out a symbol tree
 
 		Enumeration t = ST.keys();
@@ -56,7 +56,7 @@ public class ArduinoLang/*@bgen(jjtree)*/implements ArduinoLangTreeConstants/*@e
 			}
 		}
 		
-		System.out.println(); // New line
+		System.out.println("=========================================="); // New line
 		System.out.println("Progam: "); 
 
 		PrintVisitor pv = new PrintVisitor(); // Instantiate the print visitor
@@ -136,7 +136,7 @@ TOKEN :
 		<DECIMAL_LITERAL> (["l", "L"])?
 	>
 
-|	< #DECIMAL_LITERAL: ["1"-"9"] (["0" - "9"])* >
+|	< #DECIMAL_LITERAL: ["0"-"9"] (["0" - "9"])* >
 
 |	< FLOATING_POINT_LITERAL:
 		  (["0" - "9"])+ "." (["0" - "9"])* (<EXPONENT>)? (["f", "F", "d", "D"])?
@@ -408,32 +408,51 @@ void SimpleStatement()       : {}
 	(Expression()) | (Declaration())
 }
 
-void Declaration()       : {Token t; String name;}
+void Declaration()       : {Token t; String name; Token value;}
 {
-	t = <INT> name = Identifier() [DeclarationLogic()]<SEMICOLON>/*@bgen(jjtree) #Declaration( 2) */
-                                                                      {
-                                                                        ASTDeclaration jjtn001 = new ASTDeclaration(JJTDECLARATION);
-                                                                        boolean jjtc001 = true;
-                                                                        jjtree.openNodeScope(jjtn001);
-                                                                      }
-                                                                      try {
+	t = <INT> name = Identifier() <ASSIGN> value = Number() <SEMICOLON>/*@bgen(jjtree) #Declaration( 2) */
+                                                                            {
+                                                                              ASTDeclaration jjtn001 = new ASTDeclaration(JJTDECLARATION);
+                                                                              boolean jjtc001 = true;
+                                                                              jjtree.openNodeScope(jjtn001);
+                                                                            }
+                                                                            try {
 /*@egen*//*@bgen(jjtree)*/
-                                                                      {
-                                                                        jjtree.closeNodeScope(jjtn001,  2);
-                                                                        jjtc001 = false;
-                                                                      }
-/*@egen*/ {jjtn001.value = t.image;}/*@bgen(jjtree)*/
-                                                                      } finally {
-                                                                        if (jjtc001) {
-                                                                          jjtree.closeNodeScope(jjtn001,  2);
-                                                                        }
-                                                                      }
-/*@egen*/                  
+                                                                            {
+                                                                              jjtree.closeNodeScope(jjtn001,  2);
+                                                                              jjtc001 = false;
+                                                                            }
+/*@egen*/ {jjtn001.value = t.image; ST.put(name, new STC("int", name, value));}/*@bgen(jjtree)*/
+                                                                            } finally {
+                                                                              if (jjtc001) {
+                                                                                jjtree.closeNodeScope(jjtn001,  2);
+                                                                              }
+                                                                            }
+/*@egen*/                 
+|	t = <FLOAT> name = Identifier() <ASSIGN> value = Number() <SEMICOLON>/*@bgen(jjtree) #Declaration( 2) */
+                                                                              {
+                                                                                ASTDeclaration jjtn002 = new ASTDeclaration(JJTDECLARATION);
+                                                                                boolean jjtc002 = true;
+                                                                                jjtree.openNodeScope(jjtn002);
+                                                                              }
+                                                                              try {
+/*@egen*//*@bgen(jjtree)*/
+                                                                              {
+                                                                                jjtree.closeNodeScope(jjtn002,  2);
+                                                                                jjtc002 = false;
+                                                                              }
+/*@egen*/ {jjtn002.value = t.image; ST.put(name, new STC("float", name, value));}/*@bgen(jjtree)*/
+                                                                              } finally {
+                                                                                if (jjtc002) {
+                                                                                  jjtree.closeNodeScope(jjtn002,  2);
+                                                                                }
+                                                                              }
+/*@egen*/                
 }
 
-void DeclarationLogic()       : {Token t;}
+String DeclarationLogic()       : {Token t;}
 {
-	t = <ASSIGN> Number()/*@bgen(jjtree) #DeclarationLogic( 1) */
+	<ASSIGN> t = Number()/*@bgen(jjtree) #DeclarationLogic( 1) */
                               {
                                 ASTDeclarationLogic jjtn001 = new ASTDeclarationLogic(JJTDECLARATIONLOGIC);
                                 boolean jjtc001 = true;
@@ -445,7 +464,7 @@ void DeclarationLogic()       : {Token t;}
                                 jjtree.closeNodeScope(jjtn001,  1);
                                 jjtc001 = false;
                               }
-/*@egen*/ {jjtn001.value = t.image;}/*@bgen(jjtree)*/
+/*@egen*/ {jjtn001.value = t.image; return t.image;}/*@bgen(jjtree)*/
                               } finally {
                                 if (jjtc001) {
                                   jjtree.closeNodeScope(jjtn001,  1);
@@ -586,10 +605,10 @@ void Factor()       : {}
 * @accepts <INTEGER_LITERAL>
 * @accepts <FLOATING_POINT_LITERAL>
 **/
-void Number() : {/*@bgen(jjtree) Number */
-                 ASTNumber jjtn000 = new ASTNumber(JJTNUMBER);
-                 boolean jjtc000 = true;
-                 jjtree.openNodeScope(jjtn000);
+Token Number() : {/*@bgen(jjtree) Number */
+                  ASTNumber jjtn000 = new ASTNumber(JJTNUMBER);
+                  boolean jjtc000 = true;
+                  jjtree.openNodeScope(jjtn000);
 /*@egen*/Token t;}
 {/*@bgen(jjtree) Number */
         try {
@@ -600,13 +619,13 @@ void Number() : {/*@bgen(jjtree) Number */
                                         jjtree.closeNodeScope(jjtn000, true);
                                         jjtc000 = false;
                                       }
-/*@egen*/ {jjtn000.value = t.image;}
+/*@egen*/ {jjtn000.value = t.image; return t;}
 		| t = <FLOATING_POINT_LITERAL>/*@bgen(jjtree)*/
                                                {
                                                  jjtree.closeNodeScope(jjtn000, true);
                                                  jjtc000 = false;
                                                }
-/*@egen*/ {jjtn000.value = t.image;}
+/*@egen*/ {jjtn000.value = t; return t;}
 	)/*@bgen(jjtree)*/
         } finally {
           if (jjtc000) {

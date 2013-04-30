@@ -3,6 +3,7 @@ sudo ./jjtree ArduinoLang.jjt
 javac *.java
 echo ""
 read -p "Press enter to run compiler"
+clear
 java ArduinoLang test.txt
 read
 clear

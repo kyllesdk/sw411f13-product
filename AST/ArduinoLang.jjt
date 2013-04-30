@@ -33,7 +33,7 @@ public class ArduinoLang {
 
 		root.dump(" ");
 
-		System.out.println();
+		System.out.println("==========================================");
 		System.out.println("Symbol table:"); // Prints out a symbol tree
 
 		Enumeration t = ST.keys();
@@ -52,7 +52,7 @@ public class ArduinoLang {
 			}
 		}
 		
-		System.out.println(); // New line
+		System.out.println("=========================================="); // New line
 		System.out.println("Progam: "); 
 
 		PrintVisitor pv = new PrintVisitor(); // Instantiate the print visitor
@@ -132,7 +132,7 @@ TOKEN :
 		<DECIMAL_LITERAL> (["l", "L"])?
 	>
 
-|	< #DECIMAL_LITERAL: ["1"-"9"] (["0" - "9"])* >
+|	< #DECIMAL_LITERAL: ["0"-"9"] (["0" - "9"])* >
 
 |	< FLOATING_POINT_LITERAL:
 		  (["0" - "9"])+ "." (["0" - "9"])* (<EXPONENT>)? (["f", "F", "d", "D"])?
@@ -283,14 +283,15 @@ void SimpleStatement() #void : {}
 	(Expression()) | (Declaration())
 }
 
-void Declaration() #void : {Token t; String name;}
+void Declaration() #void : {Token t; String name; Token value;}
 {
-	t = <INT> name = Identifier() [DeclarationLogic()]<SEMICOLON> {jjtThis.value = t.image;} #Declaration(2)  
+	t = <INT> name = Identifier() <ASSIGN> value = Number() <SEMICOLON> {jjtThis.value = t.image; ST.put(name, new STC("int", name, value));} #Declaration(2) 
+|	t = <FLOAT> name = Identifier() <ASSIGN> value = Number() <SEMICOLON> {jjtThis.value = t.image; ST.put(name, new STC("float", name, value));} #Declaration(2)
 }
 
-void DeclarationLogic() #void : {Token t;}
+String DeclarationLogic() #void : {Token t;}
 {
-	t = <ASSIGN> Number() {jjtThis.value = t.image;} #DeclarationLogic(1)
+	<ASSIGN> t = Number() {jjtThis.value = t.image; return t.image;} #DeclarationLogic(1)
 }
 
 /**
@@ -335,11 +336,11 @@ void Factor() #void : {}
 * @accepts <INTEGER_LITERAL>
 * @accepts <FLOATING_POINT_LITERAL>
 **/
-void Number() : {Token t;}
+Token Number() : {Token t;}
 {
 	(
-		t = <INTEGER_LITERAL> {jjtThis.value = t.image;}
-		| t = <FLOATING_POINT_LITERAL> {jjtThis.value = t.image;}
+		t = <INTEGER_LITERAL> {jjtThis.value = t.image; return t;}
+		| t = <FLOATING_POINT_LITERAL> {jjtThis.value = t; return t;}
 	)
 }
 
