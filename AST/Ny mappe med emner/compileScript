@@ -1,0 +1,8 @@
+sudo ./jjtree ArduinoAST.jjt
+read -p "Press enter to run javacc on ArduinoAST.jj"
+./javacc ArduinoAST.jj
+read -p "Press enter to run javac on *.java files"
+javac *.java
+echo ""
+read -p "Press enter to run compiler"
+java ArduinoAST test.txt

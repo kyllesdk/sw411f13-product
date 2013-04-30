@@ -1,12 +1,65 @@
+options
+{
+  IGNORE_CASE = false;
+  MULTI = true;
+  VISITOR = true;
+}
+
 PARSER_BEGIN(ArduinoAST)
+
+import java.io.*;
+import java.util.*;
+
 
 /** ArduinoAST class */
 public class ArduinoAST {
+	//public static Hashtable ST = new Hashtable();
+
 	/** Main entry point */
-	public static void main(String args[]) throws ParseException {
-		ArduinoAST parser = new ArduinoAST(System.in);
+	public static void main(String args[]) throws ParseException, FileNotFoundException {
+		String temp;
+		//STC temp2;
+
+		if(args.length < 1) {
+			// Prompt user for a file to compile
+			System.out.println("Please pass in a filename of file to compile.");
+			System.exit(1);
+		}
+
+		ArduinoAST parser = new ArduinoAST(new FileInputStream(args[0]));
 		SimpleNode root = parser.Start();
-		root.dump("");
+		root.dump(" ");
+
+		System.out.println();
+		/*System.out.println("Symbol table:"); // Prints out a symbol tree
+
+		Enumeration t = ST.keys();
+
+		while (t.hasMoreElements()) {
+			temp = (String).t.nextElement();
+			temp2 = (STC)ST.get(temp);
+			System.out.println(temp); // DOC HERE PLEASE
+
+			if(temp2.type != null) {
+				System.out.println(" type = " + temp2.type); // Print the type of the element
+			}
+
+			if(temp2.value != null) {
+				System.out.println(" value = " + temp2.value); // Print the value of the element
+			}
+		}
+	*/
+		System.out.println(); // New line
+		System.out.println("Progam: "); 
+
+		PrintVisitor pv = new PrintVisitor(); // Instantiate the print visitor
+		root.jjAccept(pv, null); // Print out the program
+
+		/*System.out.println();
+		System.out.println("Type Checking:");
+		TypeCheckVisitor tc = new TypeCheckVisitor();
+		root.jjAccept(tc, ST); // Print out any type errors
+		*/
 	}
 }
 
@@ -200,7 +253,7 @@ TOKEN : /* Operators */
 SimpleNode Start() :
 {}
 {   
-    "setup()" < LBRACE > [Statement()] < RBRACE > "loop()" < LBRACE > Statement()	 < RBRACE > {return jjtThis;}
+    "setup()" < LBRACE > [Statement()] < RBRACE > "loop()" < LBRACE > Statement()	 < RBRACE > <EOF>{return jjtThis;}
 
     //Statement()
 }

@@ -1,0 +1,1096 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"marin",
+				"margin-left"
+			],
+			[
+				"mar",
+				"margin-top"
+			],
+			[
+				"userid",
+				"userid"
+			],
+			[
+				"padding",
+				"padding-left"
+			],
+			[
+				"padd",
+				"padding-left"
+			],
+			[
+				"follow",
+				"followCTR"
+			],
+			[
+				"us",
+				"userArray"
+			],
+			[
+				"margin",
+				"margin"
+			],
+			[
+				"margin-t",
+				"margin-bottom"
+			],
+			[
+				"user",
+				"useridfollowed"
+			],
+			[
+				"f",
+				"function"
+			],
+			[
+				"useridfo",
+				"useridfollower"
+			],
+			[
+				"_",
+				"_POST"
+			],
+			[
+				"useridf",
+				"useridfollowed"
+			],
+			[
+				"foll",
+				"followButtonContainer"
+			],
+			[
+				"unFollow",
+				"unFollowButton"
+			],
+			[
+				"unfoll",
+				"unFollowButton"
+			],
+			[
+				"follo",
+				"followCTR"
+			],
+			[
+				"useridfollo",
+				"useridfollowed"
+			],
+			[
+				"font-",
+				"font-size"
+			],
+			[
+				"pad",
+				"padding"
+			],
+			[
+				"backgr",
+				"background-color"
+			],
+			[
+				"pa",
+				"padding-bottom"
+			],
+			[
+				"backg",
+				"background-color"
+			],
+			[
+				"tex",
+				"text-align"
+			],
+			[
+				"te",
+				"text-align"
+			],
+			[
+				"for",
+				"foreach	foreach …"
+			],
+			[
+				"word",
+				"wordifier_userid"
+			],
+			[
+				"font",
+				"font-family"
+			],
+			[
+				"border",
+				"border-bottom"
+			],
+			[
+				"back",
+				"background-color"
+			],
+			[
+				"list-",
+				"list-style-type"
+			],
+			[
+				"list",
+				"list-style-position"
+			],
+			[
+				"marg",
+				"margin-bottom"
+			],
+			[
+				"e",
+				"eae6e6"
+			],
+			[
+				"fon",
+				"font-weight"
+			],
+			[
+				"v",
+				"vertical-align"
+			],
+			[
+				"we",
+				"webkit-border-radius"
+			],
+			[
+				"create",
+				"createUser"
+			],
+			[
+				"_SE",
+				"_SESSION"
+			],
+			[
+				"face",
+				"facebookUser"
+			],
+			[
+				"createUser",
+				"createUsername"
+			],
+			[
+				"bac",
+				"background"
+			],
+			[
+				"top",
+				"topBtn"
+			],
+			[
+				"backgrou",
+				"background"
+			],
+			[
+				"STRING",
+				"STRING_LITERAL"
+			],
+			[
+				"L",
+				"LPAREN"
+			],
+			[
+				"Hello",
+				"HelloToYou"
+			],
+			[
+				"Functi",
+				"FunctionCall"
+			],
+			[
+				"A",
+				"ArithmeticExpression"
+			],
+			[
+				"FLO",
+				"FLOATING_POINT_LITERAL"
+			],
+			[
+				"INT",
+				"INTEGER_LITERAL"
+			],
+			[
+				"Hell",
+				"HelloToYou"
+			],
+			[
+				"CO",
+				"COMMA"
+			],
+			[
+				"N",
+				"Name"
+			],
+			[
+				"RB",
+				"RBRACE"
+			],
+			[
+				"LB",
+				"LBRACE"
+			],
+			[
+				"Iden",
+				"IDENTIFIER"
+			],
+			[
+				"Va",
+				"VariableDeclaration"
+			],
+			[
+				"FL",
+				"FLOAT"
+			],
+			[
+				"String",
+				"STRING_LITERAL"
+			],
+			[
+				"If",
+				"IfStatement"
+			],
+			[
+				"Whi",
+				"WhileStatement"
+			],
+			[
+				"ST",
+				"STRING_LITERAL"
+			],
+			[
+				"Prima",
+				"PrimarySuffix"
+			],
+			[
+				"Loo",
+				"LOOKAHEAD"
+			],
+			[
+				"Un",
+				"UnaryExpression"
+			],
+			[
+				"Una",
+				"UnaryExpressionNotPlusMinus"
+			],
+			[
+				"Pre",
+				"PreDecrementExpression"
+			],
+			[
+				"STA",
+				"STAR"
+			],
+			[
+				"M",
+				"MultiplicativeExpression"
+			],
+			[
+				"T",
+				"TRUE"
+			],
+			[
+				"statement",
+				"statement_list"
+			],
+			[
+				"retu",
+				"returnMessages"
+			],
+			[
+				"reciever",
+				"recieverDel"
+			],
+			[
+				"recie",
+				"recieverDel"
+			],
+			[
+				"message",
+				"messageObject"
+			],
+			[
+				"messa",
+				"messageId"
+			],
+			[
+				"mess",
+				"messageObject"
+			],
+			[
+				"reci",
+				"recieverRead"
+			],
+			[
+				"new",
+				"newReply"
+			],
+			[
+				"_con",
+				"_controlUser"
+			],
+			[
+				"last",
+				"lastName"
+			],
+			[
+				"firstname",
+				"firstName"
+			],
+			[
+				"sender",
+				"senderId"
+			],
+			[
+				"mark",
+				"markAsUnread"
+			],
+			[
+				"mes",
+				"messageCheckbox"
+			],
+			[
+				"reply",
+				"replyJson"
+			],
+			[
+				"_rec",
+				"_recieverDel"
+			],
+			[
+				"_reciever",
+				"_recieverDel"
+			],
+			[
+				"_sender",
+				"_senderDel"
+			],
+			[
+				"_reci",
+				"_recieverRead"
+			],
+			[
+				"mesag",
+				"messageId"
+			],
+			[
+				"reciv",
+				"recieverRead"
+			],
+			[
+				"recive",
+				"recieverId"
+			],
+			[
+				"EL",
+				"ELSE"
+			],
+			[
+				"focuse",
+				"focusElementID"
+			],
+			[
+				"foc",
+				"focusElementID"
+			],
+			[
+				"login",
+				"loginButton"
+			],
+			[
+				"load",
+				"loadMessages"
+			],
+			[
+				"fet",
+				"fetch_object"
+			],
+			[
+				"newM",
+				"newMessage"
+			],
+			[
+				"fa",
+				"fadeOut"
+			],
+			[
+				"mod",
+				"modal"
+			],
+			[
+				"modal",
+				"modal_container"
+			],
+			[
+				"newMes",
+				"newMessageButton"
+			],
+			[
+				"margin-",
+				"margin-right"
+			],
+			[
+				"ret",
+				"returnValue"
+			],
+			[
+				"me",
+				"messageObject"
+			],
+			[
+				"Control",
+				"ControlMessageReply"
+			],
+			[
+				"mesa",
+				"messageId"
+			],
+			[
+				"messagec",
+				"messageCheckbox"
+			],
+			[
+				"control",
+				"ControlMessage"
+			],
+			[
+				"statem",
+				"statement_list"
+			],
+			[
+				"getRe",
+				"getReplySenderId"
+			],
+			[
+				"text",
+				"textarea"
+			],
+			[
+				"add",
+				"addReplyJS"
+			],
+			[
+				"repl",
+				"replyArray"
+			],
+			[
+				"modelMe",
+				"modelMessage"
+			],
+			[
+				"setRe",
+				"setReplySenderId"
+			],
+			[
+				"ControlMessa",
+				"controlMessageReply"
+			],
+			[
+				"messageR",
+				"messageReplyControl"
+			],
+			[
+				"return",
+				"returnReplies"
+			],
+			[
+				"modelMessage",
+				"modelMessageReply"
+			],
+			[
+				"ModelMess",
+				"modelMessageReply"
+			],
+			[
+				"_re",
+				"_replySender"
+			],
+			[
+				"_reply",
+				"_ReplyContent"
+			],
+			[
+				"backgroun",
+				"background-color"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"contents": "hasMoreElements\nnextElement",
+			"settings":
+			{
+				"buffer_size": 27,
+				"line_ending": "Unix",
+				"name": "hasMoreElements"
+			}
+		},
+		{
+			"contents": "// Name:ExprLang.jjt\n// Author: David Sinclair      Date: 29 Aug 2012\n//\n// Definition of the ExprLang language, including abstract syntax tree generation\n//\n\noptions\n{\n  IGNORE_CASE = false;\n  MULTI=true;\n  VISITOR = true;\n}\n\nPARSER_BEGIN(ExprLang)\n\nimport java.io.*;\nimport java.util.*;\n\npublic class ExprLang\n{\n  public static Hashtable ST = new Hashtable();\n\n  public static void main(String[] args) throws ParseException, FileNotFoundException\n  {\n    String temp;\n    STC temp2;\n\n    if (args.length < 1)\n    {\n      System.out.println(\"Please pass in the filename.\");\n      System.exit(1);\n    }\n\n    ExprLang parser = new ExprLang(new FileInputStream(args[0]));\n\n    SimpleNode root = parser.program();\n\n    System.out.println(\"Abstract Syntax Tree:\");\n\n    root.dump(\" \");\n\n    System.out.println();\n    System.out.println(\"Symbol Table:\");\n\n    Enumeration t = ST.keys();\n\n    while (t.hasMoreElements())\n    {\n      temp = (String)t.nextElement();\n      temp2 = (STC)ST.get(temp);\n      System.out.println(temp);\n      if (temp2.type != null)\n      {\n        System.out.println(\" type = \" + temp2.type);\n      }\n      if (temp2.value != null)\n      {\n        System.out.println(\" value = \" + temp2.value);\n      }\n    }\n\n    System.out.println();\n    System.out.println(\"Program:\");\n    PrintVisitor pv = new PrintVisitor();\n    root.jjtAccept(pv, null);\n\n    System.out.println();\n    System.out.println(\"Type Checking:\");\n    TypeCheckVisitor tc = new TypeCheckVisitor();\n    root.jjtAccept(tc, ST);    \n  }\n}\n\nPARSER_END(ExprLang)\n\nTOKEN_MGR_DECLS:\n{\n  static int linenumber = 0;\n}\n\nSKIP:   /* Whitespace */\n{\n  \"\\t\"\n| \"\\n\" {linenumber++;}\n| \"\\r\"\n| \" \"\n}\n\nTOKEN:\n{\n  <LPAREN: \"(\">\n| <RPAREN: \")\">\n| <ADD_OP: \"+\" | \"-\">\n| <MULT_OP: \"*\" | \"/\">\n| <NOT_OP: \"~\">\n| <BOOL_OP: \"&\" | \"|\">\n| <INT: \"int\">\n| <BOOL: \"bool\">\n| <NUMBER: ([\"0\"-\"9\"])+>\n| <ID: ([\"a\"-\"z\",\"A\"-\"Z\"])+>\n| <SEMIC: \";\">\n}\n\n\n\nSimpleNode program() : {}\n{\n  Stms() <EOF> {return jjtThis;}\n}\n\nvoid Stms() #void : {}\n{\n  (SimpleStm() <SEMIC> [Stms() #Stms(2)] )\n}\n\nvoid SimpleStm() #void : {}\n{\n  (expression())\n | (declaration())\n}\n\nvoid declaration() #void : {Token t; String name;}\n{\n  t = <INT> name = identifier() {jjtThis.value = t.image;\n                          ST.put(name, new STC(\"Int\", name));} #Decl(1)\n| t = <BOOL> name = identifier() {jjtThis.value = t.image;\n                           ST.put(name, new STC(\"Bool\", name));} #Decl(1)\n}\n\n\nvoid expression() #void : {Token t;}\n{\n  term()\n  (\n    (t = <ADD_OP> term() {jjtThis.value = t.image;} #Add_op(2)\n    )\n  | (t = <BOOL_OP> term() {jjtThis.value = t.image;} #Bool_op(2)\n    )\n  )*\n}\n\nvoid term() #void : {Token t;}\n{\n  <NOT_OP> factor() #Not_op(1)\n|\n  factor()\n  (t = <MULT_OP> factor() {jjtThis.value = t.image;} #Mult_op(2)\n  )*\n}\n\nvoid factor() #void : {}\n{\n  (<LPAREN> expression() #Exp(1) <RPAREN>\n  | number()\n  | identifier()\n  )\n}\n\nvoid number() : {Token t;}\n{\n  t = <NUMBER> {jjtThis.value = t.image;\n               }\n}\n\nString identifier() : {Token t;}\n{\n  t = <ID> {jjtThis.value = t.image; return t.image;}\n}\n",
+			"settings":
+			{
+				"buffer_size": 3062,
+				"line_ending": "Unix",
+				"name": "// Name:ExprLang.jjt"
+			}
+		},
+		{
+			"contents": "// Name:STC.java\n// Author: David Sinclair      Date: 29 Aug 2012\n//\n// Very basic Symbol Table implementation\n//\n\nimport java.util.*;\n\npublic class STC extends Object\n{\n    String type;\n    String value;\n\n    public STC(String itype, String ivalue)\n    {\n	type = itype;\n	value = ivalue;\n    }\n}",
+			"settings":
+			{
+				"buffer_size": 295,
+				"line_ending": "Unix",
+				"name": "// Name:STC.java"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 147.0,
+		"selected_items":
+		[
+			[
+				"syn ja",
+				"Set Syntax: Java"
+			],
+			[
+				"syn jav",
+				"Set Syntax: Java"
+			],
+			[
+				"java",
+				"Set Syntax: Java"
+			],
+			[
+				"sni",
+				"Snippet: html"
+			],
+			[
+				"snipp",
+				"Snippet: html"
+			],
+			[
+				"html",
+				"Set Syntax: HTML"
+			],
+			[
+				"syn php",
+				"Set Syntax: PHP"
+			],
+			[
+				"jav",
+				"Set Syntax: Java"
+			],
+			[
+				"ja",
+				"Set Syntax: Java"
+			],
+			[
+				"pack",
+				"Package Control: Install Package"
+			],
+			[
+				"syntax c",
+				"Set Syntax: C"
+			],
+			[
+				"gist",
+				"Gist: Open Gist"
+			],
+			[
+				"late",
+				"LaTeXTools: View PDF"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 449.0
+	},
+	"console":
+	{
+		"height": 181.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/kyllesdk/Dropbox/4. Semester - Software/sw411f13-product/AST/ArduinoAST.jjt",
+		"/Users/kyllesdk/Dropbox/4. Semester - Software/sw411f13-paper/indhold/Implementation/javacc.tex",
+		"/Users/kyllesdk/Dropbox/4. Semester - Software/sw411f13-paper/report.tex",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1367102543/afrprog.dk/www/wordify/application/views/test.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1367102592/afrprog.dk/www/wordify/application/loader.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1367101545/afrprog.dk/www/wordify/application/loader.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1367101488/afrprog.dk/www/wordify/application/asserts/facebook.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1367091677/afrprog.dk/www/wordifier/application/css/home.css",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1367089791/afrprog.dk/www/wordifier/application/posts/postFollowList.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1367094371/afrprog.dk/www/wordifier/application/controllers/FollowCTR.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1367096089/afrprog.dk/www/wordifier/application/controllers/UserCTR.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1367092446/afrprog.dk/www/wordifier/application/posts/postprofile.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1367090171/afrprog.dk/www/wordifier/application/controllers/FollowCTR.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1367090598/afrprog.dk/www/wordifier/application/posts/getwords.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1367091037/afrprog.dk/www/wordifier/application/views/header.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1367090897/afrprog.dk/www/wordifier/application/js/home.js",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1367090583/afrprog.dk/www/wordifier/application/views/home.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1367089574/afrprog.dk/www/wordifier/application/views/header.php",
+		"/Users/kyllesdk/Dropbox/4. Semester - Software/Syntax og Semantik/Textspørgsmål/Lectures/Lecture12/TekstspørgsmålOmProcedurerOgBlokke-exercise.tex",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366493465/afrprog.dk/www/wordifier/application/posts/postFollowList.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366495074/afrprog.dk/www/wordifier/application/controllers/FollowCTR.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366495723/afrprog.dk/www/wordifier/application/views/header.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366494441/afrprog.dk/www/wordifier/application/views/test.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366493854/afrprog.dk/www/wordifier/application/js/home.js",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366495239/afrprog.dk/www/wordifier/application/controllers/UserCTR.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366494802/afrprog.dk/www/wordifier/application/posts/postprofile.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366495251/afrprog.dk/www/wordifier/application/models/User.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366495167/afrprog.dk/www/wordifier/application/controllers/UserCTR.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366494946/afrprog.dk/www/wordifier/application/models/User.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366494259/afrprog.dk/www/wordifier/application/controllers/UserCTR.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366493931/afrprog.dk/www/wordifier/application/controllers/FollowCTR.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366492485/afrprog.dk/www/wordifier/application/views/header.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366492450/afrprog.dk/www/wordifier/application/posts/postprofile.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366492608/afrprog.dk/www/wordifier/application/js/home.js",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366492179/afrprog.dk/www/wordifier/application/css/home.css",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366490376/afrprog.dk/www/wordifier/application/controllers/UserCTR.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366476155/afrprog.dk/www/wordifier/application/posts/postprofile.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366486042/afrprog.dk/www/wordifier/application/controllers/FollowCTR.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366485874/afrprog.dk/www/wordifier/application/views/test.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366487480/afrprog.dk/www/wordifier/application/posts/postFollow.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366487704/afrprog.dk/www/wordifier/application/js/home.js",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366488967/afrprog.dk/www/wordifier/application/views/home.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366485773/afrprog.dk/www/wordifier/application/controllers/UserCTR.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366487803/afrprog.dk/www/wordifier/application/views/home.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366487789/afrprog.dk/www/wordifier/application/views/header.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366487769/afrprog.dk/www/wordifier/application/posts/getwords.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366487552/afrprog.dk/www/wordifier/application/posts/getwords.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366485431/afrprog.dk/www/wordifier/application/controllers/followCTR.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366485476/afrprog.dk/www/wordifier/application/controllers/CommentCTR.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366482777/afrprog.dk/www/wordifier/application/css/home.css",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366476624/afrprog.dk/www/wordifier/application/css/home.css",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366478965/afrprog.dk/www/wordifier/application/asserts/base_facebook.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366478945/afrprog.dk/www/wordifier/application/asserts/facebook.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366471925/afrprog.dk/www/wordifier/application/controllers/WordCTR.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366476116/afrprog.dk/www/wordifier/application/views/header.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366471682/afrprog.dk/www/wordifier/application/views/header.php",
+		"/Users/kyllesdk/Dropbox/4. Semester - Software/Syntax og Semantik/Textspørgsmål/Lectures/Lecture11/TekstspørgsmålOmUdvidelserAfBims-exercise.tex",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366318541/afrprog.dk/www/wordifier/application/posts/postprofile.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366319704/afrprog.dk/www/wordifier/application/loader.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366317334/afrprog.dk/www/wordifier/application/css/home.css",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366315159/afrprog.dk/www/wordifier/application/js/home.js",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366316307/afrprog.dk/www/wordifier/application/controllers/UserCTR.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366312230/afrprog.dk/www/wordifier/application/posts/postprofile.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366312213/afrprog.dk/www/wordifier/application/views/header.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366314989/afrprog.dk/www/wordifier/application/posts/getwords.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366316138/afrprog.dk/www/wordifier/application/loader.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366315467/afrprog.dk/www/wordifier/application/loader.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366315814/afrprog.dk/www/wordifier/application/controllers/UserCTR.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366312049/afrprog.dk/www/wordifier/application/css/home.css",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366314647/afrprog.dk/www/wordifier/application/js/home.js",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366314487/afrprog.dk/www/wordifier/application/posts/getwords.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366314010/afrprog.dk/www/wordifier/application/controllers/WordCTR.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366313989/afrprog.dk/www/wordifier/application/controllers/UserCTR.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366310337/afrprog.dk/www/wordifier/application/js/home.js",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366310883/afrprog.dk/www/wordifier/application/css/home.css",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366310633/afrprog.dk/www/wordifier/application/views/home.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366310331/afrprog.dk/www/wordifier/application/views/home.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366310045/afrprog.dk/www/wordifier/application/posts/getwords.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366309945/afrprog.dk/www/wordifier/application/posts/getwords.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366309890/afrprog.dk/www/wordifier/application/views/home.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366308156/afrprog.dk/www/wordifier/application/models/User.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366309648/afrprog.dk/www/wordifier/application/posts/getwords.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366304243/afrprog.dk/www/wordifier/application/views/test.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366309732/afrprog.dk/www/wordifier/application/js/home.js",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366306085/afrprog.dk/www/wordifier/application/posts/postprofile.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366304717/afrprog.dk/www/wordifier/application/views/home.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366309784/afrprog.dk/www/wordifier/application/views/header.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366304374/afrprog.dk/www/wordifier/application/posts/getwords.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366308321/afrprog.dk/www/wordifier/application/controllers/UserCTR.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366307552/afrprog.dk/www/wordifier/application/views/header.php",
+		"/Users/kyllesdk/Downloads/TekstspørgsmålOmGrundlæggendeBegreberIOperationelSemantik.-to-review.tex",
+		"/Users/kyllesdk/Dropbox/4. Semester - Software/Syntax og Semantik/Textspørgsmål/Lectures/Lecture9/TekstspørgsmålOmPumpingLemmaForKontekstfrieSprog-exercise.synctex.tex",
+		"/Users/kyllesdk/Sites/laravel-cms/application/routes.php",
+		"/Users/kyllesdk/Dropbox/4. Semester - Software/Syntax og Semantik/Textspørgsmål/Lectures/Lecture10/TekstspørgsmålOmOperationalSemantikForKommandoerIBims.-exercise.tex",
+		"/Users/kyllesdk/Dropbox/4. Semester - Software/sw411f13-paper/readingguide.tex",
+		"/Users/kyllesdk/Dropbox/4. Semester - Software/Syntax og Semantik/Textspørgsmål/Lectures/Lecture10/lecture.tex",
+		"/Users/kyllesdk/Dropbox/4. Semester - Software/sw411f13-product/Scanner/test.txt",
+		"/Users/kyllesdk/Dropbox/4. Semester - Software/sw411f13-paper/indhold/Analysis/second_syntax_example.tex",
+		"/Users/kyllesdk/Dropbox/4. Semester - Software/Javacc/javacc-5.0/examples/Lookahead/Example10.jj",
+		"/Users/kyllesdk/Dropbox/4. Semester - Software/Javacc/javacc-5.0/examples/Lookahead/Example1.jj",
+		"/Users/kyllesdk/Dropbox/4. Semester - Software/Javacc/javacc-5.0/examples/Lookahead/Example2.jj",
+		"/Users/kyllesdk/Dropbox/4. Semester - Software/Javacc/javacc-5.0/examples/Lookahead/Example3.jj",
+		"/Users/kyllesdk/Dropbox/4. Semester - Software/Javacc/javacc-5.0/examples/Lookahead/Example4.jj",
+		"/Users/kyllesdk/Dropbox/4. Semester - Software/Javacc/javacc-5.0/examples/Lookahead/Example5.jj",
+		"/Users/kyllesdk/Dropbox/4. Semester - Software/Javacc/javacc-5.0/examples/Lookahead/Example6.jj",
+		"/Users/kyllesdk/Dropbox/4. Semester - Software/Javacc/javacc-5.0/examples/Lookahead/Example7.jj",
+		"/Users/kyllesdk/Dropbox/4. Semester - Software/Javacc/javacc-5.0/examples/Lookahead/Example8.jj",
+		"/Users/kyllesdk/Dropbox/4. Semester - Software/Javacc/javacc-5.0/examples/Lookahead/Example9.jj",
+		"/Users/kyllesdk/Dropbox/4. Semester - Software/Javacc/javacc-5.0/examples/SimpleExamples/Simple1.jj",
+		"/Users/kyllesdk/Dropbox/4. Semester - Software/Javacc/javacc-5.0/examples/SimpleExamples/Simple2.jj",
+		"/Users/kyllesdk/Dropbox/4. Semester - Software/Javacc/javacc-5.0/examples/SimpleExamples/Simple3.jj",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366142571/projs.dk/www/projectstarter/application/view/loadMessages.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366142513/projs.dk/www/projectstarter/application/view/message.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366143660/afrprog.dk/www/wordifier/application/views/header.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366141332/afrprog.dk/www/wordifier/application/css/home.css",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366143674/afrprog.dk/www/wordifier/application/js/home.js",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366143819/afrprog.dk/www/wordifier/application/views/home.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366141274/afrprog.dk/www/wordifier/application/views/test.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366142436/afrprog.dk/www/wordifier/application/js/home.js",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366142013/afrprog.dk/www/wordifier/application/views/home.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366123339/afrprog.dk/www/wordifier/application/css/home.css",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366123414/afrprog.dk/www/wordifier/application/views/home.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366124229/afrprog.dk/www/wordifier/application/views/header.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366124405/afrprog.dk/www/wordifier/application/js/home.js",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366123317/afrprog.dk/www/wordifier/application/views/header.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366045773/afrprog.dk/www/wordifier/application/css/home.css",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366035169/afrprog.dk/www/wordifier/application/views/home.php",
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366036377/afrprog.dk/www/wordifier/application/controllers/UserCTR.php"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"program",
+			"div",
+			"li",
+			"40",
+			"35",
+			"39",
+			"user",
+			"http://",
+			"wordifier.afr-prog.dk/application/posts/postFollow.php",
+			"_GET",
+			"_POST",
+			"userid",
+			"userId",
+			"userid",
+			"userId",
+			"E6E1E1",
+			"/>\n",
+			" $",
+			"user",
+			"email",
+			"pro",
+			"user",
+			"logout",
+			"logout\n\n\nlogout",
+			"log",
+			"logout",
+			"//",
+			"loginPassword",
+			"loginUsername",
+			"h1",
+			"wordifier_userid",
+			"$",
+			"loginButton",
+			"nav",
+			"modal",
+			"string",
+			"void",
+			"NumberType",
+			"string",
+			"void",
+			"NumberSize",
+			"Number",
+			"return",
+			"EmptyStatement",
+			"assignment",
+			"skip",
+			"substatement",
+			"ifstatement",
+			"substa",
+			"SimpleType",
+			"type",
+			"types",
+			"EqualityExpression",
+			"express",
+			"CompilationUnit",
+			"Arguments",
+			"PrimarySuffic",
+			"CastLookahead",
+			"expression()",
+			"ifStatement",
+			"identifier",
+			"literal",
+			"Identifier",
+			"ID()",
+			"ID",
+			"literal",
+			"NULL",
+			"FALSE",
+			"Literal",
+			"EXPONENT",
+			"literal",
+			"IDENTIFIER",
+			"STRING_LITERAL",
+			"Literal()",
+			"expression()",
+			"expression",
+			"expressio",
+			"epressio",
+			"!",
+			"expression",
+			"num",
+			"numeral",
+			"Reciever",
+			"reciever",
+			"Reciever",
+			"reciever",
+			"Reciever",
+			"reciever",
+			"markAsUnread",
+			"red",
+			"0d71aa",
+			"<",
+			"id",
+			"<",
+			"boxId",
+			"(numerals)",
+			"then",
+			"*",
+			"B",
+			"a",
+			"x",
+			"''",
+			"``",
+			"lstlisting",
+			"}",
+			"\\textbf{",
+			"Sigma",
+			"B",
+			"subsection",
+			"section",
+			"subsection",
+			"$",
+			"''",
+			"$_SESSION['userid']",
+			"modal",
+			"include_once",
+			"attr",
+			".messageCheckbox",
+			"attr",
+			"\n",
+			"::",
+			"this",
+			"senderId",
+			"\"",
+			"#",
+			"span",
+			"\n",
+			"\\mid"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"settings":
+					{
+						"buffer_size": 27,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								27,
+								27
+							]
+						],
+						"settings":
+						{
+							"auto_name": "hasMoreElements",
+							"incomplete_sync": null,
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 1,
+					"settings":
+					{
+						"buffer_size": 3062,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2734,
+								2734
+							]
+						],
+						"settings":
+						{
+							"auto_name": "// Name:ExprLang.jjt",
+							"incomplete_sync": null,
+							"syntax": "Packages/Java/Java.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1726.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"settings":
+					{
+						"buffer_size": 295,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								114,
+								114
+							]
+						],
+						"settings":
+						{
+							"auto_name": "// Name:STC.java",
+							"incomplete_sync": null,
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 34.0
+	},
+	"input":
+	{
+		"height": 30.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			0.5,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 118.0
+	},
+	"output.sftp":
+	{
+		"height": 94.0
+	},
+	"replace":
+	{
+		"height": 0.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"",
+				"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1359391786/projectstarter@imezzo.dk/application/control/control.project.php"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"show_minimap": false,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 175.0,
+	"status_bar_visible": true
+}

@@ -1,0 +1,8 @@
+sudo ./jjtree ArduinoLang.jjt
+./javacc ArduinoLang.jj
+javac *.java
+echo ""
+read -p "Press enter to run compiler"
+java ArduinoLang test.txt
+read
+clear
