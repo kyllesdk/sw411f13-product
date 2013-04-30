@@ -255,7 +255,17 @@ TOKEN : /* Operators */
 
 SimpleNode Program() : {}
 {   
-	Statements()<EOF> {return jjtThis;}
+	ProgramSetup()<EOF> {return jjtThis;}
+}
+
+void ProgramSetup() #void : {Token t;}
+{
+	t = <SETUP> [Statements()] <RBRACE> ProgramLoop() {jjtThis.value = t.image;} #ProgramSetup(1)
+}
+
+void ProgramLoop() #void : {Token t;}
+{
+	t = <LOOP> [Statements()] <RBRACE> {jjtThis.value = t.image;} #ProgramLoop(1)
 }
 
 void Statements() #void : {}
@@ -270,17 +280,12 @@ void SimpleStatement() #void : {}
 
 void Declaration() #void : {Token t; String name;}
 {
-	t = <INT> name = Identifier() [DeclarationLogic()] {jjtThis.value = t.image;} #Declaration(2)  
+	t = <INT> name = Identifier() [DeclarationLogic()]<SEMICOLON> {jjtThis.value = t.image;} #Declaration(2)  
 }
 
 void DeclarationLogic() #void : {Token t;}
 {
-	t = <ASSIGN> Number()<SEMICOLON> {jjtThis.value = t.image;} #DeclarationLogic(1)
-}
-
-void EndStatement() #void : {Token t;}
-{
-	t = <SEMICOLON> {jjtThis.value = t.image;} #EndStatement(1)
+	t = <ASSIGN> Number() {jjtThis.value = t.image;} #DeclarationLogic(1)
 }
 
 /**
