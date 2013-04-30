@@ -260,7 +260,7 @@ SimpleNode Program() : {}
 
 void ProgramSetup() #void : {Token t;}
 {
-	t = <SETUP> [Statements()] <RBRACE> ProgramLoop() {jjtThis.value = t.image;} #ProgramSetup(1)
+	t = <SETUP> [Statements()] <RBRACE> ProgramLoop() {jjtThis.value = t.image;} #ProgramSetup(2)
 }
 
 void ProgramLoop() #void : {Token t;}

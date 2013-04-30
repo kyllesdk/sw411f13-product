@@ -295,7 +295,7 @@ SimpleNode Program() : {/*@bgen(jjtree) Program */
 
 void ProgramSetup()       : {Token t;}
 {
-	t = <SETUP> [Statements()] <RBRACE> ProgramLoop()/*@bgen(jjtree) #ProgramSetup( 1) */
+	t = <SETUP> [Statements()] <RBRACE> ProgramLoop()/*@bgen(jjtree) #ProgramSetup( 2) */
                                                           {
                                                             ASTProgramSetup jjtn001 = new ASTProgramSetup(JJTPROGRAMSETUP);
                                                             boolean jjtc001 = true;
@@ -304,13 +304,13 @@ void ProgramSetup()       : {Token t;}
                                                           try {
 /*@egen*//*@bgen(jjtree)*/
                                                           {
-                                                            jjtree.closeNodeScope(jjtn001,  1);
+                                                            jjtree.closeNodeScope(jjtn001,  2);
                                                             jjtc001 = false;
                                                           }
 /*@egen*/ {jjtn001.value = t.image;}/*@bgen(jjtree)*/
                                                           } finally {
                                                             if (jjtc001) {
-                                                              jjtree.closeNodeScope(jjtn001,  1);
+                                                              jjtree.closeNodeScope(jjtn001,  2);
                                                             }
                                                           }
 /*@egen*/                 
