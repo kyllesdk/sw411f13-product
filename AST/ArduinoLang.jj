@@ -265,11 +265,11 @@ SimpleNode Program() : {/*@bgen(jjtree) Program */
 {/*@bgen(jjtree) Program */
         try {
 /*@egen*/   
-	ProgramSetup()<EOF>/*@bgen(jjtree)*/
-                            {
-                              jjtree.closeNodeScope(jjtn000, true);
-                              jjtc000 = false;
-                            }
+	ProgramSetup() ProgramLoop() <EOF>/*@bgen(jjtree)*/
+                                           {
+                                             jjtree.closeNodeScope(jjtn000, true);
+                                             jjtc000 = false;
+                                           }
 /*@egen*/ {return jjtn000;}/*@bgen(jjtree)*/
         } catch (Throwable jjte000) {
           if (jjtc000) {
@@ -293,26 +293,58 @@ SimpleNode Program() : {/*@bgen(jjtree) Program */
 /*@egen*/
 }
 
+void ProgramStart()       : {Token t;}
+{/*@bgen(jjtree) #ProgramStart( 1) */
+        {
+          ASTProgramStart jjtn001 = new ASTProgramStart(JJTPROGRAMSTART);
+          boolean jjtc001 = true;
+          jjtree.openNodeScope(jjtn001);
+        }
+        try {
+/*@egen*/
+	(ProgramSetup() ProgramLoop())/*@bgen(jjtree)*/
+        } catch (Throwable jjte001) {
+          if (jjtc001) {
+            jjtree.clearNodeScope(jjtn001);
+            jjtc001 = false;
+          } else {
+            jjtree.popNode();
+          }
+          if (jjte001 instanceof RuntimeException) {
+            throw (RuntimeException)jjte001;
+          }
+          if (jjte001 instanceof ParseException) {
+            throw (ParseException)jjte001;
+          }
+          throw (Error)jjte001;
+        } finally {
+          if (jjtc001) {
+            jjtree.closeNodeScope(jjtn001,  1);
+          }
+        }
+/*@egen*/                  
+}
+
 void ProgramSetup()       : {Token t;}
 {
-	t = <SETUP> [Statements()] <RBRACE> ProgramLoop()/*@bgen(jjtree) #ProgramSetup( 2) */
-                                                          {
-                                                            ASTProgramSetup jjtn001 = new ASTProgramSetup(JJTPROGRAMSETUP);
-                                                            boolean jjtc001 = true;
-                                                            jjtree.openNodeScope(jjtn001);
-                                                          }
-                                                          try {
+	t = <SETUP> [Statements()] <RBRACE>/*@bgen(jjtree) #ProgramSetup( 1) */
+                                            {
+                                              ASTProgramSetup jjtn001 = new ASTProgramSetup(JJTPROGRAMSETUP);
+                                              boolean jjtc001 = true;
+                                              jjtree.openNodeScope(jjtn001);
+                                            }
+                                            try {
 /*@egen*//*@bgen(jjtree)*/
-                                                          {
-                                                            jjtree.closeNodeScope(jjtn001,  2);
-                                                            jjtc001 = false;
-                                                          }
+                                            {
+                                              jjtree.closeNodeScope(jjtn001,  1);
+                                              jjtc001 = false;
+                                            }
 /*@egen*/ {jjtn001.value = t.image;}/*@bgen(jjtree)*/
-                                                          } finally {
-                                                            if (jjtc001) {
-                                                              jjtree.closeNodeScope(jjtn001,  2);
-                                                            }
-                                                          }
+                                            } finally {
+                                              if (jjtc001) {
+                                                jjtree.closeNodeScope(jjtn001,  1);
+                                              }
+                                            }
 /*@egen*/                 
 }
 
