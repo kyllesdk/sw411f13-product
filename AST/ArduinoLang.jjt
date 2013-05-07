@@ -50,6 +50,10 @@ public class ArduinoLang {
 			if(temp2.value != null) {
 				System.out.println(" value = " + temp2.value); // Print the value of the element
 			}
+
+			if(temp2.stringValue != null) {
+				System.out.println(" value = " + temp2.stringValue); // Print the value of the element if it is a string
+			}
 		}
 		
 		System.out.println("=========================================="); // New line
@@ -284,10 +288,11 @@ void SimpleStatement() #void : {}
 	(Expression()) | (Declaration() | IfStatement() | WhileStatement())
 }
 
-void Declaration() #void : {Token t; String name; Token value;}
+void Declaration() #void : {Token t; String name; Token value; String stringText;}
 {
 	t = <INT> name = Identifier() <ASSIGN> value = Number() <SEMICOLON> {jjtThis.value = t.image; ST.put(name, new STC("int", name, value));} #Declaration(2) 
 |	t = <FLOAT> name = Identifier() <ASSIGN> value = Number() <SEMICOLON> {jjtThis.value = t.image; ST.put(name, new STC("float", name, value));} #Declaration(2)
+|	t = <STRING> name = Identifier() <ASSIGN> stringText = StringText() <SEMICOLON> {jjtThis.value = t.image; ST.put(name, new STC("string", name, stringText));} #Declaration(2)
 }
 
 String DeclarationLogic() #void : {Token t;}
@@ -384,6 +389,11 @@ Token Number() : {Token t;}
 		t = <INTEGER_LITERAL> {jjtThis.value = t.image; return t;}
 		| t = <FLOATING_POINT_LITERAL> {jjtThis.value = t; return t;}
 	)
+}
+
+String StringText() : {Token t;}
+{
+	t = <STRING_LITERAL> {jjtThis.value = t.image; return t.image;}
 }
 
 /**

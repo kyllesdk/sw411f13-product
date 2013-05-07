@@ -20,4 +20,6 @@ loop() do
 	int a = 10;
 	int b = 12;
 	float abc = 12.00;
+
+	string jonas = "Hansen";
 end

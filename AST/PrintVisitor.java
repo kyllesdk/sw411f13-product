@@ -165,6 +165,12 @@ public class PrintVisitor implements ArduinoLangVisitor {
     	return data;
     }
 
+    public Object visit(ASTStringText node, Object data) {
+    	System.out.print(node.value);
+
+    	return data;
+    }
+
     public Object visit(ASTNumber node, Object data) {
     	System.out.print(node.value);
 

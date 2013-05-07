@@ -54,6 +54,10 @@ public class ArduinoLang/*@bgen(jjtree)*/implements ArduinoLangTreeConstants/*@e
 			if(temp2.value != null) {
 				System.out.println(" value = " + temp2.value); // Print the value of the element
 			}
+
+			if(temp2.stringValue != null) {
+				System.out.println(" value = " + temp2.stringValue); // Print the value of the element if it is a string
+			}
 		}
 		
 		System.out.println("=========================================="); // New line
@@ -409,7 +413,7 @@ void SimpleStatement()       : {}
 	(Expression()) | (Declaration() | IfStatement() | WhileStatement())
 }
 
-void Declaration()       : {Token t; String name; Token value;}
+void Declaration()       : {Token t; String name; Token value; String stringText;}
 {
 	t = <INT> name = Identifier() <ASSIGN> value = Number() <SEMICOLON>/*@bgen(jjtree) #Declaration( 2) */
                                                                             {
@@ -448,6 +452,25 @@ void Declaration()       : {Token t; String name; Token value;}
                                                                                   jjtree.closeNodeScope(jjtn002,  2);
                                                                                 }
                                                                               }
+/*@egen*/                
+|	t = <STRING> name = Identifier() <ASSIGN> stringText = StringText() <SEMICOLON>/*@bgen(jjtree) #Declaration( 2) */
+                                                                                        {
+                                                                                          ASTDeclaration jjtn003 = new ASTDeclaration(JJTDECLARATION);
+                                                                                          boolean jjtc003 = true;
+                                                                                          jjtree.openNodeScope(jjtn003);
+                                                                                        }
+                                                                                        try {
+/*@egen*//*@bgen(jjtree)*/
+                                                                                        {
+                                                                                          jjtree.closeNodeScope(jjtn003,  2);
+                                                                                          jjtc003 = false;
+                                                                                        }
+/*@egen*/ {jjtn003.value = t.image; ST.put(name, new STC("string", name, stringText));}/*@bgen(jjtree)*/
+                                                                                        } finally {
+                                                                                          if (jjtc003) {
+                                                                                            jjtree.closeNodeScope(jjtn003,  2);
+                                                                                          }
+                                                                                        }
 /*@egen*/                
 }
 
@@ -741,6 +764,28 @@ Token Number() : {/*@bgen(jjtree) Number */
                                                }
 /*@egen*/ {jjtn000.value = t; return t;}
 	)/*@bgen(jjtree)*/
+        } finally {
+          if (jjtc000) {
+            jjtree.closeNodeScope(jjtn000, true);
+          }
+        }
+/*@egen*/
+}
+
+String StringText() : {/*@bgen(jjtree) StringText */
+                       ASTStringText jjtn000 = new ASTStringText(JJTSTRINGTEXT);
+                       boolean jjtc000 = true;
+                       jjtree.openNodeScope(jjtn000);
+/*@egen*/Token t;}
+{/*@bgen(jjtree) StringText */
+        try {
+/*@egen*/
+	t = <STRING_LITERAL>/*@bgen(jjtree)*/
+                             {
+                               jjtree.closeNodeScope(jjtn000, true);
+                               jjtc000 = false;
+                             }
+/*@egen*/ {jjtn000.value = t.image; return t.image;}/*@bgen(jjtree)*/
         } finally {
           if (jjtc000) {
             jjtree.closeNodeScope(jjtn000, true);
