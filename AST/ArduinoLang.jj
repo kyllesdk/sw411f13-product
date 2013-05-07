@@ -235,6 +235,7 @@ TOKEN : /* Operators */
 |	< SQRT: "sqrt" >
 |	< POW: "^" >
 |   < NOT: "!" >
+|	< EMPTY: "" >
 }
 
 /*TOKEN :
@@ -510,24 +511,24 @@ void Expression()       : {Token t;}
 **/
 void IfStatement()       : {Token t;}
 {
-	(t = <IF><LPAREN>BooleanExpression()<RPAREN> <DO> Statements() <END>/*@bgen(jjtree) #If_stm( 2) */
-                                                                             {
-                                                                               ASTIf_stm jjtn001 = new ASTIf_stm(JJTIF_STM);
-                                                                               boolean jjtc001 = true;
-                                                                               jjtree.openNodeScope(jjtn001);
-                                                                             }
-                                                                             try {
+	(t = <IF><LPAREN>BooleanExpression()<RPAREN> <DO> Statements() <END> (ElseifStatement())*/*@bgen(jjtree) #If_stm( 3) */
+                                                                                                  {
+                                                                                                    ASTIf_stm jjtn001 = new ASTIf_stm(JJTIF_STM);
+                                                                                                    boolean jjtc001 = true;
+                                                                                                    jjtree.openNodeScope(jjtn001);
+                                                                                                  }
+                                                                                                  try {
 /*@egen*//*@bgen(jjtree)*/
-                                                                             {
-                                                                               jjtree.closeNodeScope(jjtn001,  2);
-                                                                               jjtc001 = false;
-                                                                             }
+                                                                                                  {
+                                                                                                    jjtree.closeNodeScope(jjtn001,  3);
+                                                                                                    jjtc001 = false;
+                                                                                                  }
 /*@egen*/ {jjtn001.value = t.image;}/*@bgen(jjtree)*/
-                                                                             } finally {
-                                                                               if (jjtc001) {
-                                                                                 jjtree.closeNodeScope(jjtn001,  2);
-                                                                               }
-                                                                             }
+                                                                                                  } finally {
+                                                                                                    if (jjtc001) {
+                                                                                                      jjtree.closeNodeScope(jjtn001,  3);
+                                                                                                    }
+                                                                                                  }
 /*@egen*/           )
 }
 
@@ -537,7 +538,25 @@ void IfStatement()       : {Token t;}
 **/
 void ElseifStatement()       : {Token t;}
 {
-	(t = <ELSEIF><LPAREN>BooleanExpression()<RPAREN> <DO> Statements())
+	(t = <ELSEIF><LPAREN>BooleanExpression()<RPAREN> <DO> Statements() <END>/*@bgen(jjtree) #ElsIf_stm( 2) */
+                                                                                {
+                                                                                  ASTElsIf_stm jjtn001 = new ASTElsIf_stm(JJTELSIF_STM);
+                                                                                  boolean jjtc001 = true;
+                                                                                  jjtree.openNodeScope(jjtn001);
+                                                                                }
+                                                                                try {
+/*@egen*//*@bgen(jjtree)*/
+                                                                                {
+                                                                                  jjtree.closeNodeScope(jjtn001,  2);
+                                                                                  jjtc001 = false;
+                                                                                }
+/*@egen*/{jjtn001.value = t.image;}/*@bgen(jjtree)*/
+                                                                                } finally {
+                                                                                  if (jjtc001) {
+                                                                                    jjtree.closeNodeScope(jjtn001,  2);
+                                                                                  }
+                                                                                }
+/*@egen*/              )
 }
 
 void BooleanExpression()       : {Token t;}
