@@ -4,3 +4,8 @@
 *.war
 *.ear
 *.java
+
+# don't ignore following files
+!PrintVisitor.java
+!STC.java
+!DataType.java
