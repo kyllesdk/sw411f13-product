@@ -12,6 +12,10 @@ loop() do
 		int dasd = 4234234;
 	end
 
+	while(a) do
+		float a = 13.123;
+	end
+
 	int c = 0;
 	int a = 10;
 	int b = 12;

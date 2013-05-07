@@ -406,7 +406,7 @@ void Statements()       : {}
 
 void SimpleStatement()       : {}
 {
-	(Expression()) | (Declaration() | IfStatement())
+	(Expression()) | (Declaration() | IfStatement() | WhileStatement())
 }
 
 void Declaration()       : {Token t; String name; Token value;}
@@ -584,6 +584,33 @@ void ElseStatement()       : {Token t;}
                                                }
                                              }
 /*@egen*/            
+}
+
+/**
+* While statement
+*
+**/
+void WhileStatement()       : {Token t;}
+{
+	(t = <WHILE> <LPAREN> BooleanExpression() <RPAREN> <DO> Statements() <END>)/*@bgen(jjtree) #WhileStatement( 2) */
+                                                                                    {
+                                                                                      ASTWhileStatement jjtn001 = new ASTWhileStatement(JJTWHILESTATEMENT);
+                                                                                      boolean jjtc001 = true;
+                                                                                      jjtree.openNodeScope(jjtn001);
+                                                                                    }
+                                                                                    try {
+/*@egen*//*@bgen(jjtree)*/
+                                                                                    {
+                                                                                      jjtree.closeNodeScope(jjtn001,  2);
+                                                                                      jjtc001 = false;
+                                                                                    }
+/*@egen*/ {jjtn001.value = t.image;}/*@bgen(jjtree)*/
+                                                                                    } finally {
+                                                                                      if (jjtc001) {
+                                                                                        jjtree.closeNodeScope(jjtn001,  2);
+                                                                                      }
+                                                                                    }
+/*@egen*/                   
 }
 
 void BooleanExpression()       : {Token t;}

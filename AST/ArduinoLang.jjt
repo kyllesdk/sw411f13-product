@@ -281,7 +281,7 @@ void Statements() #void : {}
 
 void SimpleStatement() #void : {}
 {
-	(Expression()) | (Declaration() | IfStatement())
+	(Expression()) | (Declaration() | IfStatement() | WhileStatement())
 }
 
 void Declaration() #void : {Token t; String name; Token value;}
@@ -333,6 +333,15 @@ void ElseifStatement() #void : {Token t;}
 void ElseStatement() #void : {Token t;}
 {
 	(t = <ELSE> <DO> Statements() <END>) {jjtThis.value = t.image;} #Els_stm(1)
+}
+
+/**
+* While statement
+*
+**/
+void WhileStatement() #void : {Token t;}
+{
+	(t = <WHILE> <LPAREN> BooleanExpression() <RPAREN> <DO> Statements() <END>) {jjtThis.value = t.image;} #WhileStatement(2)
 }
 
 void BooleanExpression() #void : {Token t;}
