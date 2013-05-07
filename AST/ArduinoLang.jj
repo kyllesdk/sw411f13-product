@@ -108,8 +108,8 @@ MORE :
 
 TOKEN : /* Reserved words and literals */
 {
-	< SETUP : "setup() {" >
-|	< LOOP: "loop() {" >	
+	< SETUP : "setup()" >
+|	< LOOP: "loop()" >	
 |	< BOOLEAN: "boolean" >
 |	< DOUBLE: "double" >
 |	< ELSE: "else" >
@@ -327,47 +327,47 @@ void ProgramStart()       : {Token t;}
 
 void ProgramSetup()       : {Token t;}
 {
-	t = <SETUP> [Statements()] <RBRACE>/*@bgen(jjtree) #ProgramSetup( 1) */
-                                            {
-                                              ASTProgramSetup jjtn001 = new ASTProgramSetup(JJTPROGRAMSETUP);
-                                              boolean jjtc001 = true;
-                                              jjtree.openNodeScope(jjtn001);
-                                            }
-                                            try {
-/*@egen*//*@bgen(jjtree)*/
-                                            {
-                                              jjtree.closeNodeScope(jjtn001,  1);
-                                              jjtc001 = false;
-                                            }
-/*@egen*/ {jjtn001.value = t.image;}/*@bgen(jjtree)*/
-                                            } finally {
-                                              if (jjtc001) {
-                                                jjtree.closeNodeScope(jjtn001,  1);
+	t = <SETUP> <DO> [Statements()] <END>/*@bgen(jjtree) #ProgramSetup( 1) */
+                                              {
+                                                ASTProgramSetup jjtn001 = new ASTProgramSetup(JJTPROGRAMSETUP);
+                                                boolean jjtc001 = true;
+                                                jjtree.openNodeScope(jjtn001);
                                               }
-                                            }
+                                              try {
+/*@egen*//*@bgen(jjtree)*/
+                                              {
+                                                jjtree.closeNodeScope(jjtn001,  1);
+                                                jjtc001 = false;
+                                              }
+/*@egen*/ {jjtn001.value = t.image;}/*@bgen(jjtree)*/
+                                              } finally {
+                                                if (jjtc001) {
+                                                  jjtree.closeNodeScope(jjtn001,  1);
+                                                }
+                                              }
 /*@egen*/                 
 }
 
 void ProgramLoop()       : {Token t;}
 {
-	t = <LOOP> [Statements()] <RBRACE>/*@bgen(jjtree) #ProgramLoop( 1) */
-                                           {
-                                             ASTProgramLoop jjtn001 = new ASTProgramLoop(JJTPROGRAMLOOP);
-                                             boolean jjtc001 = true;
-                                             jjtree.openNodeScope(jjtn001);
-                                           }
-                                           try {
-/*@egen*//*@bgen(jjtree)*/
-                                           {
-                                             jjtree.closeNodeScope(jjtn001,  1);
-                                             jjtc001 = false;
-                                           }
-/*@egen*/ {jjtn001.value = t.image;}/*@bgen(jjtree)*/
-                                           } finally {
-                                             if (jjtc001) {
-                                               jjtree.closeNodeScope(jjtn001,  1);
+	t = <LOOP> <DO> [Statements()] <END>/*@bgen(jjtree) #ProgramLoop( 1) */
+                                             {
+                                               ASTProgramLoop jjtn001 = new ASTProgramLoop(JJTPROGRAMLOOP);
+                                               boolean jjtc001 = true;
+                                               jjtree.openNodeScope(jjtn001);
                                              }
-                                           }
+                                             try {
+/*@egen*//*@bgen(jjtree)*/
+                                             {
+                                               jjtree.closeNodeScope(jjtn001,  1);
+                                               jjtc001 = false;
+                                             }
+/*@egen*/ {jjtn001.value = t.image;}/*@bgen(jjtree)*/
+                                             } finally {
+                                               if (jjtc001) {
+                                                 jjtree.closeNodeScope(jjtn001,  1);
+                                               }
+                                             }
 /*@egen*/                
 }
 
@@ -405,7 +405,7 @@ void Statements()       : {}
 
 void SimpleStatement()       : {}
 {
-	(Expression()) | (Declaration())
+	(Expression()) | (Declaration() | IfStatement())
 }
 
 void Declaration()       : {Token t; String name; Token value;}
@@ -502,6 +502,47 @@ void Expression()       : {Token t;}
                                      }
 /*@egen*/           )
 	)*
+}
+
+/**
+* If-statement
+*
+**/
+void IfStatement()       : {Token t;}
+{
+	(t = <IF><LPAREN>BooleanExpression()<RPAREN> <DO> Statements() <END>/*@bgen(jjtree) #If_stm( 2) */
+                                                                             {
+                                                                               ASTIf_stm jjtn001 = new ASTIf_stm(JJTIF_STM);
+                                                                               boolean jjtc001 = true;
+                                                                               jjtree.openNodeScope(jjtn001);
+                                                                             }
+                                                                             try {
+/*@egen*//*@bgen(jjtree)*/
+                                                                             {
+                                                                               jjtree.closeNodeScope(jjtn001,  2);
+                                                                               jjtc001 = false;
+                                                                             }
+/*@egen*/ {jjtn001.value = t.image;}/*@bgen(jjtree)*/
+                                                                             } finally {
+                                                                               if (jjtc001) {
+                                                                                 jjtree.closeNodeScope(jjtn001,  2);
+                                                                               }
+                                                                             }
+/*@egen*/           )
+}
+
+/**
+* Elseif-statement
+*
+**/
+void ElseifStatement()       : {Token t;}
+{
+	(t = <ELSEIF><LPAREN>BooleanExpression()<RPAREN> <DO> Statements())
+}
+
+void BooleanExpression()       : {Token t;}
+{
+	(Identifier())
 }
 
 /**

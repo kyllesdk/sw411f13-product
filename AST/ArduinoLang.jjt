@@ -104,8 +104,8 @@ MORE :
 
 TOKEN : /* Reserved words and literals */
 {
-	< SETUP : "setup() {" >
-|	< LOOP: "loop() {" >	
+	< SETUP : "setup()" >
+|	< LOOP: "loop()" >	
 |	< BOOLEAN: "boolean" >
 |	< DOUBLE: "double" >
 |	< ELSE: "else" >
@@ -265,12 +265,12 @@ void ProgramStart() #void : {Token t;}
 
 void ProgramSetup() #void : {Token t;}
 {
-	t = <SETUP> [Statements()] <RBRACE> {jjtThis.value = t.image;} #ProgramSetup(1)
+	t = <SETUP> <DO> [Statements()] <END> {jjtThis.value = t.image;} #ProgramSetup(1)
 }
 
 void ProgramLoop() #void : {Token t;}
 {
-	t = <LOOP> [Statements()] <RBRACE> {jjtThis.value = t.image;} #ProgramLoop(1)
+	t = <LOOP> <DO> [Statements()] <END> {jjtThis.value = t.image;} #ProgramLoop(1)
 }
 
 void Statements() #void : {}
@@ -280,7 +280,7 @@ void Statements() #void : {}
 
 void SimpleStatement() #void : {}
 {
-	(Expression()) | (Declaration())
+	(Expression()) | (Declaration() | IfStatement())
 }
 
 void Declaration() #void : {Token t; String name; Token value;}
@@ -305,6 +305,29 @@ void Expression() #void : {Token t;}
 	(
 		(t = <ADD_OP> Term() {jjtThis.value = t.image;} #Add_op(2))
 	)*
+}
+
+/**
+* If-statement
+*
+**/
+void IfStatement() #void : {Token t;}
+{
+	(t = <IF><LPAREN>BooleanExpression()<RPAREN> <DO> Statements() <END> {jjtThis.value = t.image;} #If_stm(2))
+}
+
+/**
+* Elseif-statement
+*
+**/
+void ElseifStatement() #void : {Token t;}
+{
+	(t = <ELSEIF><LPAREN>BooleanExpression()<RPAREN> <DO> Statements())
+}
+
+void BooleanExpression() #void : {Token t;}
+{
+	(Identifier())
 }
 
 /**
