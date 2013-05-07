@@ -314,7 +314,7 @@ void Expression() #void : {Token t;}
 **/
 void IfStatement() #void : {Token t;}
 {
-	(t = <IF><LPAREN>BooleanExpression()<RPAREN> <DO> Statements() <END> (ElseifStatement())* {jjtThis.value = t.image;} #If_stm(3))
+	(t = <IF><LPAREN>BooleanExpression()<RPAREN> <DO> Statements() <END> (ElseifStatement() | ElseStatement()) {jjtThis.value = t.image;} #If_stm(3))
 }
 
 /**
@@ -324,6 +324,15 @@ void IfStatement() #void : {Token t;}
 void ElseifStatement() #void : {Token t;}
 {
 	(t = <ELSEIF><LPAREN>BooleanExpression()<RPAREN> <DO> Statements() <END>{jjtThis.value = t.image;} #ElsIf_stm(2))
+}
+
+/**
+* Else statement
+*
+**/
+void ElseStatement() #void : {Token t;}
+{
+	(t = <ELSE> <DO> Statements() <END>) {jjtThis.value = t.image;} #Els_stm(1)
 }
 
 void BooleanExpression() #void : {Token t;}

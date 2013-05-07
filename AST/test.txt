@@ -6,7 +6,7 @@ loop() do
 
 	if(hel) do 
 		int z = 11;
-	end elseif(dakda) do
+	end elseif(hdha) do
 		int da = 3219343;
 	end
 
