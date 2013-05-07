@@ -8,6 +8,8 @@ loop() do
 		int z = 11;
 	end elseif(hdha) do
 		int da = 3219343;
+	end else do
+		int dasd = 4234234;
 	end
 
 	int c = 0;
