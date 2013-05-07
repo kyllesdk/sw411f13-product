@@ -1,0 +1,2 @@
+- Man kan ikke lave en if-sætning uden "elseif" eller "else"
+- Man kan ikke lave mere end 1 "elseif"
