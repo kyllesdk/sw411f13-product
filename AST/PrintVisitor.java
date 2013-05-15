@@ -57,15 +57,20 @@ public class PrintVisitor implements ArduinoLangVisitor {
 	public Object visit(ASTIf_stm node, Object data) {
 		System.out.print("if (");
 		node.jjtGetChild(0).jjtAccept(this, data);
-		System.out.println(") {");
+		System.out.println(")");
 		node.jjtGetChild(1).jjtAccept(this, data);
 		System.out.println("");
-		System.out.print("}");
-		node.jjtGetChild(2).jjtAccept(this, data);
-		node.jjtGetChild(3).jjtAccept(this, data);
-
-		System.out.println("}");
-
+		System.out.println("} ");
+		if(node.jjtGetNumChildren() > 2) {
+			for(int i = 2; i <= node.jjtGetNumChildren(); i++) {
+				if(i < (node.jjtGetNumChildren() -1)) {
+					node.jjtGetChild(i).jjtAccept(this, data);
+				} else {
+					node.jjtGetChild(i).jjtAccept(this, data);
+					break;
+				}
+			}
+		}
 		
 		return data;
 	}
@@ -80,15 +85,13 @@ public class PrintVisitor implements ArduinoLangVisitor {
 	}
 
 	public Object visit(ASTElsIf_stm node, Object data) {
-		System.out.println(" else {");
-		System.out.print("if(");
+		System.out.print("else if(");
 		node.jjtGetChild(0).jjtAccept(this, data);
 		System.out.println(") {");
 		node.jjtGetChild(1).jjtAccept(this, data);
 		System.out.println("");
-		System.out.print("}");
-
-
+		System.out.println("}");
+	
 		return data;
 	}
 

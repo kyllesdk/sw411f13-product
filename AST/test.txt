@@ -3,6 +3,7 @@ setup() do
 end
 
 loop() do
-	call System.out.print(123,"dsd",hekjkad,809218390, 890283901);
-	
+	if(hel) do
+		int h = 10;
+	end
 end

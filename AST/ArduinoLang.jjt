@@ -319,18 +319,18 @@ void Expression() #void : {Token t;}
 * If-statement
 *
 **/
-void IfStatement() #void : {Token t;}
+void IfStatement() #If_stm : {Token t;}
 {
-	(t = <IF><LPAREN>BooleanExpression()<RPAREN> <DO> Statements() <END> (ElseifStatement())* [ElseStatement()] {jjtThis.value = t.image;} #If_stm(4))
+	(t = <IF><LPAREN>BooleanExpression()<RPAREN> <DO> Statements() <END> (ElseifStatement())* [ElseStatement()] {jjtThis.value = t.image;})
 }
 
 /**
 * Elseif-statement
 *
 **/
-void ElseifStatement() #void : {Token t;}
+void ElseifStatement() #ElsIf_stm : {Token t;}
 {
-	(t = <ELSEIF><LPAREN>BooleanExpression()<RPAREN> <DO> Statements() <END>{jjtThis.value = t.image;} #ElsIf_stm(2))
+	(t = <ELSEIF><LPAREN>BooleanExpression()<RPAREN> <DO> Statements() <END>{jjtThis.value = t.image;})
 }
 
 /**

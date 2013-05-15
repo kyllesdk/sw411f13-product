@@ -534,54 +534,80 @@ void Expression()       : {Token t;}
 * If-statement
 *
 **/
-void IfStatement()       : {Token t;}
-{
-	(t = <IF><LPAREN>BooleanExpression()<RPAREN> <DO> Statements() <END> (ElseifStatement())* [ElseStatement()]/*@bgen(jjtree) #If_stm( 4) */
+void IfStatement()         : {/*@bgen(jjtree) If_stm */
+                              ASTIf_stm jjtn000 = new ASTIf_stm(JJTIF_STM);
+                              boolean jjtc000 = true;
+                              jjtree.openNodeScope(jjtn000);
+/*@egen*/Token t;}
+{/*@bgen(jjtree) If_stm */
+        try {
+/*@egen*/
+	(t = <IF><LPAREN>BooleanExpression()<RPAREN> <DO> Statements() <END> (ElseifStatement())* [ElseStatement()]/*@bgen(jjtree)*/
                                                                                                                     {
-                                                                                                                      ASTIf_stm jjtn001 = new ASTIf_stm(JJTIF_STM);
-                                                                                                                      boolean jjtc001 = true;
-                                                                                                                      jjtree.openNodeScope(jjtn001);
+                                                                                                                      jjtree.closeNodeScope(jjtn000, true);
+                                                                                                                      jjtc000 = false;
                                                                                                                     }
-                                                                                                                    try {
-/*@egen*//*@bgen(jjtree)*/
-                                                                                                                    {
-                                                                                                                      jjtree.closeNodeScope(jjtn001,  4);
-                                                                                                                      jjtc001 = false;
-                                                                                                                    }
-/*@egen*/ {jjtn001.value = t.image;}/*@bgen(jjtree)*/
-                                                                                                                    } finally {
-                                                                                                                      if (jjtc001) {
-                                                                                                                        jjtree.closeNodeScope(jjtn001,  4);
-                                                                                                                      }
-                                                                                                                    }
-/*@egen*/           )
+/*@egen*/ {jjtn000.value = t.image;})/*@bgen(jjtree)*/
+        } catch (Throwable jjte000) {
+          if (jjtc000) {
+            jjtree.clearNodeScope(jjtn000);
+            jjtc000 = false;
+          } else {
+            jjtree.popNode();
+          }
+          if (jjte000 instanceof RuntimeException) {
+            throw (RuntimeException)jjte000;
+          }
+          if (jjte000 instanceof ParseException) {
+            throw (ParseException)jjte000;
+          }
+          throw (Error)jjte000;
+        } finally {
+          if (jjtc000) {
+            jjtree.closeNodeScope(jjtn000, true);
+          }
+        }
+/*@egen*/
 }
 
 /**
 * Elseif-statement
 *
 **/
-void ElseifStatement()       : {Token t;}
-{
-	(t = <ELSEIF><LPAREN>BooleanExpression()<RPAREN> <DO> Statements() <END>/*@bgen(jjtree) #ElsIf_stm( 2) */
+void ElseifStatement()            : {/*@bgen(jjtree) ElsIf_stm */
+                                     ASTElsIf_stm jjtn000 = new ASTElsIf_stm(JJTELSIF_STM);
+                                     boolean jjtc000 = true;
+                                     jjtree.openNodeScope(jjtn000);
+/*@egen*/Token t;}
+{/*@bgen(jjtree) ElsIf_stm */
+        try {
+/*@egen*/
+	(t = <ELSEIF><LPAREN>BooleanExpression()<RPAREN> <DO> Statements() <END>/*@bgen(jjtree)*/
                                                                                 {
-                                                                                  ASTElsIf_stm jjtn001 = new ASTElsIf_stm(JJTELSIF_STM);
-                                                                                  boolean jjtc001 = true;
-                                                                                  jjtree.openNodeScope(jjtn001);
+                                                                                  jjtree.closeNodeScope(jjtn000, true);
+                                                                                  jjtc000 = false;
                                                                                 }
-                                                                                try {
-/*@egen*//*@bgen(jjtree)*/
-                                                                                {
-                                                                                  jjtree.closeNodeScope(jjtn001,  2);
-                                                                                  jjtc001 = false;
-                                                                                }
-/*@egen*/{jjtn001.value = t.image;}/*@bgen(jjtree)*/
-                                                                                } finally {
-                                                                                  if (jjtc001) {
-                                                                                    jjtree.closeNodeScope(jjtn001,  2);
-                                                                                  }
-                                                                                }
-/*@egen*/              )
+/*@egen*/{jjtn000.value = t.image;})/*@bgen(jjtree)*/
+        } catch (Throwable jjte000) {
+          if (jjtc000) {
+            jjtree.clearNodeScope(jjtn000);
+            jjtc000 = false;
+          } else {
+            jjtree.popNode();
+          }
+          if (jjte000 instanceof RuntimeException) {
+            throw (RuntimeException)jjte000;
+          }
+          if (jjte000 instanceof ParseException) {
+            throw (ParseException)jjte000;
+          }
+          throw (Error)jjte000;
+        } finally {
+          if (jjtc000) {
+            jjtree.closeNodeScope(jjtn000, true);
+          }
+        }
+/*@egen*/
 }
 
 /**
@@ -714,11 +740,6 @@ void Parameters()            : {/*@bgen(jjtree) Parameter */
         }
 /*@egen*/
 }
-/*
-Token Parameter() : {Token t;}
-{
-	
-}*/
 
 /**
 * Term
