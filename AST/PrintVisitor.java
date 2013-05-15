@@ -130,6 +130,40 @@ public class PrintVisitor implements ArduinoLangVisitor {
 		return (data);
 	}
 
+	public Object visit(ASTFunctionCall node, Object data) {
+		node.jjtGetChild(0).jjtAccept(this, data);
+		System.out.print("(");
+		for(int i = 1; i <= node.jjtGetNumChildren(); i++) {
+			if(i < (node.jjtGetNumChildren() - 1)) {
+				node.jjtGetChild(i).jjtAccept(this, data);
+				System.out.print(", ");
+				
+			} else {
+				node.jjtGetChild(i).jjtAccept(this, data);
+				break;
+			}
+		}
+		System.out.print(")");
+		System.out.print(";");
+
+		return data;
+	}
+
+	public Object visit(ASTParameter node, Object data) {
+		int i = 0;
+
+		for(i = 0; i <= node.jjtGetNumChildren(); i++) {
+			if(i < (node.jjtGetNumChildren() -1)) {
+				node.jjtGetChild(i).jjtAccept(this, data);
+				System.out.print(",");
+			} else {
+				node.jjtGetChild(i).jjtAccept(this, data);
+				break;
+			}
+		}
+		return data;
+	}
+
 	public Object visit(ASTAdd_op node, Object data) {
 		node.jjtGetChild(0).jjtAccept(this, data);
 		System.out.print(" " + node.value + " ");

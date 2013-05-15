@@ -3,23 +3,6 @@ setup() do
 end
 
 loop() do
-
-	if(hel) do 
-		int z = 11;
-	end elseif(hdha) do
-		int da = 3219343;
-	end else do
-		int dasd = 4234234;
-	end
-
-	while(a) do
-		float a = 13.123;
-	end
-
-	int c = 0;
-	int a = 10;
-	int b = 12;
-	float abc = 12.00;
-
-	string jonas = "Hansen";
+	call System.out.print(123,"dsd",hekjkad,809218390, 890283901);
+	
 end

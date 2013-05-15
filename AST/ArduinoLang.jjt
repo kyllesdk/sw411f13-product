@@ -110,6 +110,7 @@ TOKEN : /* Reserved words and literals */
 {
 	< SETUP : "setup()" >
 |	< LOOP: "loop()" >	
+|	< CALL: "call" >
 |	< BOOLEAN: "boolean" >
 |	< DOUBLE: "double" >
 |	< ELSE: "else" >
@@ -214,7 +215,8 @@ TOKEN : /* Seperators */
 |	< SEMICOLON: ";" >
 |	< COMMA: "," >
 |	< DOT: "." > 
-|	< ID: ["a"-"z","A"-"Z"] ( ["a"-"z","A"-"Z","0"-"9"] )* >
+|	< ID: ["a"-"z","A"-"Z","."] ( ["a"-"z","A"-"Z","0"-"9", "."] )* >
+//|	< PARAMETER: ["(","a"-"z","A"-"Z","0"-"9","\"",","] ( ["a"-"z","A"-"Z","0"-"9","\"" ,","] )* [")"] >
 }
 
 TOKEN : /* Operators */
@@ -285,7 +287,7 @@ void Statements() #void : {}
 
 void SimpleStatement() #void : {}
 {
-	(Expression()) | (Declaration() | IfStatement() | WhileStatement())
+	(Expression()) | (Declaration() | IfStatement() | WhileStatement() | FunctionCall())
 }
 
 void Declaration() #void : {Token t; String name; Token value; String stringText;}
@@ -352,6 +354,19 @@ void WhileStatement() #void : {Token t;}
 void BooleanExpression() #void : {Token t;}
 {
 	(Identifier())
+}
+
+void FunctionCall() #void : {Token t; String name;}
+{
+	(t = <CALL> name = Identifier() <LPAREN>Parameters()<RPAREN><SEMICOLON>){jjtThis.value = t;} #FunctionCall(2)
+}
+
+void Parameters() #Parameter : {Token t; String text;}
+{
+	((t = Number()(","Parameters())*){jjtThis.value = t;}
+|	(text = StringText()(","Parameters())*){jjtThis.value = text;}
+|	(text = Identifier()(","Parameters())*){jjtThis.value = text;}
+)
 }
 
 /**
