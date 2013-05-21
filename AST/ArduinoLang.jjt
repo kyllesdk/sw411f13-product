@@ -222,22 +222,17 @@ TOKEN : /* Seperators */
 TOKEN : /* Operators */
 {
 	< ASSIGN: "=" >
+|	< COLON: ":" >
+|	< BOOL_OP: "&&" | "||" | "<=" | ">=" | "!" | "==">
 |	< GT: ">" >
 |	< LT: "<" >
-|	< COLON: ":" >
-|	< EQ: "==" >
-|	< LE: "<=" >
-|	< GE: ">=" >
-|	< NE: "!=" >
-|	< BOOL_OP: "&&" | "||" >
 |	< ADD_OP: "+" | "-" >
 |	< MULTIPLY: "*" >
-|	< DIVIDE: "/" >
+|	< DIVISION: "/" >
 |	< MOD: "%" >
-|	< SQRT: "sqrt" >
-|	< POW: "^" >
-|   < NOT: "!" >
+| 	< POW: "^" >
 |	< EMPTY: "" >
+|	< HASHTAG: "#" >
 }
 
 /*TOKEN :
@@ -262,12 +257,25 @@ TOKEN : /* Operators */
 
 SimpleNode Program() : {}
 {   
-	ProgramSetup() ProgramLoop() <EOF> {return jjtThis;}
+	ProgramTop() ProgramContent() <EOF> {return jjtThis;}
+}
+
+void ProgramContent() #ProgramContent : {Token t;}
+{
+	ProgramSetup() ProgramLoop()
+}
+
+void ProgramTop() #ProgramTop : {Token t;}
+{
+	(
+	t = <HASHTAG> Identifier() <LT> Identifier() <GT> {jjtThis.value = t.image;} #ProgramLibInclude(2)
+	| ClassInstantiation()
+	)*
 }
 
 void ProgramStart() #void : {Token t;}
 {
-	(ProgramSetup() ProgramLoop())  #ProgramStart(1)
+	(ProgramTop() ProgramSetup() ProgramLoop())  #ProgramStart(2)
 }
 
 void ProgramSetup() #void : {Token t;}
@@ -290,13 +298,13 @@ void SimpleStatement() #void : {}
 	(Expression()) | (Declaration() | IfStatement() | WhileStatement() | FunctionCall())
 }
 
-void Declaration() #void : {Token t; String name; Token value; String stringText;}
+void Declaration() #Declaration : {Token t; String name; Token value; String stringText;}
 {
-	t = <INT> name = Identifier() <ASSIGN> value = Number() <SEMICOLON> {jjtThis.value = t.image; ST.put(name, new STC("int", name, value));} #Declaration(2) 
-|	t = <FLOAT> name = Identifier() <ASSIGN> value = Number() <SEMICOLON> {jjtThis.value = t.image; ST.put(name, new STC("float", name, value));} #Declaration(2)
-|	t = <STRING> name = Identifier() <ASSIGN> stringText = StringText() <SEMICOLON> {jjtThis.value = t.image; ST.put(name, new STC("string", name, stringText));} #Declaration(2)
+	t = <INT> name = Identifier() <ASSIGN> (Expression())* <SEMICOLON> {jjtThis.value = t.image;}
+	| t = <FLOAT> name = Identifier() <ASSIGN> (Expression())* <SEMICOLON> {jjtThis.value = t.image;}
+	| t = <STRING> name = Identifier() <ASSIGN> (Expression())* <SEMICOLON> {jjtThis.value = t.image;}
 }
-
+	
 String DeclarationLogic() #void : {Token t;}
 {
 	<ASSIGN> t = Number() {jjtThis.value = t.image; return t.image;} #DeclarationLogic(1)
@@ -307,12 +315,23 @@ String DeclarationLogic() #void : {Token t;}
 * @accepts
 * @accepts 
 **/
-void Expression() #void : {Token t;}
+void Expression() #Expression : {Token t;}
 {
-	Term()
-	(
-		(t = <ADD_OP> Term() {jjtThis.value = t.image;} #Add_op(2))
+	// Term()
+	// (
+	// 	(t = <ADD_OP> Term() {jjtThis.value = t.image;} #Add_op(2))
+	// )*
+	(<LPAREN> Expression() <RPAREN>
+	|
+	Term()(
+		(t = <ADD_OP> Expression()){jjtThis.value = t.image;} #Add_op(2)
+		| (t = <MULTIPLY> Expression()){jjtThis.value = t.image;} #Add_op(2)
+		| (t = <DIVISION> Expression()){jjtThis.value = t.image;} #Add_op(2)
+		| (t = <POW> Expression()){jjtThis.value = t.image;} #Add_op(2)
+		| (t = <LPAREN> Expression()<RPAREN> {jjtThis.value = t.image;} #Add_op(2))
+		| (t = <MOD> Expression()){jjtThis.value = t.image;} #Add_op(2)
 	)*
+	)
 }
 
 /**
@@ -353,12 +372,21 @@ void WhileStatement() #void : {Token t;}
 
 void BooleanExpression() #void : {Token t;}
 {
-	(Identifier())
+	Expression()( 
+	t = <BOOL_OP> Expression() {jjtThis.value = t.image;} #Bool_op(2)
+	| t = <GT> Expression() {jjtThis.value = t.image;} #Bool_op(2)
+	| t = <LT> Expression() {jjtThis.value = t.image;} #Bool_op(2)
+	)*
 }
 
 void FunctionCall() #void : {Token t; String name;}
 {
-	(t = <CALL> name = Identifier() <LPAREN>Parameters()<RPAREN><SEMICOLON>){jjtThis.value = t;} #FunctionCall(2)
+	(t = <CALL> name = Identifier() (Identifier())* <LPAREN>(Parameters())*<RPAREN><SEMICOLON>){jjtThis.value = t;} #FunctionCall(2)
+}
+
+void ClassInstantiation() #ClassInstantiation : {Token t; String name;}
+{
+	(<CALL> Identifier() (Identifier())* <LPAREN>(Parameters())*<RPAREN><SEMICOLON>)
 }
 
 void Parameters() #Parameter : {Token t; String text;}
@@ -375,8 +403,10 @@ void Parameters() #Parameter : {Token t; String text;}
 **/
 void Term() #void : {Token t;}
 {
-	<NOT> Factor() #Not_op(1)
+/*	<NOT> Factor() #Not_op(1)
 	| Factor() (t = <MULTIPLY> Factor() {jjtThis.value = t.image;} #Mult_op(2))*
+*/
+	(Number() | Identifier())
 }
 
 /**
@@ -385,12 +415,14 @@ void Term() #void : {Token t;}
 * @accepts Number
 * @accepts Identifier
 **/
-void Factor() #void : {}
+void Factor() #Factor : {}
 {
-	(<LPAREN> Expression() #Expression(1) <RPAREN>
+	/*(<LPAREN> Expression() #Expression(1) <RPAREN>
 	| Number()
 	| Identifier()
-	)
+	)*/
+	Number()
+	| Identifier()
 }
 
 /**

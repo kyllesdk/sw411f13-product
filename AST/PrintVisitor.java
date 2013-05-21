@@ -11,9 +11,35 @@ public class PrintVisitor implements ArduinoLangVisitor {
     }
 
 	public Object visit(ASTProgram node, Object data) {
+		System.out.print("");
 		node.jjtGetChild(0).jjtAccept(this, data);
 		System.out.println(""); // Print new line tut use ; here
 		node.jjtGetChild(1).jjtAccept(this, data);
+		
+		return data;
+	}
+
+	public Object visit(ASTProgramContent node, Object data) {
+		node.jjtGetChild(0).jjtAccept(this, data);
+		node.jjtGetChild(1).jjtAccept(this, data);
+
+		return data;
+	}
+
+	public Object visit(ASTProgramTop node, Object data) {
+		for(int i = 0; i < node.jjtGetNumChildren(); i++) {
+			node.jjtGetChild(i).jjtAccept(this, data);
+		}
+
+		return data;
+	}
+
+	public Object visit(ASTProgramLibInclude node, Object data) {
+		System.out.print("#");
+		node.jjtGetChild(0).jjtAccept(this, data);
+		System.out.print(" <");
+		node.jjtGetChild(1).jjtAccept(this, data);
+		System.out.println(">");
 
 		return data;
 	}
@@ -57,7 +83,7 @@ public class PrintVisitor implements ArduinoLangVisitor {
 	public Object visit(ASTIf_stm node, Object data) {
 		System.out.print("if (");
 		node.jjtGetChild(0).jjtAccept(this, data);
-		System.out.println(")");
+		System.out.println(") {");
 		node.jjtGetChild(1).jjtAccept(this, data);
 		System.out.println("");
 		System.out.println("} ");
@@ -111,7 +137,11 @@ public class PrintVisitor implements ArduinoLangVisitor {
 		System.out.print(node.value + " ");
 		node.jjtGetChild(0).jjtAccept(this, data);
 		System.out.print(" = ");
-		node.jjtGetChild(1).jjtAccept(this, data);
+		
+		for(int i = 1; i < node.jjtGetNumChildren(); i++) {
+		node.jjtGetChild(i).jjtAccept(this, data);
+			
+		}
 		System.out.print(";");
 
 		return data;
@@ -126,28 +156,84 @@ public class PrintVisitor implements ArduinoLangVisitor {
 	}
 
 	public Object visit(ASTExpression node, Object data) {
-		System.out.print("(");
+/*		System.out.print("");
 		node.jjtGetChild(0).jjtAccept(this, data);
-		System.out.print(")");
+		System.out.print("");*/
+
+		node.jjtGetChild(0).jjtAccept(this, data);
+
+		for(int i = 1; i < node.jjtGetNumChildren(); i++) {
+			node.jjtGetChild(i).jjtAccept(this, data);
+		
+		}
 
 		return (data);
+	}
+
+	public Object visit(ASTFactor node, Object data) {
+		node.jjtGetChild(0).jjtAccept(this, data);
+
+		/*for(int i = 1; i <= node.jjtGetNumChildren(); i++) {
+			if(i < (node.jjtGetNumChildren() - 1)) {
+			node.jjtGetChild(i).jjtAccept(this, data);
+				
+			} else {
+				break;
+			}
+		
+		}*/
+
+		return data;
 	}
 
 	public Object visit(ASTFunctionCall node, Object data) {
 		node.jjtGetChild(0).jjtAccept(this, data);
 		System.out.print("(");
-		for(int i = 1; i <= node.jjtGetNumChildren(); i++) {
-			if(i < (node.jjtGetNumChildren() - 1)) {
-				node.jjtGetChild(i).jjtAccept(this, data);
-				System.out.print(", ");
-				
-			} else {
-				node.jjtGetChild(i).jjtAccept(this, data);
-				break;
+		if(node.jjtGetNumChildren() > 0){
+			for(int i = 1; i <= node.jjtGetNumChildren(); i++) {
+				if(i < (node.jjtGetNumChildren() - 1)) {
+					node.jjtGetChild(i).jjtAccept(this, data);
+					System.out.print(", ");
+					
+				} else {
+					node.jjtGetChild(i).jjtAccept(this, data);
+					break;
+				}
 			}
+		} else {
+			System.out.print(")");
+			System.out.print(";");
 		}
+	
 		System.out.print(")");
 		System.out.print(";");
+
+		return data;
+	}
+
+	public Object visit(ASTClassInstantiation node, Object data) {
+		node.jjtGetChild(0).jjtAccept(this, data);
+		System.out.print(" ");
+		node.jjtGetChild(1).jjtAccept(this, data);
+		System.out.print("(");
+		if(node.jjtGetNumChildren() > 0){
+			for(int i = 1; i <= node.jjtGetNumChildren(); i++) {
+				if(i < (node.jjtGetNumChildren() - 1)) {
+					node.jjtGetChild(i).jjtAccept(this, data);
+					System.out.print(", ");
+					
+				} else {
+					node.jjtGetChild(i).jjtAccept(this, data);
+					break;
+				}
+			}
+		} else {
+			System.out.print(")");
+			System.out.println(";");
+		}
+	
+		System.out.print(")");
+		System.out.println(";");
 
 		return data;
 	}
@@ -175,6 +261,13 @@ public class PrintVisitor implements ArduinoLangVisitor {
 		return data;
 	}
 
+	/*public Object visit(ASTSringAdd_op node, Object data) {
+		node.jjtGetChild(0).jjtAccept(this, data);
+		nonde.jjtGetChild(1).jjtAccept(this, data);
+
+		return data;
+	}*/
+
 	public Object visit(ASTBool_op node, Object data) {
 		node.jjtGetChild(0).jjtAccept(this, data);
 		System.out.print(" " + node.value + " ");
@@ -186,8 +279,13 @@ public class PrintVisitor implements ArduinoLangVisitor {
 	public Object visit(ASTMult_op node, Object data) {
 		node.jjtGetChild(0).jjtAccept(this, data);
 		System.out.print(" " + node.value + " ");
-		node.jjtGetChild(1).jjtAccept(this, data);
-	
+		int i = node.jjtGetNumChildren();
+		if(i > 1) {
+			node.jjtGetChild(1).jjtAccept(this, data);
+		} else {
+			node.jjtGetChild(1).jjtAccept(this, data);
+		}
+
 		return data;		
 	}
 

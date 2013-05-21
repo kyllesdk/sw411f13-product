@@ -1,9 +1,29 @@
+#include <LiquidCrystal.h>
+#include <Henning.h>
+
+call LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
+call LiquidHenning lh();
+
 setup() do
-	int test = 1;
+int i = 10;
 end
 
 loop() do
-	if(hel) do
-		int h = 10;
+	int h = 123;
+	int j =  3 + 2 - 4;
+	string hello = hello + there;
+	float h = 2.345;
+	int a = h;
+	int a = b * c + h / c;
+	float b = 2.434^34.45 + 3;
+	int a = 2 ^3;
+	int b = 2 /4;
+	int c = 4 % 2;
+	if(hello && hello || ad > (10) < dk >= dasd <= dasd !lol) do
+		int h = 12;
+	end
+
+	if(1 == 1 || 2 < 3) do
+	call System.out.print("Hello World");
 	end
 end
