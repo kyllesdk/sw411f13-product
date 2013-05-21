@@ -53,6 +53,7 @@ public class PrintVisitor implements ArduinoLangVisitor {
 	}
 
 	public Object visit(ASTProgramSetup node, Object data) {
+		System.out.print("void ");
 		System.out.print(node.value);
 		System.out.println(" { ");
 		node.jjtGetChild(0).jjtAccept(this, data);
@@ -63,6 +64,7 @@ public class PrintVisitor implements ArduinoLangVisitor {
 	}
 
 	public Object visit(ASTProgramLoop node, Object data) {
+		System.out.print("void ");
 		System.out.print(node.value);
 		System.out.println(" { ");
 		node.jjtGetChild(0).jjtAccept(this, data);
@@ -190,7 +192,7 @@ public class PrintVisitor implements ArduinoLangVisitor {
 		node.jjtGetChild(0).jjtAccept(this, data);
 		System.out.print("(");
 		if(node.jjtGetNumChildren() > 0){
-			for(int i = 1; i <= node.jjtGetNumChildren(); i++) {
+			for(int i = 1; i < node.jjtGetNumChildren(); i++) {
 				if(i < (node.jjtGetNumChildren() - 1)) {
 					node.jjtGetChild(i).jjtAccept(this, data);
 					System.out.print(", ");
@@ -217,7 +219,7 @@ public class PrintVisitor implements ArduinoLangVisitor {
 		node.jjtGetChild(1).jjtAccept(this, data);
 		System.out.print("(");
 		if(node.jjtGetNumChildren() > 0){
-			for(int i = 1; i <= node.jjtGetNumChildren(); i++) {
+			for(int i = 2; i <= node.jjtGetNumChildren(); i++) {
 				if(i < (node.jjtGetNumChildren() - 1)) {
 					node.jjtGetChild(i).jjtAccept(this, data);
 					System.out.print(", ");
@@ -270,7 +272,15 @@ public class PrintVisitor implements ArduinoLangVisitor {
 
 	public Object visit(ASTBool_op node, Object data) {
 		node.jjtGetChild(0).jjtAccept(this, data);
-		System.out.print(" " + node.value + " ");
+		System.out.print(" ");
+
+		String nodeValueString = node.value.toString();
+		if("AND".equals(nodeValueString)) { System.out.print("&& "); }
+		else if("EQUALS".equals(nodeValueString)) {System.out.print("== ");}
+		else if("NOT".equals(nodeValueString)) {System.out.print("!");}
+		else if("NOTEQUALS".equals(nodeValueString)) {System.out.print("!= ");}
+		else if("OR".equals(nodeValueString)) {System.out.print("|| ");}
+
 		node.jjtGetChild(1).jjtAccept(this, data);
 
 		return data;

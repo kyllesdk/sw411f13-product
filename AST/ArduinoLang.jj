@@ -115,6 +115,7 @@ TOKEN : /* Reserved words and literals */
 	< SETUP : "setup()" >
 |	< LOOP: "loop()" >	
 |	< CALL: "call" >
+|	< INSTANTIATE: "instantiate" >
 |	< BOOLEAN: "boolean" >
 |	< DOUBLE: "double" >
 |	< ELSE: "else" >
@@ -208,6 +209,23 @@ TOKEN :
 	>	
 }
 
+TOKEN : /* Operators */
+{
+	< ASSIGN: "=" >
+|	< COLON: ":" >
+|	< BOOL_OP: "AND" | "||" | "<=" | ">=" | "NOTEQUALS" | "EQUALS" | "NOT">
+|	< GT: ">" >
+|	< LT: "<" >
+|	< ADD_OP: "+" | "-" >
+|	< MULTIPLY: "*" >
+|	< DIVISION: "/" >
+|	< MOD: "%" >
+| 	< POW: "^" >
+|	< EMPTY: "" >
+|	< HASHTAG: "#" >
+}
+
+
 TOKEN : /* Seperators */
 {
 	< LPAREN: "(" >
@@ -221,22 +239,6 @@ TOKEN : /* Seperators */
 |	< DOT: "." > 
 |	< ID: ["a"-"z","A"-"Z","."] ( ["a"-"z","A"-"Z","0"-"9", "."] )* >
 //|	< PARAMETER: ["(","a"-"z","A"-"Z","0"-"9","\"",","] ( ["a"-"z","A"-"Z","0"-"9","\"" ,","] )* [")"] >
-}
-
-TOKEN : /* Operators */
-{
-	< ASSIGN: "=" >
-|	< COLON: ":" >
-|	< BOOL_OP: "&&" | "||" | "<=" | ">=" | "!" | "==">
-|	< GT: ">" >
-|	< LT: "<" >
-|	< ADD_OP: "+" | "-" >
-|	< MULTIPLY: "*" >
-|	< DIVISION: "/" >
-|	< MOD: "%" >
-| 	< POW: "^" >
-|	< EMPTY: "" >
-|	< HASHTAG: "#" >
 }
 
 /*TOKEN :
@@ -412,47 +414,47 @@ void ProgramStart()       : {Token t;}
 
 void ProgramSetup()       : {Token t;}
 {
-	t = <SETUP> <DO> [Statements()] <END>/*@bgen(jjtree) #ProgramSetup( 1) */
-                                              {
-                                                ASTProgramSetup jjtn001 = new ASTProgramSetup(JJTPROGRAMSETUP);
-                                                boolean jjtc001 = true;
-                                                jjtree.openNodeScope(jjtn001);
-                                              }
-                                              try {
+	<VOID> t = <SETUP> <DO> [Statements()] <END>/*@bgen(jjtree) #ProgramSetup( 1) */
+                                                     {
+                                                       ASTProgramSetup jjtn001 = new ASTProgramSetup(JJTPROGRAMSETUP);
+                                                       boolean jjtc001 = true;
+                                                       jjtree.openNodeScope(jjtn001);
+                                                     }
+                                                     try {
 /*@egen*//*@bgen(jjtree)*/
-                                              {
-                                                jjtree.closeNodeScope(jjtn001,  1);
-                                                jjtc001 = false;
-                                              }
+                                                     {
+                                                       jjtree.closeNodeScope(jjtn001,  1);
+                                                       jjtc001 = false;
+                                                     }
 /*@egen*/ {jjtn001.value = t.image;}/*@bgen(jjtree)*/
-                                              } finally {
-                                                if (jjtc001) {
-                                                  jjtree.closeNodeScope(jjtn001,  1);
-                                                }
-                                              }
+                                                     } finally {
+                                                       if (jjtc001) {
+                                                         jjtree.closeNodeScope(jjtn001,  1);
+                                                       }
+                                                     }
 /*@egen*/                 
 }
 
 void ProgramLoop()       : {Token t;}
 {
-	t = <LOOP> <DO> [Statements()] <END>/*@bgen(jjtree) #ProgramLoop( 1) */
-                                             {
-                                               ASTProgramLoop jjtn001 = new ASTProgramLoop(JJTPROGRAMLOOP);
-                                               boolean jjtc001 = true;
-                                               jjtree.openNodeScope(jjtn001);
-                                             }
-                                             try {
+	<VOID> t = <LOOP> <DO> [Statements()] <END>/*@bgen(jjtree) #ProgramLoop( 1) */
+                                                    {
+                                                      ASTProgramLoop jjtn001 = new ASTProgramLoop(JJTPROGRAMLOOP);
+                                                      boolean jjtc001 = true;
+                                                      jjtree.openNodeScope(jjtn001);
+                                                    }
+                                                    try {
 /*@egen*//*@bgen(jjtree)*/
-                                             {
-                                               jjtree.closeNodeScope(jjtn001,  1);
-                                               jjtc001 = false;
-                                             }
+                                                    {
+                                                      jjtree.closeNodeScope(jjtn001,  1);
+                                                      jjtc001 = false;
+                                                    }
 /*@egen*/ {jjtn001.value = t.image;}/*@bgen(jjtree)*/
-                                             } finally {
-                                               if (jjtc001) {
-                                                 jjtree.closeNodeScope(jjtn001,  1);
-                                               }
-                                             }
+                                                    } finally {
+                                                      if (jjtc001) {
+                                                        jjtree.closeNodeScope(jjtn001,  1);
+                                                      }
+                                                    }
 /*@egen*/                
 }
 
@@ -490,7 +492,7 @@ void Statements()       : {}
 
 void SimpleStatement()       : {}
 {
-	(Expression()) | (Declaration() | IfStatement() | WhileStatement() | FunctionCall())
+	(Expression()) | (Declaration() | FunctionCall() | IfStatement() | WhileStatement() | ClassInstantiation())
 }
 
 void Declaration()              : {/*@bgen(jjtree) Declaration */
@@ -919,38 +921,46 @@ void BooleanExpression()       : {Token t;}
 	)*
 }
 
-void FunctionCall()       : {Token t; String name;}
-{
-	(t = <CALL> name = Identifier() (Identifier())* <LPAREN>(Parameters())*<RPAREN><SEMICOLON>)/*@bgen(jjtree) #FunctionCall( 2) */
-                                                                                                   {
-                                                                                                     ASTFunctionCall jjtn001 = new ASTFunctionCall(JJTFUNCTIONCALL);
-                                                                                                     boolean jjtc001 = true;
-                                                                                                     jjtree.openNodeScope(jjtn001);
-                                                                                                   }
-                                                                                                   try {
-/*@egen*//*@bgen(jjtree)*/
-                                                                                                   {
-                                                                                                     jjtree.closeNodeScope(jjtn001,  2);
-                                                                                                     jjtc001 = false;
-                                                                                                   }
-/*@egen*/{jjtn001.value = t;}/*@bgen(jjtree)*/
-                                                                                                   } finally {
-                                                                                                     if (jjtc001) {
-                                                                                                       jjtree.closeNodeScope(jjtn001,  2);
-                                                                                                     }
-                                                                                                   }
-/*@egen*/                 
+void FunctionCall()               : {/*@bgen(jjtree) FunctionCall */
+                                     ASTFunctionCall jjtn000 = new ASTFunctionCall(JJTFUNCTIONCALL);
+                                     boolean jjtc000 = true;
+                                     jjtree.openNodeScope(jjtn000);
+/*@egen*/Token t; String name;}
+{/*@bgen(jjtree) FunctionCall */
+        try {
+/*@egen*/
+	<CALL> name = Identifier() (Identifier())* <LPAREN>(Parameters())*<RPAREN><SEMICOLON>/*@bgen(jjtree)*/
+        } catch (Throwable jjte000) {
+          if (jjtc000) {
+            jjtree.clearNodeScope(jjtn000);
+            jjtc000 = false;
+          } else {
+            jjtree.popNode();
+          }
+          if (jjte000 instanceof RuntimeException) {
+            throw (RuntimeException)jjte000;
+          }
+          if (jjte000 instanceof ParseException) {
+            throw (ParseException)jjte000;
+          }
+          throw (Error)jjte000;
+        } finally {
+          if (jjtc000) {
+            jjtree.closeNodeScope(jjtn000, true);
+          }
+        }
+/*@egen*/
 }
 
 void ClassInstantiation()                     : {/*@bgen(jjtree) ClassInstantiation */
-                                                 ASTClassInstantiation jjtn000 = new ASTClassInstantiation(JJTCLASSINSTANTIATION);
-                                                 boolean jjtc000 = true;
-                                                 jjtree.openNodeScope(jjtn000);
-/*@egen*/Token t; String name;}
+  ASTClassInstantiation jjtn000 = new ASTClassInstantiation(JJTCLASSINSTANTIATION);
+  boolean jjtc000 = true;
+  jjtree.openNodeScope(jjtn000);
+/*@egen*/}
 {/*@bgen(jjtree) ClassInstantiation */
         try {
 /*@egen*/
-	(<CALL> Identifier() (Identifier())* <LPAREN>(Parameters())*<RPAREN><SEMICOLON>)/*@bgen(jjtree)*/
+	<INSTANTIATE> Identifier() (Identifier())* <LPAREN>(Parameters())*<RPAREN><SEMICOLON>/*@bgen(jjtree)*/
         } catch (Throwable jjte000) {
           if (jjtc000) {
             jjtree.clearNodeScope(jjtn000);
@@ -981,25 +991,26 @@ void Parameters()            : {/*@bgen(jjtree) Parameter */
 {/*@bgen(jjtree) Parameter */
         try {
 /*@egen*/
-	((t = Number()(","Parameters())*)/*@bgen(jjtree)*/
-                                         {
-                                           jjtree.closeNodeScope(jjtn000, true);
-                                           jjtc000 = false;
-                                         }
+	((t = Number()((("," | <MOD> | <MULTIPLY> | <DIVISION> | <ADD_OP>) Parameters())*)/*@bgen(jjtree)*/
+                                                                                          {
+                                                                                            jjtree.closeNodeScope(jjtn000, true);
+                                                                                            jjtc000 = false;
+                                                                                          }
 /*@egen*/{jjtn000.value = t;}
-|	(text = StringText()(","Parameters())*)/*@bgen(jjtree)*/
-                                               {
-                                                 jjtree.closeNodeScope(jjtn000, true);
-                                                 jjtc000 = false;
-                                               }
+|	(text = StringText()("," Parameters())*)/*@bgen(jjtree)*/
+                                                {
+                                                  jjtree.closeNodeScope(jjtn000, true);
+                                                  jjtc000 = false;
+                                                }
 /*@egen*/{jjtn000.value = text;}
-|	(text = Identifier()(","Parameters())*)/*@bgen(jjtree)*/
-                                               {
-                                                 jjtree.closeNodeScope(jjtn000, true);
-                                                 jjtc000 = false;
-                                               }
+|	(text = Identifier()("," Parameters())*)/*@bgen(jjtree)*/
+                                                {
+                                                  jjtree.closeNodeScope(jjtn000, true);
+                                                  jjtc000 = false;
+                                                }
 /*@egen*/{jjtn000.value = text;}
-)/*@bgen(jjtree)*/
+/*|	(FunctionCall()(("," | <MOD> | <MULTIPLY> | <DIVISION> | <ADD_OP>) Parameters())*)*/
+))/*@bgen(jjtree)*/
         } catch (Throwable jjte000) {
           if (jjtc000) {
             jjtree.clearNodeScope(jjtn000);

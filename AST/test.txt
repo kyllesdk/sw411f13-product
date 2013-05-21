@@ -1,29 +1,24 @@
 #include <LiquidCrystal.h>
-#include <Henning.h>
 
-call LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
-call LiquidHenning lh();
+instantiate LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
 
-setup() do
-int i = 10;
+void setup() do
+	// hello
+	call pinMode(9, OUTPUT);
+	call analogWrite(9, 20);
+
+	call lcd.begin(8, 2);
+
+	/* Hello yo ou too
+	Lol*/
+	call lcd.print("Hello World!");
+	call delay(2000);
+	if(1 AND 1 + 1 EQUALS 2 AND 1 NOT 2 AND 1+2 NOTEQUALS 3) do
+		int g = 123;
+	end
 end
 
-loop() do
-	int h = 123;
-	int j =  3 + 2 - 4;
-	string hello = hello + there;
-	float h = 2.345;
-	int a = h;
-	int a = b * c + h / c;
-	float b = 2.434^34.45 + 3;
-	int a = 2 ^3;
-	int b = 2 /4;
-	int c = 4 % 2;
-	if(hello && hello || ad > (10) < dk >= dasd <= dasd !lol) do
-		int h = 12;
-	end
-
-	if(1 == 1 || 2 < 3) do
-	call System.out.print("Hello World");
-	end
+void loop() do
+	call lcd.setCursor(0, 0);
+	call lcd.print(5000);
 end

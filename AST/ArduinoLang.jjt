@@ -111,6 +111,7 @@ TOKEN : /* Reserved words and literals */
 	< SETUP : "setup()" >
 |	< LOOP: "loop()" >	
 |	< CALL: "call" >
+|	< INSTANTIATE: "instantiate" >
 |	< BOOLEAN: "boolean" >
 |	< DOUBLE: "double" >
 |	< ELSE: "else" >
@@ -204,6 +205,23 @@ TOKEN :
 	>	
 }
 
+TOKEN : /* Operators */
+{
+	< ASSIGN: "=" >
+|	< COLON: ":" >
+|	< BOOL_OP: "AND" | "||" | "<=" | ">=" | "NOTEQUALS" | "EQUALS" | "NOT">
+|	< GT: ">" >
+|	< LT: "<" >
+|	< ADD_OP: "+" | "-" >
+|	< MULTIPLY: "*" >
+|	< DIVISION: "/" >
+|	< MOD: "%" >
+| 	< POW: "^" >
+|	< EMPTY: "" >
+|	< HASHTAG: "#" >
+}
+
+
 TOKEN : /* Seperators */
 {
 	< LPAREN: "(" >
@@ -217,22 +235,6 @@ TOKEN : /* Seperators */
 |	< DOT: "." > 
 |	< ID: ["a"-"z","A"-"Z","."] ( ["a"-"z","A"-"Z","0"-"9", "."] )* >
 //|	< PARAMETER: ["(","a"-"z","A"-"Z","0"-"9","\"",","] ( ["a"-"z","A"-"Z","0"-"9","\"" ,","] )* [")"] >
-}
-
-TOKEN : /* Operators */
-{
-	< ASSIGN: "=" >
-|	< COLON: ":" >
-|	< BOOL_OP: "&&" | "||" | "<=" | ">=" | "!" | "==">
-|	< GT: ">" >
-|	< LT: "<" >
-|	< ADD_OP: "+" | "-" >
-|	< MULTIPLY: "*" >
-|	< DIVISION: "/" >
-|	< MOD: "%" >
-| 	< POW: "^" >
-|	< EMPTY: "" >
-|	< HASHTAG: "#" >
 }
 
 /*TOKEN :
@@ -280,12 +282,12 @@ void ProgramStart() #void : {Token t;}
 
 void ProgramSetup() #void : {Token t;}
 {
-	t = <SETUP> <DO> [Statements()] <END> {jjtThis.value = t.image;} #ProgramSetup(1)
+	<VOID> t = <SETUP> <DO> [Statements()] <END> {jjtThis.value = t.image;} #ProgramSetup(1)
 }
 
 void ProgramLoop() #void : {Token t;}
 {
-	t = <LOOP> <DO> [Statements()] <END> {jjtThis.value = t.image;} #ProgramLoop(1)
+	<VOID> t = <LOOP> <DO> [Statements()] <END> {jjtThis.value = t.image;} #ProgramLoop(1)
 }
 
 void Statements() #void : {}
@@ -295,7 +297,7 @@ void Statements() #void : {}
 
 void SimpleStatement() #void : {}
 {
-	(Expression()) | (Declaration() | IfStatement() | WhileStatement() | FunctionCall())
+	(Expression()) | (Declaration() | FunctionCall() | IfStatement() | WhileStatement() | ClassInstantiation())
 }
 
 void Declaration() #Declaration : {Token t; String name; Token value; String stringText;}
@@ -379,22 +381,23 @@ void BooleanExpression() #void : {Token t;}
 	)*
 }
 
-void FunctionCall() #void : {Token t; String name;}
+void FunctionCall() #FunctionCall : {Token t; String name;}
 {
-	(t = <CALL> name = Identifier() (Identifier())* <LPAREN>(Parameters())*<RPAREN><SEMICOLON>){jjtThis.value = t;} #FunctionCall(2)
+	<CALL> name = Identifier() (Identifier())* <LPAREN>(Parameters())*<RPAREN><SEMICOLON>
 }
 
-void ClassInstantiation() #ClassInstantiation : {Token t; String name;}
+void ClassInstantiation() #ClassInstantiation : {}
 {
-	(<CALL> Identifier() (Identifier())* <LPAREN>(Parameters())*<RPAREN><SEMICOLON>)
+	<INSTANTIATE> Identifier() (Identifier())* <LPAREN>(Parameters())*<RPAREN><SEMICOLON>
 }
 
 void Parameters() #Parameter : {Token t; String text;}
 {
-	((t = Number()(","Parameters())*){jjtThis.value = t;}
-|	(text = StringText()(","Parameters())*){jjtThis.value = text;}
-|	(text = Identifier()(","Parameters())*){jjtThis.value = text;}
-)
+	((t = Number()((("," | <MOD> | <MULTIPLY> | <DIVISION> | <ADD_OP>) Parameters())*){jjtThis.value = t;}
+|	(text = StringText()("," Parameters())*){jjtThis.value = text;}
+|	(text = Identifier()("," Parameters())*){jjtThis.value = text;}
+/*|	(FunctionCall()(("," | <MOD> | <MULTIPLY> | <DIVISION> | <ADD_OP>) Parameters())*)*/
+))
 }
 
 /**
