@@ -209,7 +209,7 @@ TOKEN : /* Operators */
 {
 	< ASSIGN: "=" >
 |	< COLON: ":" >
-|	< BOOL_OP: "AND" | "||" | "<=" | ">=" | "NOTEQUALS" | "EQUALS" | "NOT">
+|	< BOOL_OP: "AND" | "OR" | "<=" | ">=" | "NOTEQUALS" | "EQUALS" | "NOT">
 |	< GT: ">" >
 |	< LT: "<" >
 |	< ADD_OP: "+" | "-" >
@@ -217,7 +217,6 @@ TOKEN : /* Operators */
 |	< DIVISION: "/" >
 |	< MOD: "%" >
 | 	< POW: "^" >
-|	< EMPTY: "" >
 |	< HASHTAG: "#" >
 }
 
@@ -234,39 +233,32 @@ TOKEN : /* Seperators */
 |	< COMMA: "," >
 |	< DOT: "." > 
 |	< ID: ["a"-"z","A"-"Z","."] ( ["a"-"z","A"-"Z","0"-"9", "."] )* >
-//|	< PARAMETER: ["(","a"-"z","A"-"Z","0"-"9","\"",","] ( ["a"-"z","A"-"Z","0"-"9","\"" ,","] )* [")"] >
 }
-
-/*TOKEN :
-{
-	< Id: ["a"-"z","A"-"Z"] ( ["a"-"z","A"-"Z","0"-"9"] )* >
-}*/
 
 /*********************************************
 *	LANGUAGE GRAMMAR STARTS HERE 							 *
 *********************************************/
 
-
-
-/** Root production */
-/*void Input() :
-{}
-{
-	( <Id> )+ <EOF> 
-}*/
-
-/* If statement grammar */
-
+// Starting Simple node (program starts here), and runs until EOF is reached
 SimpleNode Program() : {}
 {   
 	ProgramTop() ProgramContent() <EOF> {return jjtThis;}
 }
 
-void ProgramContent() #ProgramContent : {Token t;}
+/**
+* ProgramContents is all the program besides the definitions and instantiations that can occur in the top
+**/
+void ProgramContent() #ProgramContent : {}
 {
 	ProgramSetup() ProgramLoop()
 }
 
+/**
+* Alows the top of the program to be made
+* @allows definitions to be made (#DEFINE ...)
+* @allows class instantiations (instantiate CLASSNAME variable = ..)
+* @param Token t, this is the token that is sent to the PrintVisitor
+**/
 void ProgramTop() #ProgramTop : {Token t;}
 {
 	(
@@ -275,31 +267,67 @@ void ProgramTop() #ProgramTop : {Token t;}
 	)*
 }
 
-void ProgramStart() #void : {Token t;}
+/*void ProgramStart() #void : {Token t;}
 {
 	(ProgramTop() ProgramSetup() ProgramLoop())  #ProgramStart(2)
 }
+*/
 
+/**
+* ProgramSetup is defining how to Setup() function of a program should be made
+* @accepts void Setup() do STATEMENT end
+* @Hint Statements are optional so that the setup() function can be empty
+* @param Token t, this is the token that is sent to the PrintVisitor
+**/
 void ProgramSetup() #void : {Token t;}
 {
 	<VOID> t = <SETUP> <DO> [Statements()] <END> {jjtThis.value = t.image;} #ProgramSetup(1)
 }
 
+/**
+* ProgramLoop defines how the Loop() function of a program must be defined
+* @accepts void Loop() do STATEMENT end
+* @Hint Satements are optional so that the loop() function can be empty
+* @param Token t, this is the token that is sent to the PrintVisitor
+**/
 void ProgramLoop() #void : {Token t;}
 {
 	<VOID> t = <LOOP> <DO> [Statements()] <END> {jjtThis.value = t.image;} #ProgramLoop(1)
 }
 
+/**
+* Statements
+* @allows the user to make more than one statement
+**/
 void Statements() #void : {}
 {
 	(SimpleStatement() [Statements() #Statements(2)])
 }
 
+/**
+* SimpleStatement is defining what a statement can consist of
+* @accepts Expression() e.g. c = a + b;
+* @accepts Declarations e.g. int a = 10; int b = 2;
+* @accepts Function calls e.g. call HelloWorld();
+* @accepts If-statements e.g. if(BOOLEAN) do STATEMENT end
+* @accepts While loops e.g. while(BOOLEAN) do STATEMENT end
+* @accepts Class instantiations e.g. instantiate CLASSNAME VARIABLE = ...
+**/
 void SimpleStatement() #void : {}
 {
-	(Expression()) | (Declaration() | FunctionCall() | IfStatement() | WhileStatement() | ClassInstantiation())
+	(Expression() | Declaration() | FunctionCall() | IfStatement() | WhileStatement() | ClassInstantiation())
 }
 
+/**
+* Declaration Defines how a declaration must be made, and what types is allowed
+* @accepts int NAME = EXPRESSION*; The value has to be a number that is following the rules of an integer. Decimals is not allowed
+* @accepts float NAME = EXPRESSION*; The value has to be a number that is folowing the rules of an integer. Decimals is allowed.
+* @accepts string NAME = EXPRESSION*; The value has to be text or numbers that follows the string_literal rules.
+* @param Token t, this is the token that is sent to the PrintVisitor
+* @param String name, this is the name that is sent to the STC class
+* @Param Token value, this is the value of the declaration that is sent to the STC Class. This is used for int, and float
+* @param String stringText, is used almost the same as Token value, but this is sending the text-value to STC class
+**/
 void Declaration() #Declaration : {Token t; String name; Token value; String stringText;}
 {
 	t = <INT> name = Identifier() <ASSIGN> (Expression())* <SEMICOLON> {jjtThis.value = t.image;}
@@ -307,38 +335,41 @@ void Declaration() #Declaration : {Token t; String name; Token value; String str
 	| t = <STRING> name = Identifier() <ASSIGN> (Expression())* <SEMICOLON> {jjtThis.value = t.image;}
 }
 	
-String DeclarationLogic() #void : {Token t;}
+/**String DeclarationLogic() #void : {Token t;}
 {
 	<ASSIGN> t = Number() {jjtThis.value = t.image; return t.image;} #DeclarationLogic(1)
-}
+}*/
 
 /**
-* Expression
-* @accepts
-* @accepts 
+* Expressions
+* @accepts TERM (+ | -) EXPRESSION, plus and minus operation
+* @accepts TERM  * EXPRESSION, multiply operation
+* @accepts TERM / EXPRESSION, division operation
+* @accepts TERM ^ EXPRESSION, power a number e.g. 2^2
+* @accepts TERM (EXPRESSION), parenthesis can be used
+* @accepts TERM % EXPRESSION, the modulus operation
+* @param Token t, this is the token that is sent to the PrintVisitor
 **/
 void Expression() #Expression : {Token t;}
 {
-	// Term()
-	// (
-	// 	(t = <ADD_OP> Term() {jjtThis.value = t.image;} #Add_op(2))
-	// )*
 	(<LPAREN> Expression() <RPAREN>
-	|
-	Term()(
-		(t = <ADD_OP> Expression()){jjtThis.value = t.image;} #Add_op(2)
-		| (t = <MULTIPLY> Expression()){jjtThis.value = t.image;} #Add_op(2)
-		| (t = <DIVISION> Expression()){jjtThis.value = t.image;} #Add_op(2)
-		| (t = <POW> Expression()){jjtThis.value = t.image;} #Add_op(2)
-		| (t = <LPAREN> Expression()<RPAREN> {jjtThis.value = t.image;} #Add_op(2))
-		| (t = <MOD> Expression()){jjtThis.value = t.image;} #Add_op(2)
+	|	Term()(
+			(t = <ADD_OP> Expression()){jjtThis.value = t.image;} #Add_op(2)
+			| (t = <MULTIPLY> Expression()){jjtThis.value = t.image;} #Add_op(2)
+			| (t = <DIVISION> Expression()){jjtThis.value = t.image;} #Add_op(2)
+			| (t = <POW> Expression()){jjtThis.value = t.image;} #Add_op(2)
+			| (t = <LPAREN> Expression()<RPAREN> {jjtThis.value = t.image;} #Add_op(2))
+			| (t = <MOD> Expression()){jjtThis.value = t.image;} #Add_op(2)
 	)*
 	)
 }
 
 /**
 * If-statement
-*
+* @accepts if(BOOLEAN) do STATEMENT end (ELSEIF)* [ELSE]
+* @param Token t, this is the token that is sent to the PrintVisitor
+* @hint The elseif statement is concatenated so that it can occur 0+ times
+* @hint The else statement is set as optional
 **/
 void IfStatement() #If_stm : {Token t;}
 {
@@ -347,7 +378,8 @@ void IfStatement() #If_stm : {Token t;}
 
 /**
 * Elseif-statement
-*
+* @accepts elseif(BOOLEAN) do STATEMENT end
+* @param Token t, this is the token that is sent to the PrintVisitor
 **/
 void ElseifStatement() #ElsIf_stm : {Token t;}
 {
@@ -356,7 +388,8 @@ void ElseifStatement() #ElsIf_stm : {Token t;}
 
 /**
 * Else statement
-*
+* @accepts else do STATEMENT end
+* @param Token t, this is the token that is sent to the PrintVisitor
 **/
 void ElseStatement() #void : {Token t;}
 {
@@ -364,14 +397,22 @@ void ElseStatement() #void : {Token t;}
 }
 
 /**
-* While statement
-*
+* While statement - This is the only loop functionality in the language
+* @accepts while(BOOLEAN) do STATEMENT end
+* @param Token t, this is the token that is sent to the PrintVisitor
 **/
 void WhileStatement() #void : {Token t;}
 {
 	(t = <WHILE> <LPAREN> BooleanExpression() <RPAREN> <DO> Statements() <END>) {jjtThis.value = t.image;} #WhileStatement(2)
 }
 
+/**
+* BooleanExpression defines what boolean expressions consist of
+* @accepts EXPRESSION (AND | OR | <= | >= | NOTEQUALS | EQUALS | NOT) EXPRESSION e.g. (a AND c) NOTEQUALS c
+* @accepts EXPRESSION > EXPRESSION e.g. a > b
+* @accepts EXPRESSION < EXPRESSION e.g. a < b
+* @param Token t, this is the token that is sent to the PrintVisitor
+**/
 void BooleanExpression() #void : {Token t;}
 {
 	Expression()( 
@@ -381,57 +422,58 @@ void BooleanExpression() #void : {Token t;}
 	)*
 }
 
+/**
+* FunctionCall defines how a function must be called
+* @accepts call FUNCTIONNAME(PARAMETERS);
+* @hint function calls can consist of multiple calls seperated by a "." e.g. System.out.print(PAMETERS);
+* @hint a function can consist of zero parameters
+* @param Token t, this is the token that is sent to the PrintVisitor
+**/
 void FunctionCall() #FunctionCall : {Token t; String name;}
 {
 	<CALL> name = Identifier() (Identifier())* <LPAREN>(Parameters())*<RPAREN><SEMICOLON>
 }
 
+/**
+* ClassInstantiation defines how a class must be instantiated
+* @accepts instantiate CLASSNAME VARIABLE(PARAMETERS); e.g. instantiate LCDDisplay lcd();
+* @hint the class instantiation can consist of zero parameters
+**/
 void ClassInstantiation() #ClassInstantiation : {}
 {
 	<INSTANTIATE> Identifier() (Identifier())* <LPAREN>(Parameters())*<RPAREN><SEMICOLON>
 }
 
+/**
+* Parameters defines how parameters must be defined, and what to return to the PrintVisitor
+* @accepts NUMBER or NUMBER (("," | "%" | "*" | "/" | (+ | -)) PARAMETER)* - It is concatenated 
+* @accepts STRINGTEXT or STRINGTEXT (, PARAMETER)* - Concatenated
+* @accepts IDENTIFIER or IDENTIFIER (, PARAMETER)* - Concatenated
+* @param Token t, this is the token that is sent to the PrintVisitor
+* @param String text, this is used for the String and Identifier to sent the data to the PrintVisitor class.
+**/
 void Parameters() #Parameter : {Token t; String text;}
 {
 	((t = Number()((("," | <MOD> | <MULTIPLY> | <DIVISION> | <ADD_OP>) Parameters())*){jjtThis.value = t;}
 |	(text = StringText()("," Parameters())*){jjtThis.value = text;}
 |	(text = Identifier()("," Parameters())*){jjtThis.value = text;}
-/*|	(FunctionCall()(("," | <MOD> | <MULTIPLY> | <DIVISION> | <ADD_OP>) Parameters())*)*/
 ))
 }
 
 /**
 * Term
-* @accepts 
+* @accepts NUMBER or IDENTIFIER
 **/
-void Term() #void : {Token t;}
+void Term() #void : {}
 {
-/*	<NOT> Factor() #Not_op(1)
-	| Factor() (t = <MULTIPLY> Factor() {jjtThis.value = t.image;} #Mult_op(2))*
-*/
 	(Number() | Identifier())
 }
 
 /**
-* Factor
-* @accepts "("Expression")""
-* @accepts Number
-* @accepts Identifier
-**/
-void Factor() #Factor : {}
-{
-	/*(<LPAREN> Expression() #Expression(1) <RPAREN>
-	| Number()
-	| Identifier()
-	)*/
-	Number()
-	| Identifier()
-}
-
-/**
-* Number
-* @accepts <INTEGER_LITERAL>
+* Number - this is defining how all the numbers in the language has to be defined
+* @accepts <INTEGER_LITERAL> 
 * @accepts <FLOATING_POINT_LITERAL>
+* @return Token t - this is used by other methods
 **/
 Token Number() : {Token t;}
 {
@@ -441,14 +483,20 @@ Token Number() : {Token t;}
 	)
 }
 
+/**
+* StringText defines how strings has to be defined. 
+* @accepts e.g. "Hello World!" do not accept: Hello World!
+* @return String t.image
+**/
 String StringText() : {Token t;}
 {
 	t = <STRING_LITERAL> {jjtThis.value = t.image; return t.image;}
 }
 
 /**
-* Identifier
-* @accepts <ID> (a-z, A-Z)
+* Identifier - is used by other methods where text has to be written but without \"".. e.g. Print, or variable names.
+* @accepts <ID>
+* @return String t.image
 **/
 String Identifier() : {Token t;}
 {

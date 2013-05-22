@@ -44,13 +44,13 @@ public class PrintVisitor implements ArduinoLangVisitor {
 		return data;
 	}
 
-	public Object visit(ASTProgramStart node, Object data) {
+	/*public Object visit(ASTProgramStart node, Object data) {
 		node.jjtGetChild(0).jjtAccept(this, data);
 		System.out.println("");
 		node.jjtGetChild(1).jjtAccept(this, data);
 
 		return data;
-	}
+	}*/
 
 	public Object visit(ASTProgramSetup node, Object data) {
 		System.out.print("void ");
