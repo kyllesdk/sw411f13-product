@@ -1,26 +1,10 @@
 #include <LiquidCrystal.h>
 
-instantiate LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
-
 void setup() do
-
-
-	// hello
-	call pinMode(9, OUTPUT);
-	call analogWrite(9, 20);
-
-	call lcd.begin(8, 2);
-
-	/* Hello yo ou too
-	Lol*/
-	call lcd.print("Hello World!");
-	call delay(2000);
-	if(1 AND 1 + 1 EQUALS 2 AND 1 NOT 2 AND 1+2 NOTEQUALS 3) do
-		int g = 123;
-	end
+	int h = 10;
 end
 
 void loop() do
-	call lcd.setCursor(0, 0);
-	call lcd.print(5000);
+	int goodf = 24 - 2234324.4234 + 324.324;
+	string he = "hello";
 end

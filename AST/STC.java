@@ -6,6 +6,16 @@ public class STC extends Object {
 	Token value;
 	String stringValue;
 
+	public STC(String iType, Token iValue) {
+		type = iType;
+		value = iValue;
+	}
+
+	public STC(String iType, String iValue) {
+		type = iType;
+		stringValue = iValue;
+	}
+
 	public STC(String iType, String iName,  Token iValue) {
 		type = iType;
 		name = iName;

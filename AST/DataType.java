@@ -5,5 +5,7 @@ public enum DataType {
 	TypeFloat,
 	TypeBoolean,
 	TypeString,
+	TypeIdentifier,
+	TypeNotImportant,
 	TypeUnknown
 }

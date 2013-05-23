@@ -67,9 +67,9 @@ public class ArduinoLang/*@bgen(jjtree)*/implements ArduinoLangTreeConstants/*@e
 		root.jjtAccept(pv, null); // Print out the program
 
 		System.out.println();
-		/*System.out.println("Type Checking:");
+		System.out.println("Type Checking:");
 		TypeCheckVisitor tc = new TypeCheckVisitor();
-		root.jjAccept(tc, ST); // Print out any type errors*/
+		root.jjtAccept(tc, ST); // Print out any type errors*/
 
 	}
 }
@@ -141,7 +141,6 @@ TOKEN :
 	< INTEGER_LITERAL: 
 		<DECIMAL_LITERAL> (["l", "L"])?
 	>
-
 |	< #DECIMAL_LITERAL: ["0"-"9"] (["0" - "9"])* >
 
 |	< FLOATING_POINT_LITERAL:
@@ -151,7 +150,7 @@ TOKEN :
 		| (["0" - "9"])+ (<EXPONENT>)? ["f", "F", "d", "D"]
 	>
 
-|	< #EXPONENT: ["e", "E"] (["+","-"])? (["0" - "9"])+ >
+|	< #EXPONENT: ["e", "E"] (["+","-"])? (["0" - "9"])+ > // Bruger vi den?
 
 |	< CHARACTER_LITERAL:
 		"'"
@@ -186,9 +185,9 @@ TOKEN :
 TOKEN :
 {
 	/*< IDENTIFIER: <LETTER> (<PART_LETTER>)* >*/
+
 	< #LETTER:
       [  // all chars for which Character.isIdentifierStart is true
-		"$",
 		"A"-"Z",
 		"_",
 		"a"-"z"
@@ -199,7 +198,6 @@ TOKEN :
       [  // all chars for which Character.isIdentifierPart is true
          "\u0000"-"\u0008",
          "\u000e"-"\u001b",
-         "$",
          "0"-"9",
          "A"-"Z",
          "_",
@@ -214,11 +212,12 @@ TOKEN : /* Operators */
 	< ASSIGN: "=" >
 |	< COLON: ":" >
 |	< BOOL_OP: "AND" | "OR" | "<=" | ">=" | "NOTEQUALS" | "EQUALS" | "NOT">
-|	< GT: ">" >
-|	< LT: "<" >
+|   < LT: "<" >
+|   < GT: ">" >
 |	< ADD_OP: "+" | "-" >
 |	< MULTIPLY: "*" >
 |	< DIVISION: "/" >
+|	< SQRT: "SQRT" >
 |	< MOD: "%" >
 | 	< POW: "^" >
 |	< HASHTAG: "#" >
@@ -509,19 +508,25 @@ void Declaration()              : {/*@bgen(jjtree) Declaration */
                                                                              jjtree.closeNodeScope(jjtn000, true);
                                                                              jjtc000 = false;
                                                                            }
-/*@egen*/ {jjtn000.value = t.image;}
+/*@egen*/ {jjtn000.value = t.image; ST.put(name, new STC("int", name));}
 	| t = <FLOAT> name = Identifier() <ASSIGN> (Expression())* <SEMICOLON>/*@bgen(jjtree)*/
                                                                                {
                                                                                  jjtree.closeNodeScope(jjtn000, true);
                                                                                  jjtc000 = false;
                                                                                }
-/*@egen*/ {jjtn000.value = t.image;}
-	| t = <STRING> name = Identifier() <ASSIGN> (Expression())* <SEMICOLON>/*@bgen(jjtree)*/
+/*@egen*/ {jjtn000.value = t.image; ST.put(name, new STC("float", name));}
+	| t = <STRING> name = Identifier() <ASSIGN> (StringText())*  <SEMICOLON>/*@bgen(jjtree)*/
+                                                                                 {
+                                                                                   jjtree.closeNodeScope(jjtn000, true);
+                                                                                   jjtc000 = false;
+                                                                                 }
+/*@egen*/ {jjtn000.value = t.image; ST.put(name, new STC("string", name));}
+	| t = <BOOLEAN> name = Identifier() <ASSIGN> (Expression())* <SEMICOLON>/*@bgen(jjtree)*/
                                                                                 {
                                                                                   jjtree.closeNodeScope(jjtn000, true);
                                                                                   jjtc000 = false;
                                                                                 }
-/*@egen*/ {jjtn000.value = t.image;}/*@bgen(jjtree)*/
+/*@egen*/{jjtn000.value = t.image; ST.put(name, new STC("boolean", name));}/*@bgen(jjtree)*/
         } catch (Throwable jjte000) {
           if (jjtc000) {
             jjtree.clearNodeScope(jjtn000);
@@ -682,6 +687,25 @@ void Expression()             : {/*@bgen(jjtree) Expression */
                                                       jjtree.closeNodeScope(jjtn006,  2);
                                                     }
                                                   }
+/*@egen*/           
+			| (t = <SQRT> Expression())/*@bgen(jjtree) #Add_op( 2) */
+                                                   {
+                                                     ASTAdd_op jjtn007 = new ASTAdd_op(JJTADD_OP);
+                                                     boolean jjtc007 = true;
+                                                     jjtree.openNodeScope(jjtn007);
+                                                   }
+                                                   try {
+/*@egen*//*@bgen(jjtree)*/
+                                                   {
+                                                     jjtree.closeNodeScope(jjtn007,  2);
+                                                     jjtc007 = false;
+                                                   }
+/*@egen*/{jjtn007.value = t.image;}/*@bgen(jjtree)*/
+                                                   } finally {
+                                                     if (jjtc007) {
+                                                       jjtree.closeNodeScope(jjtn007,  2);
+                                                     }
+                                                   }
 /*@egen*/           
 	)*
 	)/*@bgen(jjtree)*/
@@ -856,70 +880,74 @@ void WhileStatement()       : {Token t;}
 **/
 void BooleanExpression()       : {Token t;}
 {
-	Expression()( 
-	t = <BOOL_OP> Expression()/*@bgen(jjtree) #Bool_op( 2) */
-                                   {
-                                     ASTBool_op jjtn001 = new ASTBool_op(JJTBOOL_OP);
-                                     boolean jjtc001 = true;
-                                     jjtree.openNodeScope(jjtn001);
-                                   }
-                                   try {
+	Expression()(
+		t = <BOOL_OP> Expression()/*@bgen(jjtree) #Bool_op( 2) */
+                                           {
+                                             ASTBool_op jjtn001 = new ASTBool_op(JJTBOOL_OP);
+                                             boolean jjtc001 = true;
+                                             jjtree.openNodeScope(jjtn001);
+                                           }
+                                           try {
 /*@egen*//*@bgen(jjtree)*/
-                                   {
-                                     jjtree.closeNodeScope(jjtn001,  2);
-                                     jjtc001 = false;
-                                   }
+                                           {
+                                             jjtree.closeNodeScope(jjtn001,  2);
+                                             jjtc001 = false;
+                                           }
 /*@egen*/ {jjtn001.value = t.image;}/*@bgen(jjtree)*/
-                                   } finally {
-                                     if (jjtc001) {
-                                       jjtree.closeNodeScope(jjtn001,  2);
-                                     }
-                                   }
+                                           } finally {
+                                             if (jjtc001) {
+                                               jjtree.closeNodeScope(jjtn001,  2);
+                                             }
+                                           }
 /*@egen*/            
-	| t = <GT> Expression()/*@bgen(jjtree) #Bool_op( 2) */
-                                {
-                                  ASTBool_op jjtn002 = new ASTBool_op(JJTBOOL_OP);
-                                  boolean jjtc002 = true;
-                                  jjtree.openNodeScope(jjtn002);
-                                }
-                                try {
+	|	t = <LT> Expression()/*@bgen(jjtree) #Bool_op( 2) */
+                                      {
+                                        ASTBool_op jjtn002 = new ASTBool_op(JJTBOOL_OP);
+                                        boolean jjtc002 = true;
+                                        jjtree.openNodeScope(jjtn002);
+                                      }
+                                      try {
 /*@egen*//*@bgen(jjtree)*/
-                                {
-                                  jjtree.closeNodeScope(jjtn002,  2);
-                                  jjtc002 = false;
-                                }
+                                      {
+                                        jjtree.closeNodeScope(jjtn002,  2);
+                                        jjtc002 = false;
+                                      }
 /*@egen*/ {jjtn002.value = t.image;}/*@bgen(jjtree)*/
-                                } finally {
-                                  if (jjtc002) {
-                                    jjtree.closeNodeScope(jjtn002,  2);
-                                  }
-                                }
+                                      } finally {
+                                        if (jjtc002) {
+                                          jjtree.closeNodeScope(jjtn002,  2);
+                                        }
+                                      }
 /*@egen*/            
-	| t = <LT> Expression()/*@bgen(jjtree) #Bool_op( 2) */
-                                {
-                                  ASTBool_op jjtn003 = new ASTBool_op(JJTBOOL_OP);
-                                  boolean jjtc003 = true;
-                                  jjtree.openNodeScope(jjtn003);
-                                }
-                                try {
+	|	t = <GT> Expression()/*@bgen(jjtree) #Bool_op( 2) */
+                                      {
+                                        ASTBool_op jjtn003 = new ASTBool_op(JJTBOOL_OP);
+                                        boolean jjtc003 = true;
+                                        jjtree.openNodeScope(jjtn003);
+                                      }
+                                      try {
 /*@egen*//*@bgen(jjtree)*/
-                                {
-                                  jjtree.closeNodeScope(jjtn003,  2);
-                                  jjtc003 = false;
-                                }
+                                      {
+                                        jjtree.closeNodeScope(jjtn003,  2);
+                                        jjtc003 = false;
+                                      }
 /*@egen*/ {jjtn003.value = t.image;}/*@bgen(jjtree)*/
-                                } finally {
-                                  if (jjtc003) {
-                                    jjtree.closeNodeScope(jjtn003,  2);
-                                  }
-                                }
+                                      } finally {
+                                        if (jjtc003) {
+                                          jjtree.closeNodeScope(jjtn003,  2);
+                                        }
+                                      }
 /*@egen*/            
+
 	)*
 }
 
 /**
-*
-*
+* FunctionCall defines how a function must be called
+* @accepts call FUNCTIONNAME(PARAMETERS);
+* @hint function calls can consist of multiple calls seperated by a "." e.g. System.out.print(PAMETERS);
+* @hint a function can consist of zero parameters
+* @param Token t, this is the token that is sent to the PrintVisitor
 **/
 void FunctionCall()               : {/*@bgen(jjtree) FunctionCall */
                                      ASTFunctionCall jjtn000 = new ASTFunctionCall(JJTFUNCTIONCALL);
@@ -928,7 +956,7 @@ void FunctionCall()               : {/*@bgen(jjtree) FunctionCall */
 /*@egen*/Token t; String name;}
 {/*@bgen(jjtree) FunctionCall */
         try {
-/*@egen*/
+/*@egen*/ //System(dsada)
 	<CALL> name = Identifier() (Identifier())* <LPAREN>(Parameters())*<RPAREN><SEMICOLON>/*@bgen(jjtree)*/
         } catch (Throwable jjte000) {
           if (jjtc000) {
@@ -952,6 +980,11 @@ void FunctionCall()               : {/*@bgen(jjtree) FunctionCall */
 /*@egen*/
 }
 
+/**
+* ClassInstantiation defines how a class must be instantiated
+* @accepts instantiate CLASSNAME VARIABLE(PARAMETERS); e.g. instantiate LCDDisplay lcd();
+* @hint the class instantiation can consist of zero parameters
+**/
 void ClassInstantiation()                     : {/*@bgen(jjtree) ClassInstantiation */
   ASTClassInstantiation jjtn000 = new ASTClassInstantiation(JJTCLASSINSTANTIATION);
   boolean jjtc000 = true;
@@ -983,6 +1016,14 @@ void ClassInstantiation()                     : {/*@bgen(jjtree) ClassInstantiat
 /*@egen*/
 }
 
+/**
+* Parameters defines how parameters must be defined, and what to return to the PrintVisitor
+* @accepts NUMBER or NUMBER (("," | "%" | "*" | "/" | (+ | -)) PARAMETER)* - It is concatenated 
+* @accepts STRINGTEXT or STRINGTEXT (, PARAMETER)* - Concatenated
+* @accepts IDENTIFIER or IDENTIFIER (, PARAMETER)* - Concatenated
+* @param Token t, this is the token that is sent to the PrintVisitor
+* @param String text, this is used for the String and Identifier to sent the data to the PrintVisitor class.
+**/
 void Parameters()            : {/*@bgen(jjtree) Parameter */
                                 ASTParameter jjtn000 = new ASTParameter(JJTPARAMETER);
                                 boolean jjtc000 = true;
@@ -1009,7 +1050,6 @@ void Parameters()            : {/*@bgen(jjtree) Parameter */
                                                   jjtc000 = false;
                                                 }
 /*@egen*/{jjtn000.value = text;}
-/*|	(FunctionCall()(("," | <MOD> | <MULTIPLY> | <DIVISION> | <ADD_OP>) Parameters())*)*/
 ))/*@bgen(jjtree)*/
         } catch (Throwable jjte000) {
           if (jjtc000) {
@@ -1035,62 +1075,18 @@ void Parameters()            : {/*@bgen(jjtree) Parameter */
 
 /**
 * Term
-* @accepts 
+* @accepts NUMBER or IDENTIFIER
 **/
-void Term()       : {Token t;}
+void Term()       : {}
 {
-/*	<NOT> Factor() #Not_op(1)
-	| Factor() (t = <MULTIPLY> Factor() {jjtThis.value = t.image;} #Mult_op(2))*
-*/
 	(Number() | Identifier())
 }
 
 /**
-* Factor
-* @accepts "("Expression")""
-* @accepts Number
-* @accepts Identifier
-**/
-void Factor()         : {/*@bgen(jjtree) Factor */
-  ASTFactor jjtn000 = new ASTFactor(JJTFACTOR);
-  boolean jjtc000 = true;
-  jjtree.openNodeScope(jjtn000);
-/*@egen*/}
-{/*@bgen(jjtree) Factor */
-        try {
-/*@egen*/
-	/*(<LPAREN> Expression() #Expression(1) <RPAREN>
-	| Number()
-	| Identifier()
-	)*/
-	Number()
-	| Identifier()/*@bgen(jjtree)*/
-        } catch (Throwable jjte000) {
-          if (jjtc000) {
-            jjtree.clearNodeScope(jjtn000);
-            jjtc000 = false;
-          } else {
-            jjtree.popNode();
-          }
-          if (jjte000 instanceof RuntimeException) {
-            throw (RuntimeException)jjte000;
-          }
-          if (jjte000 instanceof ParseException) {
-            throw (ParseException)jjte000;
-          }
-          throw (Error)jjte000;
-        } finally {
-          if (jjtc000) {
-            jjtree.closeNodeScope(jjtn000, true);
-          }
-        }
-/*@egen*/
-}
-
-/**
-* Number
-* @accepts <INTEGER_LITERAL>
+* Number - this is defining how all the numbers in the language has to be defined
+* @accepts <INTEGER_LITERAL> 
 * @accepts <FLOATING_POINT_LITERAL>
+* @return Token t - this is used by other methods
 **/
 Token Number() : {/*@bgen(jjtree) Number */
                   ASTNumber jjtn000 = new ASTNumber(JJTNUMBER);
@@ -1122,6 +1118,11 @@ Token Number() : {/*@bgen(jjtree) Number */
 /*@egen*/
 }
 
+/**
+* StringText defines how strings has to be defined. 
+* @accepts e.g. "Hello World!" do not accept: Hello World!
+* @return String t.image
+**/
 String StringText() : {/*@bgen(jjtree) StringText */
                        ASTStringText jjtn000 = new ASTStringText(JJTSTRINGTEXT);
                        boolean jjtc000 = true;
@@ -1145,8 +1146,9 @@ String StringText() : {/*@bgen(jjtree) StringText */
 }
 
 /**
-* Identifier
-* @accepts <ID> (a-z, A-Z)
+* Identifier - is used by other methods where text has to be written but without \"".. e.g. Print, or variable names.
+* @accepts <ID>
+* @return String t.image
 **/
 String Identifier() : {/*@bgen(jjtree) Identifier */
                        ASTIdentifier jjtn000 = new ASTIdentifier(JJTIDENTIFIER);

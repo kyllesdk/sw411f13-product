@@ -63,9 +63,9 @@ public class ArduinoLang {
 		root.jjtAccept(pv, null); // Print out the program
 
 		System.out.println();
-		/*System.out.println("Type Checking:");
+		System.out.println("Type Checking:");
 		TypeCheckVisitor tc = new TypeCheckVisitor();
-		root.jjAccept(tc, ST); // Print out any type errors*/
+		root.jjtAccept(tc, ST); // Print out any type errors*/
 
 	}
 }
@@ -137,7 +137,6 @@ TOKEN :
 	< INTEGER_LITERAL: 
 		<DECIMAL_LITERAL> (["l", "L"])?
 	>
-
 |	< #DECIMAL_LITERAL: ["0"-"9"] (["0" - "9"])* >
 
 |	< FLOATING_POINT_LITERAL:
@@ -147,7 +146,7 @@ TOKEN :
 		| (["0" - "9"])+ (<EXPONENT>)? ["f", "F", "d", "D"]
 	>
 
-|	< #EXPONENT: ["e", "E"] (["+","-"])? (["0" - "9"])+ >
+|	< #EXPONENT: ["e", "E"] (["+","-"])? (["0" - "9"])+ > // Bruger vi den?
 
 |	< CHARACTER_LITERAL:
 		"'"
@@ -182,9 +181,9 @@ TOKEN :
 TOKEN :
 {
 	/*< IDENTIFIER: <LETTER> (<PART_LETTER>)* >*/
+
 	< #LETTER:
       [  // all chars for which Character.isIdentifierStart is true
-		"$",
 		"A"-"Z",
 		"_",
 		"a"-"z"
@@ -195,7 +194,6 @@ TOKEN :
       [  // all chars for which Character.isIdentifierPart is true
          "\u0000"-"\u0008",
          "\u000e"-"\u001b",
-         "$",
          "0"-"9",
          "A"-"Z",
          "_",
@@ -210,11 +208,12 @@ TOKEN : /* Operators */
 	< ASSIGN: "=" >
 |	< COLON: ":" >
 |	< BOOL_OP: "AND" | "OR" | "<=" | ">=" | "NOTEQUALS" | "EQUALS" | "NOT">
-|	< GT: ">" >
-|	< LT: "<" >
+|   < LT: "<" >
+|   < GT: ">" >
 |	< ADD_OP: "+" | "-" >
 |	< MULTIPLY: "*" >
 |	< DIVISION: "/" >
+|	< SQRT: "SQRT" >
 |	< MOD: "%" >
 | 	< POW: "^" >
 |	< HASHTAG: "#" >
@@ -330,9 +329,10 @@ void SimpleStatement() #void : {}
 **/
 void Declaration() #Declaration : {Token t; String name; Token value; String stringText;}
 {
-	t = <INT> name = Identifier() <ASSIGN> (Expression())* <SEMICOLON> {jjtThis.value = t.image;}
-	| t = <FLOAT> name = Identifier() <ASSIGN> (Expression())* <SEMICOLON> {jjtThis.value = t.image;}
-	| t = <STRING> name = Identifier() <ASSIGN> (Expression())* <SEMICOLON> {jjtThis.value = t.image;}
+	t = <INT> name = Identifier() <ASSIGN> (Expression())* <SEMICOLON> {jjtThis.value = t.image; ST.put(name, new STC("int", name));}
+	| t = <FLOAT> name = Identifier() <ASSIGN> (Expression())* <SEMICOLON> {jjtThis.value = t.image; ST.put(name, new STC("float", name));}
+	| t = <STRING> name = Identifier() <ASSIGN> (StringText())*  <SEMICOLON> {jjtThis.value = t.image; ST.put(name, new STC("string", name));}
+	| t = <BOOLEAN> name = Identifier() <ASSIGN> (Expression())* <SEMICOLON>{jjtThis.value = t.image; ST.put(name, new STC("boolean", name));}
 }
 	
 /**String DeclarationLogic() #void : {Token t;}
@@ -360,6 +360,7 @@ void Expression() #Expression : {Token t;}
 			| (t = <POW> Expression()){jjtThis.value = t.image;} #Add_op(2)
 			| (t = <LPAREN> Expression()<RPAREN> {jjtThis.value = t.image;} #Add_op(2))
 			| (t = <MOD> Expression()){jjtThis.value = t.image;} #Add_op(2)
+			| (t = <SQRT> Expression()){jjtThis.value = t.image;} #Add_op(2)
 	)*
 	)
 }
@@ -415,10 +416,11 @@ void WhileStatement() #void : {Token t;}
 **/
 void BooleanExpression() #void : {Token t;}
 {
-	Expression()( 
-	t = <BOOL_OP> Expression() {jjtThis.value = t.image;} #Bool_op(2)
-	| t = <GT> Expression() {jjtThis.value = t.image;} #Bool_op(2)
-	| t = <LT> Expression() {jjtThis.value = t.image;} #Bool_op(2)
+	Expression()(
+		t = <BOOL_OP> Expression() {jjtThis.value = t.image;} #Bool_op(2)
+	|	t = <LT> Expression() {jjtThis.value = t.image;} #Bool_op(2)
+	|	t = <GT> Expression() {jjtThis.value = t.image;} #Bool_op(2)
+
 	)*
 }
 
@@ -430,7 +432,7 @@ void BooleanExpression() #void : {Token t;}
 * @param Token t, this is the token that is sent to the PrintVisitor
 **/
 void FunctionCall() #FunctionCall : {Token t; String name;}
-{
+{ //System(dsada)
 	<CALL> name = Identifier() (Identifier())* <LPAREN>(Parameters())*<RPAREN><SEMICOLON>
 }
 
