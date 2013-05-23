@@ -9,3 +9,4 @@
 !PrintVisitor.java
 !STC.java
 !DataType.java
+!TypeCheckVisitor.java
