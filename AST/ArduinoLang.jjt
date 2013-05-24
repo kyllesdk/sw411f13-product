@@ -357,10 +357,10 @@ void Expression() #Expression : {Token t;}
 			(t = <ADD_OP> Expression()){jjtThis.value = t.image;} #Add_op(2)
 			| (t = <MULTIPLY> Expression()){jjtThis.value = t.image;} #Add_op(2)
 			| (t = <DIVISION> Expression()){jjtThis.value = t.image;} #Add_op(2)
-			| (t = <POW> Expression()){jjtThis.value = t.image;} #Add_op(2)
+			| (t = <POW>Number()){jjtThis.value = t.image;} #Add_op(2)
 			| (t = <LPAREN> Expression()<RPAREN> {jjtThis.value = t.image;} #Add_op(2))
 			| (t = <MOD> Expression()){jjtThis.value = t.image;} #Add_op(2)
-			| (t = <SQRT> Expression()){jjtThis.value = t.image;} #Add_op(2)
+			| (t = <SQRT><LPAREN>Expression()<RPAREN>){jjtThis.value = t.image;} #Add_op(2)
 	)*
 	)
 }

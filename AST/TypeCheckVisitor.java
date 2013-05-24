@@ -93,6 +93,12 @@ public class TypeCheckVisitor implements ArduinoLangVisitor {
 
 			return DataType.TypeUnknown;
 
+		} else if(((DataType)node.jjtGetChild(0).jjtAccept(this, data) == DataType.TypeBoolean) && ((DataType)node.jjtGetChild(1).jjtAccept(this, data) != DataType.TypeInteger)) {
+
+			_errorMessage = "A variable of type boolean has to have an integer (1,0) or identifier (true, false) as value.";
+
+			return DataType.TypeUnknown;
+
 		} else {
 			return DataType.Declaration;
 		}
@@ -125,6 +131,10 @@ public class TypeCheckVisitor implements ArduinoLangVisitor {
 */
 	 	// Checks if user is trying to add a float to an integer
 	 	if(((DataType)node.jjtGetChild(0).jjtAccept(this, data) == DataType.TypeInteger) && ((DataType)node.jjtGetChild(1).jjtAccept(this, data) == DataType.TypeFloat)) {
+
+	 		return DataType.TypeFloat;
+
+	 	} else if (((DataType)node.jjtGetChild(0).jjtAccept(this, data) == DataType.TypeFloat) && ((DataType)node.jjtGetChild(1).jjtAccept(this, data) == DataType.TypeInteger)) {
 
 	 		return DataType.TypeFloat;
 

@@ -5,6 +5,5 @@ void setup() do
 end
 
 void loop() do
-	int goodf = 24 - 2234324.4234 + 324.324;
-	string he = "hello";
+	int lol = 1^2;
 end
