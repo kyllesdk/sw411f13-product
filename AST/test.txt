@@ -5,6 +5,9 @@ void setup() do
 end
 
 void loop() do
-	int goodf = 24 - 2234324.4234 + 324.324;
+	float b = 1;
+	int goodf = 24 + b;
 	string he = "hello";
+
+	int b = 12 + 12^(2 + 3) + 234;
 end

@@ -116,13 +116,11 @@ TOKEN : /* Reserved words and literals */
 |	< DOUBLE: "double" >
 |	< ELSE: "else" >
 |	< ELSEIF: "elseif" >
-|	< FALSE: "false" >
 |	< FLOAT: "float" >
 |	< IF: "if" >
 |	< INT: "int" >
 |	< NULL: "null" >
 |	< STRING: "string" >
-|	< TRUE: "true" >
 |	< WHILE: "while" >
 | 	< DO: "do" >
 | 	< END: "end" >
@@ -332,7 +330,7 @@ void Declaration() #Declaration : {Token t; String name; Token value; String str
 	t = <INT> name = Identifier() <ASSIGN> (Expression())* <SEMICOLON> {jjtThis.value = t.image; ST.put(name, new STC("int", name));}
 	| t = <FLOAT> name = Identifier() <ASSIGN> (Expression())* <SEMICOLON> {jjtThis.value = t.image; ST.put(name, new STC("float", name));}
 	| t = <STRING> name = Identifier() <ASSIGN> (StringText())*  <SEMICOLON> {jjtThis.value = t.image; ST.put(name, new STC("string", name));}
-	| t = <BOOLEAN> name = Identifier() <ASSIGN> (Expression())* <SEMICOLON>{jjtThis.value = t.image; ST.put(name, new STC("boolean", name));}
+	| t = <BOOLEAN> name = Identifier() <ASSIGN> Number() <SEMICOLON>{jjtThis.value = t.image; ST.put(name, new STC("boolean", name));}
 }
 	
 /**String DeclarationLogic() #void : {Token t;}
@@ -357,10 +355,10 @@ void Expression() #Expression : {Token t;}
 			(t = <ADD_OP> Expression()){jjtThis.value = t.image;} #Add_op(2)
 			| (t = <MULTIPLY> Expression()){jjtThis.value = t.image;} #Add_op(2)
 			| (t = <DIVISION> Expression()){jjtThis.value = t.image;} #Add_op(2)
-			| (t = <POW> Expression()){jjtThis.value = t.image;} #Add_op(2)
+			| (t = <POW><LPAREN>Expression()<RPAREN>){jjtThis.value = t.image;} #Add_op(2)
 			| (t = <LPAREN> Expression()<RPAREN> {jjtThis.value = t.image;} #Add_op(2))
 			| (t = <MOD> Expression()){jjtThis.value = t.image;} #Add_op(2)
-			| (t = <SQRT> Expression()){jjtThis.value = t.image;} #Add_op(2)
+			| (t = <SQRT> <LPAREN>Expression()<RPAREN>){jjtThis.value = t.image;} #Add_op(2)
 	)*
 	)
 }
