@@ -438,12 +438,13 @@ void WhileStatement() #void : {Token t;}
 **/
 void BooleanExpression() #void : {Token t;}
 {
-	Expression()(
+	(<LPAREN>BooleanExpression()<RPAREN>
+	| Expression()(
 		t = <BOOL_OP> Expression() {jjtThis.value = t.image;} #Bool_op(2)
 	|	t = <LT> Expression() {jjtThis.value = t.image;} #Bool_op(2)
 	|	t = <GT> Expression() {jjtThis.value = t.image;} #Bool_op(2)
 
-	)*
+	)*)
 }
 
 /**

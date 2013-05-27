@@ -6,4 +6,8 @@ end
 
 void loop() do
 	int hello = 10 * SQRT(2) + 2.32323;
+	int i = 10 + (10 + 1);
+	if(b EQUALS b AND a EQUALS a) do
+	int h = 10;
+	end
 end

@@ -78,15 +78,6 @@ public class TypeCheckVisitor implements ArduinoLangVisitor {
 	public Object visit(ASTDeclaration node, Object data) {
 		PrintVisitor pv = new PrintVisitor();
 
-		//node.jjtGetChild(0).jjtAccept(this, data);
-		//node.jjtGetChild(1).jjtAccept(this, data);
-
-		//System.out.println("DECL: " + node.jjtGetChild(0).jjtAccept(this, data) + " VAL TYPE: " + node.jjtGetChild(1).jjtAccept(this, data));
-
-
-		//DataType childOne = (DataType)node.jjtGetChild(0).jjtAccept(this, data);
-		//DataType childTwo = (DataType)node.jjtGetChild(1).jjtAccept(this, data);
-
 		if(((DataType)node.jjtGetChild(0).jjtAccept(this, data) == DataType.TypeInteger) && ((DataType)node.jjtGetChild(1).jjtAccept(this, data) == DataType.TypeFloat)) {
 
 			_errorMessage = "Trying to add Float to Integer, this result in loss of precision.";
@@ -130,9 +121,6 @@ public class TypeCheckVisitor implements ArduinoLangVisitor {
 
 	public Object visit(ASTAdd_op node, Object data) {
 		PrintVisitor pv = new PrintVisitor();
-
-	 	 /*System.out.println("TYPE: " + (DataType)node.jjtGetChild(0).jjtAccept(this, data) + " " +  node.value);
-	 	 System.out.println("TYPE: " + (DataType)node.jjtGetChild(1).jjtAccept(this, data) + " " + node.value);*/
 
 	 	// Checks if user is trying to add a float to an integer
 	 	if(((DataType)node.jjtGetChild(0).jjtAccept(this, data) == DataType.TypeFloat) || ((DataType)node.jjtGetChild(1).jjtAccept(this, data) == DataType.TypeFloat)) {
@@ -207,10 +195,6 @@ public class TypeCheckVisitor implements ArduinoLangVisitor {
     	} else {
     		return DataType.TypeUnknown; // Type unkown her normalt
     	}
-
-    	
-    	//System.out.println("BALLADLASLDALD5");
-    	//return DataType.TypeNotImportant;
     }
 
     public Object visit(ASTStringText node, Object data) {

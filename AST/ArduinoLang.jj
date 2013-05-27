@@ -946,7 +946,8 @@ void WhileStatement()       : {Token t;}
 **/
 void BooleanExpression()       : {Token t;}
 {
-	Expression()(
+	(<LPAREN>BooleanExpression()<RPAREN>
+	| Expression()(
 		t = <BOOL_OP> Expression()/*@bgen(jjtree) #Bool_op( 2) */
                                            {
                                              ASTBool_op jjtn001 = new ASTBool_op(JJTBOOL_OP);
@@ -1005,7 +1006,7 @@ void BooleanExpression()       : {Token t;}
                                       }
 /*@egen*/            
 
-	)*
+	)*)
 }
 
 /**
