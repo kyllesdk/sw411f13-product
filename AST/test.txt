@@ -5,7 +5,7 @@ void setup() do
 end
 
 void loop() do
-	float b = 1;
+	float b = 1.12312;
 	int goodf = 24 + b;
 	string he = "hello";
 
