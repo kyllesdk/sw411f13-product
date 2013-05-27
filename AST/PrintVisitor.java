@@ -231,12 +231,7 @@ public class PrintVisitor implements ArduinoLangVisitor {
 	public Object visit(ASTAdd_op node, Object data) {
 		String nodeValueString = node.value.toString();
 		
-		if("SQRT".equals(nodeValueString)) {
-			node.jjtGetChild(0).jjtAccept(this, data);
-			System.out.print(" sqrt(");
-			node.jjtGetChild(1).jjtAccept(this, data);
-			System.out.print(")");
-		} else if("^".equals(nodeValueString)) {
+		if("^".equals(nodeValueString)) {	
 			System.out.print(" pow(");
 			node.jjtGetChild(0).jjtAccept(this, data);
 			System.out.print(", ");
@@ -247,6 +242,20 @@ public class PrintVisitor implements ArduinoLangVisitor {
 			System.out.print(" " + node.value + " ");
 			node.jjtGetChild(1).jjtAccept(this, data);
 		}
+		return data;
+	}
+
+	public Object visit(ASTDivide_op node, Object data) {
+		String nodeValueString = node.value.toString();
+		System.out.print(node.value);
+		
+		return data;
+	}
+	public Object visit(ASTSqrt_op node, Object data) {
+		String nodeValueString = node.value.toString();
+		System.out.print("sqrt");
+		System.out.print(node.value);
+
 		return data;
 	}
 

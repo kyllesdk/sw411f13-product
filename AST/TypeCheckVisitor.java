@@ -2,7 +2,7 @@ import java.util.*;
 import java.util.regex.*;
 
 public class TypeCheckVisitor implements ArduinoLangVisitor {
-	private String _errorMessage = "";
+	public String _errorMessage = "";
 
 	public Object visit(SimpleNode node, Object data) {
 		throw new RuntimeException("Visit SimpleNode");
@@ -106,7 +106,6 @@ public class TypeCheckVisitor implements ArduinoLangVisitor {
 	}
 
 	public Object visit(ASTExpression node, Object data) {
-
 		return(node.jjtGetChild(0).jjtAccept(this, data));
 	}
 
@@ -122,9 +121,18 @@ public class TypeCheckVisitor implements ArduinoLangVisitor {
 		return DataType.TypeNotImportant;
 	}
 
+	public Object visit(ASTDivide_op node, Object data) {
+
+		return DataType.TypeNotImportant;
+	}
+
+	public Object visit(ASTSqrt_op node, Object data) {
+		return DataType.TypeNotImportant;
+	}
+
 	public Object visit(ASTAdd_op node, Object data) {
 		PrintVisitor pv = new PrintVisitor();
-
+		
 	 	 /*System.out.println("TYPE: " + (DataType)node.jjtGetChild(0).jjtAccept(this, data) + " " +  node.value);
 	 	 System.out.println("TYPE: " + (DataType)node.jjtGetChild(1).jjtAccept(this, data) + " " + node.value);*/
 
@@ -232,7 +240,6 @@ public class TypeCheckVisitor implements ArduinoLangVisitor {
     }
 
     public Object visit(ASTNumber node, Object data) {
-    	//System.out.println(node.value);
     	
     	String number = node.value.toString();
     	try {

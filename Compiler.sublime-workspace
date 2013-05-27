@@ -4,6 +4,250 @@
 		"selected_items":
 		[
 			[
+				"Type",
+				"TypeIdentifier"
+			],
+			[
+				"E",
+				"EXPRESSION"
+			],
+			[
+				"BOO",
+				"BOOL_LITERAL"
+			],
+			[
+				"bool",
+				"boolNumber"
+			],
+			[
+				"Boo",
+				"TypeBoolean"
+			],
+			[
+				"jt",
+				"jjtGetChild"
+			],
+			[
+				"TypeI",
+				"TypeIdentifier"
+			],
+			[
+				"TYpe",
+				"TypeBoolean"
+			],
+			[
+				"Ty",
+				"TypeString"
+			],
+			[
+				"int",
+				"intNumber"
+			],
+			[
+				"jjt",
+				"jjtGetChild"
+			],
+			[
+				"Tp",
+				"TypeNotImportant"
+			],
+			[
+				"type",
+				"TypeInteger"
+			],
+			[
+				"data",
+				"DataType"
+			],
+			[
+				"Param",
+				"ParameterSeperator"
+			],
+			[
+				"Para",
+				"ParameterSeperator"
+			],
+			[
+				"M",
+				"MOD"
+			],
+			[
+				"get",
+				"jjtGetNumChildren"
+			],
+			[
+				"Progra",
+				"ProgramContent"
+			],
+			[
+				"Pogr",
+				"ProgramTop"
+			],
+			[
+				"pr",
+				"println"
+			],
+			[
+				"Program",
+				"ProgramTop"
+			],
+			[
+				"B",
+				"BOOL_OP"
+			],
+			[
+				"D",
+				"DIVISION"
+			],
+			[
+				"STR",
+				"STRING"
+			],
+			[
+				"jjtg",
+				"jjtGetChild"
+			],
+			[
+				"jjtget",
+				"jjtGetChild"
+			],
+			[
+				"De",
+				"Declaration"
+			],
+			[
+				"St",
+				"StringText"
+			],
+			[
+				"Par",
+				"Parameters"
+			],
+			[
+				"PAR",
+				"PARAMETER_LITERAL"
+			],
+			[
+				"T",
+				"Token"
+			],
+			[
+				"RBra",
+				"RBRACKET"
+			],
+			[
+				"RB",
+				"RBRACE"
+			],
+			[
+				"LBR",
+				"LBRACE"
+			],
+			[
+				"L",
+				"LBRACKET"
+			],
+			[
+				"stri",
+				"stringValue"
+			],
+			[
+				"srin",
+				"stringText"
+			],
+			[
+				"SE",
+				"SEMICOLON"
+			],
+			[
+				"String",
+				"StringText"
+			],
+			[
+				"While",
+				"WhileStatement"
+			],
+			[
+				"Elsei",
+				"ElseifStatement"
+			],
+			[
+				"Else",
+				"ElseStatement"
+			],
+			[
+				"ELS",
+				"ELSE"
+			],
+			[
+				"print",
+				"println"
+			],
+			[
+				"EL",
+				"ELSEIF"
+			],
+			[
+				"BOOL",
+				"BOOLEAN"
+			],
+			[
+				"dec",
+				"DeclarationLogic"
+			],
+			[
+				"BO",
+				"BOOLEAN"
+			],
+			[
+				"Proga",
+				"ProgramLoop"
+			],
+			[
+				"jj",
+				"jjtGetChild"
+			],
+			[
+				"END",
+				"EndStatement"
+			],
+			[
+				"S",
+				"SEMICOLON"
+			],
+			[
+				"pu",
+				"public"
+			],
+			[
+				"Sta",
+				"Statement"
+			],
+			[
+				"State",
+				"Statements"
+			],
+			[
+				"FLO",
+				"FLOAT_LITERAL"
+			],
+			[
+				"id",
+				"Identifier"
+			],
+			[
+				"NU",
+				"NUMBER"
+			],
+			[
+				"Iden",
+				"Identifier"
+			],
+			[
+				"re",
+				"return"
+			],
+			[
 				"marin",
 				"margin-left"
 			],
@@ -188,10 +432,6 @@
 				"STRING_LITERAL"
 			],
 			[
-				"L",
-				"LPAREN"
-			],
-			[
 				"Hello",
 				"HelloToYou"
 			],
@@ -202,10 +442,6 @@
 			[
 				"A",
 				"ArithmeticExpression"
-			],
-			[
-				"FLO",
-				"FLOATING_POINT_LITERAL"
 			],
 			[
 				"INT",
@@ -224,16 +460,8 @@
 				"Name"
 			],
 			[
-				"RB",
-				"RBRACE"
-			],
-			[
 				"LB",
 				"LBRACE"
-			],
-			[
-				"Iden",
-				"IDENTIFIER"
 			],
 			[
 				"Va",
@@ -242,10 +470,6 @@
 			[
 				"FL",
 				"FLOAT"
-			],
-			[
-				"String",
-				"STRING_LITERAL"
 			],
 			[
 				"If",
@@ -284,266 +508,48 @@
 				"STAR"
 			],
 			[
-				"M",
-				"MultiplicativeExpression"
-			],
-			[
-				"T",
-				"TRUE"
-			],
-			[
 				"statement",
 				"statement_list"
 			],
 			[
 				"retu",
 				"returnMessages"
-			],
-			[
-				"reciever",
-				"recieverDel"
-			],
-			[
-				"recie",
-				"recieverDel"
-			],
-			[
-				"message",
-				"messageObject"
-			],
-			[
-				"messa",
-				"messageId"
-			],
-			[
-				"mess",
-				"messageObject"
-			],
-			[
-				"reci",
-				"recieverRead"
-			],
-			[
-				"new",
-				"newReply"
-			],
-			[
-				"_con",
-				"_controlUser"
-			],
-			[
-				"last",
-				"lastName"
-			],
-			[
-				"firstname",
-				"firstName"
-			],
-			[
-				"sender",
-				"senderId"
-			],
-			[
-				"mark",
-				"markAsUnread"
-			],
-			[
-				"mes",
-				"messageCheckbox"
-			],
-			[
-				"reply",
-				"replyJson"
-			],
-			[
-				"_rec",
-				"_recieverDel"
-			],
-			[
-				"_reciever",
-				"_recieverDel"
-			],
-			[
-				"_sender",
-				"_senderDel"
-			],
-			[
-				"_reci",
-				"_recieverRead"
-			],
-			[
-				"mesag",
-				"messageId"
-			],
-			[
-				"reciv",
-				"recieverRead"
-			],
-			[
-				"recive",
-				"recieverId"
-			],
-			[
-				"EL",
-				"ELSE"
-			],
-			[
-				"focuse",
-				"focusElementID"
-			],
-			[
-				"foc",
-				"focusElementID"
-			],
-			[
-				"login",
-				"loginButton"
-			],
-			[
-				"load",
-				"loadMessages"
-			],
-			[
-				"fet",
-				"fetch_object"
-			],
-			[
-				"newM",
-				"newMessage"
-			],
-			[
-				"fa",
-				"fadeOut"
-			],
-			[
-				"mod",
-				"modal"
-			],
-			[
-				"modal",
-				"modal_container"
-			],
-			[
-				"newMes",
-				"newMessageButton"
-			],
-			[
-				"margin-",
-				"margin-right"
-			],
-			[
-				"ret",
-				"returnValue"
-			],
-			[
-				"me",
-				"messageObject"
-			],
-			[
-				"Control",
-				"ControlMessageReply"
-			],
-			[
-				"mesa",
-				"messageId"
-			],
-			[
-				"messagec",
-				"messageCheckbox"
-			],
-			[
-				"control",
-				"ControlMessage"
-			],
-			[
-				"statem",
-				"statement_list"
-			],
-			[
-				"getRe",
-				"getReplySenderId"
-			],
-			[
-				"text",
-				"textarea"
-			],
-			[
-				"add",
-				"addReplyJS"
-			],
-			[
-				"repl",
-				"replyArray"
-			],
-			[
-				"modelMe",
-				"modelMessage"
-			],
-			[
-				"setRe",
-				"setReplySenderId"
-			],
-			[
-				"ControlMessa",
-				"controlMessageReply"
-			],
-			[
-				"messageR",
-				"messageReplyControl"
-			],
-			[
-				"return",
-				"returnReplies"
-			],
-			[
-				"modelMessage",
-				"modelMessageReply"
-			],
-			[
-				"ModelMess",
-				"modelMessageReply"
-			],
-			[
-				"_re",
-				"_replySender"
-			],
-			[
-				"_reply",
-				"_ReplyContent"
-			],
-			[
-				"backgroun",
-				"background-color"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"contents": "hasMoreElements\nnextElement",
+			"contents": "Notes:\n\n- Overvej om vi skal have alle arduinos reserveret ord med\n- Fjern de literals vi ikke bruger\n\n\n\n\nMåske skal en boolean kunne være en identifier\n\nHusk multop\nHusk POW og SQRT",
 			"settings":
 			{
-				"buffer_size": 27,
+				"buffer_size": 182,
 				"line_ending": "Unix",
-				"name": "hasMoreElements"
+				"name": "Notes:"
 			}
 		},
 		{
-			"contents": "// Name:ExprLang.jjt\n// Author: David Sinclair      Date: 29 Aug 2012\n//\n// Definition of the ExprLang language, including abstract syntax tree generation\n//\n\noptions\n{\n  IGNORE_CASE = false;\n  MULTI=true;\n  VISITOR = true;\n}\n\nPARSER_BEGIN(ExprLang)\n\nimport java.io.*;\nimport java.util.*;\n\npublic class ExprLang\n{\n  public static Hashtable ST = new Hashtable();\n\n  public static void main(String[] args) throws ParseException, FileNotFoundException\n  {\n    String temp;\n    STC temp2;\n\n    if (args.length < 1)\n    {\n      System.out.println(\"Please pass in the filename.\");\n      System.exit(1);\n    }\n\n    ExprLang parser = new ExprLang(new FileInputStream(args[0]));\n\n    SimpleNode root = parser.program();\n\n    System.out.println(\"Abstract Syntax Tree:\");\n\n    root.dump(\" \");\n\n    System.out.println();\n    System.out.println(\"Symbol Table:\");\n\n    Enumeration t = ST.keys();\n\n    while (t.hasMoreElements())\n    {\n      temp = (String)t.nextElement();\n      temp2 = (STC)ST.get(temp);\n      System.out.println(temp);\n      if (temp2.type != null)\n      {\n        System.out.println(\" type = \" + temp2.type);\n      }\n      if (temp2.value != null)\n      {\n        System.out.println(\" value = \" + temp2.value);\n      }\n    }\n\n    System.out.println();\n    System.out.println(\"Program:\");\n    PrintVisitor pv = new PrintVisitor();\n    root.jjtAccept(pv, null);\n\n    System.out.println();\n    System.out.println(\"Type Checking:\");\n    TypeCheckVisitor tc = new TypeCheckVisitor();\n    root.jjtAccept(tc, ST);    \n  }\n}\n\nPARSER_END(ExprLang)\n\nTOKEN_MGR_DECLS:\n{\n  static int linenumber = 0;\n}\n\nSKIP:   /* Whitespace */\n{\n  \"\\t\"\n| \"\\n\" {linenumber++;}\n| \"\\r\"\n| \" \"\n}\n\nTOKEN:\n{\n  <LPAREN: \"(\">\n| <RPAREN: \")\">\n| <ADD_OP: \"+\" | \"-\">\n| <MULT_OP: \"*\" | \"/\">\n| <NOT_OP: \"~\">\n| <BOOL_OP: \"&\" | \"|\">\n| <INT: \"int\">\n| <BOOL: \"bool\">\n| <NUMBER: ([\"0\"-\"9\"])+>\n| <ID: ([\"a\"-\"z\",\"A\"-\"Z\"])+>\n| <SEMIC: \";\">\n}\n\n\n\nSimpleNode program() : {}\n{\n  Stms() <EOF> {return jjtThis;}\n}\n\nvoid Stms() #void : {}\n{\n  (SimpleStm() <SEMIC> [Stms() #Stms(2)] )\n}\n\nvoid SimpleStm() #void : {}\n{\n  (expression())\n | (declaration())\n}\n\nvoid declaration() #void : {Token t; String name;}\n{\n  t = <INT> name = identifier() {jjtThis.value = t.image;\n                          ST.put(name, new STC(\"Int\", name));} #Decl(1)\n| t = <BOOL> name = identifier() {jjtThis.value = t.image;\n                           ST.put(name, new STC(\"Bool\", name));} #Decl(1)\n}\n\n\nvoid expression() #void : {Token t;}\n{\n  term()\n  (\n    (t = <ADD_OP> term() {jjtThis.value = t.image;} #Add_op(2)\n    )\n  | (t = <BOOL_OP> term() {jjtThis.value = t.image;} #Bool_op(2)\n    )\n  )*\n}\n\nvoid term() #void : {Token t;}\n{\n  <NOT_OP> factor() #Not_op(1)\n|\n  factor()\n  (t = <MULT_OP> factor() {jjtThis.value = t.image;} #Mult_op(2)\n  )*\n}\n\nvoid factor() #void : {}\n{\n  (<LPAREN> expression() #Exp(1) <RPAREN>\n  | number()\n  | identifier()\n  )\n}\n\nvoid number() : {Token t;}\n{\n  t = <NUMBER> {jjtThis.value = t.image;\n               }\n}\n\nString identifier() : {Token t;}\n{\n  t = <ID> {jjtThis.value = t.image; return t.image;}\n}\n",
+			"file": "AST/test.txt",
 			"settings":
 			{
-				"buffer_size": 3062,
-				"line_ending": "Unix",
-				"name": "// Name:ExprLang.jjt"
+				"buffer_size": 144,
+				"line_ending": "Unix"
 			}
 		},
 		{
-			"contents": "// Name:STC.java\n// Author: David Sinclair      Date: 29 Aug 2012\n//\n// Very basic Symbol Table implementation\n//\n\nimport java.util.*;\n\npublic class STC extends Object\n{\n    String type;\n    String value;\n\n    public STC(String itype, String ivalue)\n    {\n	type = itype;\n	value = ivalue;\n    }\n}",
+			"file": "AST/ArduinoLang.jj",
 			"settings":
 			{
-				"buffer_size": 295,
-				"line_ending": "Unix",
-				"name": "// Name:STC.java"
+				"buffer_size": 48406,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "AST/ArduinoLang.jjt",
+			"settings":
+			{
+				"buffer_size": 14618,
+				"line_ending": "Unix"
 			}
 		}
 	],
@@ -566,6 +572,22 @@
 				"Set Syntax: Java"
 			],
 			[
+				"syn java",
+				"Set Syntax: Java"
+			],
+			[
+				"jav",
+				"Set Syntax: Java"
+			],
+			[
+				"ja",
+				"Set Syntax: Java"
+			],
+			[
+				"pack",
+				"Package Control: Install Package"
+			],
+			[
 				"sni",
 				"Snippet: html"
 			],
@@ -580,18 +602,6 @@
 			[
 				"syn php",
 				"Set Syntax: PHP"
-			],
-			[
-				"jav",
-				"Set Syntax: Java"
-			],
-			[
-				"ja",
-				"Set Syntax: Java"
-			],
-			[
-				"pack",
-				"Package Control: Install Package"
 			],
 			[
 				"syntax c",
@@ -631,9 +641,25 @@
 	},
 	"file_history":
 	[
+		"/Users/kyllesdk/Dropbox/4. Semester - Software/sw411f13-product/AST/ArduinoLang.jj",
+		"/Users/kyllesdk/Dropbox/4. Semester - Software/sw411f13-product/AST/TypeCheckVisitor.java",
+		"/Users/kyllesdk/Dropbox/4. Semester - Software/sw411f13-product/AST/PrintVisitor.java",
+		"/Users/kyllesdk/Dropbox/4. Semester - Software/sw411f13-product/AST/ArduinoLang.jjt",
+		"/Users/kyllesdk/Dropbox/4. Semester - Software/sw411f13-product/AST/test.txt",
+		"/Users/kyllesdk/Dropbox/4. Semester - Software/sw411f13-paper/readingguide.tex",
+		"/Users/kyllesdk/Dropbox/4. Semester - Software/sw411f13-paper/report.tex",
+		"/Users/kyllesdk/Dropbox/4. Semester - Software/sw411f13-product/AST/STC.java",
+		"/Users/kyllesdk/Dropbox/4. Semester - Software/sw411f13-product/AST/DataType.java",
+		"/Users/kyllesdk/Dropbox/4. Semester - Software/sw411f13-product/AST/SimpleNode.java",
+		"/Users/kyllesdk/Desktop/targetSourceLang.java",
+		"/Users/kyllesdk/Dropbox/4. Semester - Software/sw411f13-product/AST/errors.txt",
+		"/Users/kyllesdk/Dropbox/4. Semester - Software/sw411f13-paper/indhold/Analysis/design_criteria.tex",
+		"/Users/kyllesdk/Dropbox/4. Semester - Software/sw411f13-product/AST/compileScript",
+		"/Users/kyllesdk/Dropbox/4. Semester - Software/Javacc/javacc-5.0/examples/JJTreeExamples/Eg4DumpVisitor.java",
+		"/Users/kyllesdk/Dropbox/4. Semester - Software/Javacc/javacc-5.0/examples/JJTreeExamples/eg4.jjt",
+		"/Users/kyllesdk/Dropbox/4. Semester - Software/sw411f13-product/AST/SimpleCharStream.java",
 		"/Users/kyllesdk/Dropbox/4. Semester - Software/sw411f13-product/AST/ArduinoAST.jjt",
 		"/Users/kyllesdk/Dropbox/4. Semester - Software/sw411f13-paper/indhold/Implementation/javacc.tex",
-		"/Users/kyllesdk/Dropbox/4. Semester - Software/sw411f13-paper/report.tex",
 		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1367102543/afrprog.dk/www/wordify/application/views/test.php",
 		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1367102592/afrprog.dk/www/wordify/application/loader.php",
 		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1367101545/afrprog.dk/www/wordify/application/loader.php",
@@ -725,7 +751,6 @@
 		"/Users/kyllesdk/Dropbox/4. Semester - Software/Syntax og Semantik/Textspørgsmål/Lectures/Lecture9/TekstspørgsmålOmPumpingLemmaForKontekstfrieSprog-exercise.synctex.tex",
 		"/Users/kyllesdk/Sites/laravel-cms/application/routes.php",
 		"/Users/kyllesdk/Dropbox/4. Semester - Software/Syntax og Semantik/Textspørgsmål/Lectures/Lecture10/TekstspørgsmålOmOperationalSemantikForKommandoerIBims.-exercise.tex",
-		"/Users/kyllesdk/Dropbox/4. Semester - Software/sw411f13-paper/readingguide.tex",
 		"/Users/kyllesdk/Dropbox/4. Semester - Software/Syntax og Semantik/Textspørgsmål/Lectures/Lecture10/lecture.tex",
 		"/Users/kyllesdk/Dropbox/4. Semester - Software/sw411f13-product/Scanner/test.txt",
 		"/Users/kyllesdk/Dropbox/4. Semester - Software/sw411f13-paper/indhold/Analysis/second_syntax_example.tex",
@@ -743,22 +768,7 @@
 		"/Users/kyllesdk/Dropbox/4. Semester - Software/Javacc/javacc-5.0/examples/SimpleExamples/Simple2.jj",
 		"/Users/kyllesdk/Dropbox/4. Semester - Software/Javacc/javacc-5.0/examples/SimpleExamples/Simple3.jj",
 		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366142571/projs.dk/www/projectstarter/application/view/loadMessages.php",
-		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366142513/projs.dk/www/projectstarter/application/view/message.php",
-		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366143660/afrprog.dk/www/wordifier/application/views/header.php",
-		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366141332/afrprog.dk/www/wordifier/application/css/home.css",
-		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366143674/afrprog.dk/www/wordifier/application/js/home.js",
-		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366143819/afrprog.dk/www/wordifier/application/views/home.php",
-		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366141274/afrprog.dk/www/wordifier/application/views/test.php",
-		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366142436/afrprog.dk/www/wordifier/application/js/home.js",
-		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366142013/afrprog.dk/www/wordifier/application/views/home.php",
-		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366123339/afrprog.dk/www/wordifier/application/css/home.css",
-		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366123414/afrprog.dk/www/wordifier/application/views/home.php",
-		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366124229/afrprog.dk/www/wordifier/application/views/header.php",
-		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366124405/afrprog.dk/www/wordifier/application/js/home.js",
-		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366123317/afrprog.dk/www/wordifier/application/views/header.php",
-		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366045773/afrprog.dk/www/wordifier/application/css/home.css",
-		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366035169/afrprog.dk/www/wordifier/application/views/home.php",
-		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366036377/afrprog.dk/www/wordifier/application/controllers/UserCTR.php"
+		"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1366142513/projs.dk/www/projectstarter/application/view/message.php"
 	],
 	"find":
 	{
@@ -776,6 +786,69 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"\"+\"",
+			"andet",
+			"identifier",
+			"round",
+			"jjtGetChild",
+			"identifier",
+			"tc",
+			"root",
+			"not",
+			"factor",
+			"empty",
+			"return",
+			"call",
+			"not",
+			"^",
+			"Number",
+			"t",
+			"number",
+			"comma",
+			"COMMA",
+			"2",
+			"1",
+			"< ID",
+			"Name()",
+			"2",
+			"Identifier",
+			"Expression",
+			"bool_op",
+			"T",
+			"t",
+			"String",
+			"Token",
+			"ST",
+			"bool",
+			"BOOLEAN",
+			"\"=\"",
+			"< ID",
+			"term",
+			"exp",
+			"Decl",
+			"term",
+			"Bool_op",
+			"BOOL_OP",
+			"Add_op",
+			"ADD_OP",
+			"Not_op",
+			"NOT_OP",
+			"NUMBER",
+			"Name()",
+			"decla",
+			"NumberType",
+			"PrimitiveTypes",
+			"identifier",
+			"ArduinoAST",
+			"identifier",
+			"#void",
+			"visitor",
+			"exprlangVisitor",
+			"literal",
+			"identi",
+			"printVisitor",
+			"declaration",
+			"astprogram",
 			"program",
 			"div",
 			"li",
@@ -840,70 +913,7 @@
 			"literal",
 			"Identifier",
 			"ID()",
-			"ID",
-			"literal",
-			"NULL",
-			"FALSE",
-			"Literal",
-			"EXPONENT",
-			"literal",
-			"IDENTIFIER",
-			"STRING_LITERAL",
-			"Literal()",
-			"expression()",
-			"expression",
-			"expressio",
-			"epressio",
-			"!",
-			"expression",
-			"num",
-			"numeral",
-			"Reciever",
-			"reciever",
-			"Reciever",
-			"reciever",
-			"Reciever",
-			"reciever",
-			"markAsUnread",
-			"red",
-			"0d71aa",
-			"<",
-			"id",
-			"<",
-			"boxId",
-			"(numerals)",
-			"then",
-			"*",
-			"B",
-			"a",
-			"x",
-			"''",
-			"``",
-			"lstlisting",
-			"}",
-			"\\textbf{",
-			"Sigma",
-			"B",
-			"subsection",
-			"section",
-			"subsection",
-			"$",
-			"''",
-			"$_SESSION['userid']",
-			"modal",
-			"include_once",
-			"attr",
-			".messageCheckbox",
-			"attr",
-			"\n",
-			"::",
-			"this",
-			"senderId",
-			"\"",
-			"#",
-			"span",
-			"\n",
-			"\\mid"
+			"ID"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -921,28 +931,30 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
 					"settings":
 					{
-						"buffer_size": 27,
+						"buffer_size": 182,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								27,
-								27
+								182,
+								182
 							]
 						],
 						"settings":
 						{
-							"auto_name": "hasMoreElements",
+							"auto_name": "Notes:",
 							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
 							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
@@ -950,65 +962,93 @@
 						"zoom_level": 1.0
 					},
 					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 1,
-			"sheets":
-			[
+				},
 				{
 					"buffer": 1,
+					"file": "AST/test.txt",
 					"settings":
 					{
-						"buffer_size": 3062,
+						"buffer_size": 144,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2734,
-								2734
+								118,
+								118
 							]
 						],
 						"settings":
 						{
-							"auto_name": "// Name:ExprLang.jjt",
 							"incomplete_sync": null,
-							"syntax": "Packages/Java/Java.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 1726.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 2,
+					"file": "AST/ArduinoLang.jj",
 					"settings":
 					{
-						"buffer_size": 295,
+						"buffer_size": 48406,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								114,
-								114
+								22651,
+								22651
 							]
 						],
 						"settings":
 						{
-							"auto_name": "// Name:STC.java",
 							"incomplete_sync": null,
-							"syntax": "Packages/Text/Plain text.tmLanguage"
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Java/Java.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 9097.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "AST/ArduinoLang.jjt",
+					"settings":
+					{
+						"buffer_size": 14618,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								9170,
+								9170
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Java/Java.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 5075.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1033,18 +1073,11 @@
 				0,
 				1,
 				1
-			],
-			[
-				1,
-				0,
-				2,
-				1
 			]
 		],
 		"cols":
 		[
 			0.0,
-			0.5,
 			1.0
 		],
 		"rows":
@@ -1073,6 +1106,10 @@
 		"selected_items":
 		[
 			[
+				".jj",
+				"ArduinoAST.jjt"
+			],
+			[
 				"",
 				"/var/folders/l8/q9q_fdsx70l9xnzn3xm7hry40000gn/T/sublime-sftp-browse-1359391786/projectstarter@imezzo.dk/application/control/control.project.php"
 			]
@@ -1087,7 +1124,7 @@
 		],
 		"width": 380.0
 	},
-	"show_minimap": false,
+	"show_minimap": true,
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
