@@ -4,6 +4,7 @@
   IGNORE_CASE = false;
                
                  
+  DEBUG_PARSER = true;
 }
 
 PARSER_BEGIN(ArduinoLang)
@@ -530,11 +531,11 @@ void Declaration()              : {/*@bgen(jjtree) Declaration */
                                                                                    jjtc000 = false;
                                                                                  }
 /*@egen*/ {jjtn000.value = t.image; ST.put(name, new STC("string", name));}
-	| t = <BOOLEAN> name = Identifier() <ASSIGN> Number() <SEMICOLON>/*@bgen(jjtree)*/
-                                                                         {
-                                                                           jjtree.closeNodeScope(jjtn000, true);
-                                                                           jjtc000 = false;
-                                                                         }
+	| t = <BOOLEAN> name = Identifier() <ASSIGN> BooleanNumber() <SEMICOLON>/*@bgen(jjtree)*/
+                                                                                {
+                                                                                  jjtree.closeNodeScope(jjtn000, true);
+                                                                                  jjtc000 = false;
+                                                                                }
 /*@egen*/{jjtn000.value = t.image; ST.put(name, new STC("boolean", name));}/*@bgen(jjtree)*/
         } catch (Throwable jjte000) {
           if (jjtc000) {
@@ -603,80 +604,99 @@ void Expression()             : {/*@bgen(jjtree) Expression */
                                                      }
                                                    }
 /*@egen*/           
+			| (t = <MINUS> Expression())/*@bgen(jjtree) #Add_op( 2) */
+                                                    {
+                                                      ASTAdd_op jjtn002 = new ASTAdd_op(JJTADD_OP);
+                                                      boolean jjtc002 = true;
+                                                      jjtree.openNodeScope(jjtn002);
+                                                    }
+                                                    try {
+/*@egen*//*@bgen(jjtree)*/
+                                                    {
+                                                      jjtree.closeNodeScope(jjtn002,  2);
+                                                      jjtc002 = false;
+                                                    }
+/*@egen*/{jjtn002.value = t.image;}/*@bgen(jjtree)*/
+                                                    } finally {
+                                                      if (jjtc002) {
+                                                        jjtree.closeNodeScope(jjtn002,  2);
+                                                      }
+                                                    }
+/*@egen*/           
 			| (t = <MULTIPLY> Expression())/*@bgen(jjtree) #Add_op( 2) */
                                                        {
-                                                         ASTAdd_op jjtn002 = new ASTAdd_op(JJTADD_OP);
-                                                         boolean jjtc002 = true;
-                                                         jjtree.openNodeScope(jjtn002);
+                                                         ASTAdd_op jjtn003 = new ASTAdd_op(JJTADD_OP);
+                                                         boolean jjtc003 = true;
+                                                         jjtree.openNodeScope(jjtn003);
                                                        }
                                                        try {
 /*@egen*//*@bgen(jjtree)*/
                                                        {
-                                                         jjtree.closeNodeScope(jjtn002,  2);
-                                                         jjtc002 = false;
+                                                         jjtree.closeNodeScope(jjtn003,  2);
+                                                         jjtc003 = false;
                                                        }
-/*@egen*/{jjtn002.value = t.image;}/*@bgen(jjtree)*/
+/*@egen*/{jjtn003.value = t.image;}/*@bgen(jjtree)*/
                                                        } finally {
-                                                         if (jjtc002) {
-                                                           jjtree.closeNodeScope(jjtn002,  2);
+                                                         if (jjtc003) {
+                                                           jjtree.closeNodeScope(jjtn003,  2);
                                                          }
                                                        }
 /*@egen*/           
 			| Divide_op()
 			| (t = <POW><LPAREN>Expression()<RPAREN>)/*@bgen(jjtree) #Add_op( 2) */
                                                                  {
-                                                                   ASTAdd_op jjtn003 = new ASTAdd_op(JJTADD_OP);
-                                                                   boolean jjtc003 = true;
-                                                                   jjtree.openNodeScope(jjtn003);
+                                                                   ASTAdd_op jjtn004 = new ASTAdd_op(JJTADD_OP);
+                                                                   boolean jjtc004 = true;
+                                                                   jjtree.openNodeScope(jjtn004);
                                                                  }
                                                                  try {
 /*@egen*//*@bgen(jjtree)*/
                                                                  {
-                                                                   jjtree.closeNodeScope(jjtn003,  2);
-                                                                   jjtc003 = false;
+                                                                   jjtree.closeNodeScope(jjtn004,  2);
+                                                                   jjtc004 = false;
                                                                  }
-/*@egen*/{jjtn003.value = t.image;}/*@bgen(jjtree)*/
+/*@egen*/{jjtn004.value = t.image;}/*@bgen(jjtree)*/
                                                                  } finally {
-                                                                   if (jjtc003) {
-                                                                     jjtree.closeNodeScope(jjtn003,  2);
+                                                                   if (jjtc004) {
+                                                                     jjtree.closeNodeScope(jjtn004,  2);
                                                                    }
                                                                  }
 /*@egen*/           
 			| (t = <LPAREN> Expression()<RPAREN>/*@bgen(jjtree) #Add_op( 2) */
                                                              {
-                                                               ASTAdd_op jjtn004 = new ASTAdd_op(JJTADD_OP);
-                                                               boolean jjtc004 = true;
-                                                               jjtree.openNodeScope(jjtn004);
+                                                               ASTAdd_op jjtn005 = new ASTAdd_op(JJTADD_OP);
+                                                               boolean jjtc005 = true;
+                                                               jjtree.openNodeScope(jjtn005);
                                                              }
                                                              try {
 /*@egen*//*@bgen(jjtree)*/
                                                              {
-                                                               jjtree.closeNodeScope(jjtn004,  2);
-                                                               jjtc004 = false;
+                                                               jjtree.closeNodeScope(jjtn005,  2);
+                                                               jjtc005 = false;
                                                              }
-/*@egen*/ {jjtn004.value = t.image;}/*@bgen(jjtree)*/
+/*@egen*/ {jjtn005.value = t.image;}/*@bgen(jjtree)*/
                                                              } finally {
-                                                               if (jjtc004) {
-                                                                 jjtree.closeNodeScope(jjtn004,  2);
+                                                               if (jjtc005) {
+                                                                 jjtree.closeNodeScope(jjtn005,  2);
                                                                }
                                                              }
 /*@egen*/           )
 			| (t = <MOD> Expression())/*@bgen(jjtree) #Add_op( 2) */
                                                   {
-                                                    ASTAdd_op jjtn005 = new ASTAdd_op(JJTADD_OP);
-                                                    boolean jjtc005 = true;
-                                                    jjtree.openNodeScope(jjtn005);
+                                                    ASTAdd_op jjtn006 = new ASTAdd_op(JJTADD_OP);
+                                                    boolean jjtc006 = true;
+                                                    jjtree.openNodeScope(jjtn006);
                                                   }
                                                   try {
 /*@egen*//*@bgen(jjtree)*/
                                                   {
-                                                    jjtree.closeNodeScope(jjtn005,  2);
-                                                    jjtc005 = false;
+                                                    jjtree.closeNodeScope(jjtn006,  2);
+                                                    jjtc006 = false;
                                                   }
-/*@egen*/{jjtn005.value = t.image;}/*@bgen(jjtree)*/
+/*@egen*/{jjtn006.value = t.image;}/*@bgen(jjtree)*/
                                                   } finally {
-                                                    if (jjtc005) {
-                                                      jjtree.closeNodeScope(jjtn005,  2);
+                                                    if (jjtc006) {
+                                                      jjtree.closeNodeScope(jjtn006,  2);
                                                     }
                                                   }
 /*@egen*/           
@@ -1126,6 +1146,28 @@ void Parameters()            : {/*@bgen(jjtree) Parameter */
 void Term()       : {}
 {
 	(Number() | Identifier())
+}
+
+Token BooleanNumber() : {/*@bgen(jjtree) BooleanNumber */
+                         ASTBooleanNumber jjtn000 = new ASTBooleanNumber(JJTBOOLEANNUMBER);
+                         boolean jjtc000 = true;
+                         jjtree.openNodeScope(jjtn000);
+/*@egen*/Token t;}
+{/*@bgen(jjtree) BooleanNumber */
+        try {
+/*@egen*/
+	t = <POSITIVENUMBER>/*@bgen(jjtree)*/
+                             {
+                               jjtree.closeNodeScope(jjtn000, true);
+                               jjtc000 = false;
+                             }
+/*@egen*/ {jjtn000.value = t.image; return t;}/*@bgen(jjtree)*/
+        } finally {
+          if (jjtc000) {
+            jjtree.closeNodeScope(jjtn000, true);
+          }
+        }
+/*@egen*/
 }
 
 /**

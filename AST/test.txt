@@ -5,8 +5,5 @@ void setup() do
 end
 
 void loop() do
-	float b =  .10 + 1.12312;
-	int h = 10/1 + 1230;
-	int a = 10 + SQRT(2);
-	string he = "hello";
+	int hello = 10 * SQRT(2) + 2.32323;
 end

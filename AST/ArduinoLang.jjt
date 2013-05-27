@@ -3,6 +3,7 @@ options
   IGNORE_CASE = false;
   MULTI = true;
   VISITOR = true;
+  DEBUG_PARSER = true;
 }
 
 PARSER_BEGIN(ArduinoLang)
@@ -341,7 +342,7 @@ void Declaration() #Declaration : {Token t; String name; Token value; String str
 	t = <INT> name = Identifier() <ASSIGN> (Expression())* <SEMICOLON> {jjtThis.value = t.image; ST.put(name, new STC("int", name));}
 	| t = <FLOAT> name = Identifier() <ASSIGN> (Expression())* <SEMICOLON> {jjtThis.value = t.image; ST.put(name, new STC("float", name));}
 	| t = <STRING> name = Identifier() <ASSIGN> (StringText())*  <SEMICOLON> {jjtThis.value = t.image; ST.put(name, new STC("string", name));}
-	| t = <BOOLEAN> name = Identifier() <ASSIGN> Number() <SEMICOLON>{jjtThis.value = t.image; ST.put(name, new STC("boolean", name));}
+	| t = <BOOLEAN> name = Identifier() <ASSIGN> BooleanNumber() <SEMICOLON>{jjtThis.value = t.image; ST.put(name, new STC("boolean", name));}
 }
 	
 /**String DeclarationLogic() #void : {Token t;}
@@ -365,6 +366,7 @@ void Expression() #Expression : {Token t;}
 	|	Sqrt_op()
 	|	Term()(
 			(t = <ADD_OP> Expression()){jjtThis.value = t.image;} #Add_op(2)
+			| (t = <MINUS> Expression()){jjtThis.value = t.image;} #Add_op(2)
 			| (t = <MULTIPLY> Expression()){jjtThis.value = t.image;} #Add_op(2)
 			| Divide_op()
 			| (t = <POW><LPAREN>Expression()<RPAREN>){jjtThis.value = t.image;} #Add_op(2)
@@ -489,6 +491,11 @@ void Parameters() #Parameter : {Token t; String text;}
 void Term() #void : {}
 {
 	(Number() | Identifier())
+}
+
+Token BooleanNumber() : {Token t;}
+{
+	t = <POSITIVENUMBER> {jjtThis.value = t.image; return t;}
 }
 
 /**

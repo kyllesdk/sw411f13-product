@@ -55,7 +55,6 @@ public class TypeCheckVisitor implements ArduinoLangVisitor {
 			System.out.println();
 		}
 
-
 		return (node.jjtGetChild(1).jjtAccept(this, data));
 	}
 
@@ -78,28 +77,27 @@ public class TypeCheckVisitor implements ArduinoLangVisitor {
 
 	public Object visit(ASTDeclaration node, Object data) {
 		PrintVisitor pv = new PrintVisitor();
+
 		//node.jjtGetChild(0).jjtAccept(this, data);
 		//node.jjtGetChild(1).jjtAccept(this, data);
 
 		//System.out.println("DECL: " + node.jjtGetChild(0).jjtAccept(this, data) + " VAL TYPE: " + node.jjtGetChild(1).jjtAccept(this, data));
 
-		if(((DataType)node.jjtGetChild(0).jjtAccept(this, data) == DataType.TypeInteger) && ((DataType)node.jjtGetChild(1).jjtAccept(this, data) == DataType.TypeInteger)) {
 
-			return DataType.Declaration;
+		//DataType childOne = (DataType)node.jjtGetChild(0).jjtAccept(this, data);
+		//DataType childTwo = (DataType)node.jjtGetChild(1).jjtAccept(this, data);
 
-
-		} else if(((DataType)node.jjtGetChild(0).jjtAccept(this, data) == DataType.TypeInteger) && ((DataType)node.jjtGetChild(1).jjtAccept(this, data) == DataType.TypeFloat)) {
+		if(((DataType)node.jjtGetChild(0).jjtAccept(this, data) == DataType.TypeInteger) && ((DataType)node.jjtGetChild(1).jjtAccept(this, data) == DataType.TypeFloat)) {
 
 			_errorMessage = "Trying to add Float to Integer, this result in loss of precision.";
 
 			return DataType.TypeUnknown;
 
-		} else if(((DataType)node.jjtGetChild(0).jjtAccept(this, data) == DataType.TypeBoolean) && ((DataType)node.jjtGetChild(1).jjtAccept(this, data) != DataType.TypeInteger)) {
+		} else if(((DataType)node.jjtGetChild(0).jjtAccept(this, data) != DataType.TypeBoolean) && ((DataType)node.jjtGetChild(1).jjtAccept(this, data) == DataType.TypeBoolean)) {
 
-			_errorMessage = "A variable of type boolean has to have an integer (1,0) or identifier (true, false) as value.";
+			_errorMessage = "Expected the variable to be of type boolean.";
 
 			return DataType.TypeUnknown;
-
 		}
 
 		return DataType.Declaration;
@@ -132,22 +130,18 @@ public class TypeCheckVisitor implements ArduinoLangVisitor {
 
 	public Object visit(ASTAdd_op node, Object data) {
 		PrintVisitor pv = new PrintVisitor();
-		
+
 	 	 /*System.out.println("TYPE: " + (DataType)node.jjtGetChild(0).jjtAccept(this, data) + " " +  node.value);
 	 	 System.out.println("TYPE: " + (DataType)node.jjtGetChild(1).jjtAccept(this, data) + " " + node.value);*/
 
 	 	// Checks if user is trying to add a float to an integer
-	 	if(((DataType)node.jjtGetChild(0).jjtAccept(this, data) == DataType.TypeInteger) && ((DataType)node.jjtGetChild(1).jjtAccept(this, data) == DataType.TypeFloat)) {
+	 	if(((DataType)node.jjtGetChild(0).jjtAccept(this, data) == DataType.TypeFloat) || ((DataType)node.jjtGetChild(1).jjtAccept(this, data) == DataType.TypeFloat)) {
 
 	 		return DataType.TypeFloat;
 
-	 	} else if (((DataType)node.jjtGetChild(0).jjtAccept(this, data) == DataType.TypeFloat) && ((DataType)node.jjtGetChild(1).jjtAccept(this, data) == DataType.TypeInteger)) {
+	 	} else if (((DataType)node.jjtGetChild(0).jjtAccept(this, data) == DataType.TypeInteger) && ((DataType)node.jjtGetChild(1).jjtAccept(this, data) == DataType.TypeInteger)) {
 
-	 		return DataType.TypeFloat;
-
-		} else if(((DataType)node.jjtGetChild(0).jjtAccept(this, data) == DataType.TypeInteger) && ((DataType)node.jjtGetChild(1).jjtAccept(this, data) == DataType.TypeInteger)) {
-
-			return DataType.TypeInteger;
+	 		return DataType.TypeInteger;
 		
 		} else if(((DataType)node.jjtGetChild(0).jjtAccept(this, data) == DataType.TypeFloat) && ((DataType)node.jjtGetChild(1).jjtAccept(this, data) == DataType.TypeFloat)) {
 
@@ -156,54 +150,39 @@ public class TypeCheckVisitor implements ArduinoLangVisitor {
 		} else if(((DataType)node.jjtGetChild(0).jjtAccept(this, data) == DataType.TypeString) && ((DataType)node.jjtGetChild(1).jjtAccept(this, data) == DataType.TypeString)) {
 
 			return DataType.TypeString;
+
+		} 
+
+		return DataType.Declaration;
+
 		}
 
-
+	 public Object visit(ASTBool_op node, Object data) {
 
 		return DataType.TypeNotImportant;
 
 	}
 
-	 public Object visit(ASTBool_op node, Object data) {
-	// 	if(((DataType)node.jjtGetChild(0).jjtAccept(this, data) == DataType.TypeBoolean) && ((DataType)node.jjtGetChild(1).jjtAccept(this, data) == DataType.TypeBoolean)) {
-
-	// 		return DataType.TypeInteger;
-		
-	// 	} else if(((DataType)node.jjtGetChild(0).jjtAccept(this, data) == DataType.TypeInteger) && ((DataType)node.jjtGetChild(1).jjtAccept(this, data) == DataType.TypeInteger)) {
-
-	// 		return DataType.TypeInteger;
-
-	// 	} else if(((DataType)node.jjtGetChild(0).jjtAccept(this, data) == DataType.TypeFloat) && ((DataType)node.jjtGetChild(1).jjtAccept(this, data) == DataType.TypeFloat)) {
-
-	// 		return DataType.TypeFloat;
-
-	// 	} else if(((DataType)node.jjtGetChild(0).jjtAccept(this, data) == DataType.TypeIdentifier) && ((DataType)node.jjtGetChild(1).jjtAccept(this, data) == DataType.TypeIdentifier)) {
-
-	// 		return DataType.TypeIdentifier;  
-
-	// 	} else {
-	// 		return DataType.TypeUnknown;
-	// 	}
-	return DataType.TypeNotImportant;
-	}
-
 	 public Object visit(ASTMult_op node, Object data) {
-	// 	if(((DataType)node.jjtGetChild(0).jjtAccept(this, data) == DataType.TypeInteger) && ((DataType)node.jjtGetChild(1).jjtAccept(this, data) == DataType.TypeInteger)) {
+	 	if(((DataType)node.jjtGetChild(0).jjtAccept(this, data) == DataType.TypeFloat) || ((DataType)node.jjtGetChild(1).jjtAccept(this, data) == DataType.TypeFloat)) {
 
-	// 		return DataType.TypeInteger;
+	 		return DataType.TypeFloat;
 
-	// 	} else if(((DataType)node.jjtGetChild(0).jjtAccept(this, data) == DataType.TypeFloat) && ((DataType)node.jjtGetChild(1).jjtAccept(this, data) == DataType.TypeFloat)) {
+	 	} else if (((DataType)node.jjtGetChild(0).jjtAccept(this, data) == DataType.TypeInteger) && ((DataType)node.jjtGetChild(1).jjtAccept(this, data) == DataType.TypeInteger)) {
 
-	// 		return DataType.TypeFloat;
+	 		return DataType.TypeInteger;
+		
+		} else if(((DataType)node.jjtGetChild(0).jjtAccept(this, data) == DataType.TypeFloat) && ((DataType)node.jjtGetChild(1).jjtAccept(this, data) == DataType.TypeFloat)) {
 
-	// 	} else if(((DataType)node.jjtGetChild(0).jjtAccept(this, data) == DataType.TypeIdentifier) && ((DataType)node.jjtGetChild(1).jjtAccept(this, data) == DataType.TypeIdentifier)) {
+			return DataType.TypeFloat;
 
-	// 		return DataType.TypeIdentifier;  
+		} else if(((DataType)node.jjtGetChild(0).jjtAccept(this, data) == DataType.TypeString) && ((DataType)node.jjtGetChild(1).jjtAccept(this, data) == DataType.TypeString)) {
 
-	// 	} else {
-	// 		return DataType.TypeUnknown;
-	// 	}	
-	return DataType.TypeNotImportant;
+			return DataType.TypeString;
+
+		} 
+
+		return DataType.Declaration;
 	}
 
 	// Gets the type of the identifier
@@ -237,6 +216,19 @@ public class TypeCheckVisitor implements ArduinoLangVisitor {
     public Object visit(ASTStringText node, Object data) {
     	//System.out.println("BALLADLASLDALD6");
     	return DataType.TypeString;
+    }
+
+    public Object visit(ASTBooleanNumber node, Object data) {
+    	String number = node.value.toString();
+
+		if("(0)".equals(number) || "(1)".equals(number)) {
+			
+			return DataType.TypeBoolean;
+		} else {
+			System.out.println("Type error: A boolean number has to be 1 or 0");
+			
+			return DataType.TypeNotImportant;
+		}	 
     }
 
     public Object visit(ASTNumber node, Object data) {

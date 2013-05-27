@@ -44,14 +44,6 @@ public class PrintVisitor implements ArduinoLangVisitor {
 		return data;
 	}
 
-	/*public Object visit(ASTProgramStart node, Object data) {
-		node.jjtGetChild(0).jjtAccept(this, data);
-		System.out.println("");
-		node.jjtGetChild(1).jjtAccept(this, data);
-
-		return data;
-	}*/
-
 	public Object visit(ASTProgramSetup node, Object data) {
 		System.out.print("void ");
 		System.out.print(node.value);
@@ -259,13 +251,6 @@ public class PrintVisitor implements ArduinoLangVisitor {
 		return data;
 	}
 
-	/*public Object visit(ASTSringAdd_op node, Object data) {
-		node.jjtGetChild(0).jjtAccept(this, data);
-		nonde.jjtGetChild(1).jjtAccept(this, data);
-
-		return data;
-	}*/
-
 	public Object visit(ASTBool_op node, Object data) {
 		node.jjtGetChild(0).jjtAccept(this, data);
 		System.out.print(" ");
@@ -302,6 +287,11 @@ public class PrintVisitor implements ArduinoLangVisitor {
     }
 
     public Object visit(ASTStringText node, Object data) {
+    	System.out.print(node.value);
+
+    	return data;
+    }
+    public Object visit(ASTBooleanNumber node, Object data) {
     	System.out.print(node.value);
 
     	return data;
