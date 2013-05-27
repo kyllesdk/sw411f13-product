@@ -122,7 +122,6 @@ public class TypeCheckVisitor implements ArduinoLangVisitor {
 	public Object visit(ASTAdd_op node, Object data) {
 		PrintVisitor pv = new PrintVisitor();
 
-	 	// Checks if user is trying to add a float to an integer
 	 	if(((DataType)node.jjtGetChild(0).jjtAccept(this, data) == DataType.TypeFloat) || ((DataType)node.jjtGetChild(1).jjtAccept(this, data) == DataType.TypeFloat)) {
 
 	 		return DataType.TypeFloat;
