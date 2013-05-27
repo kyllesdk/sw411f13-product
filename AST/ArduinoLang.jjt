@@ -134,6 +134,7 @@ TOKEN :
 {
 	< INTEGER_LITERAL: 
 		<DECIMAL_LITERAL> (["l", "L"])?
+		| <MINUS><DECIMAL_LITERAL> (["l", "L"])?
 	>
 |	< #DECIMAL_LITERAL: ["0"-"9"] (["0" - "9"])* >
 
@@ -142,6 +143,9 @@ TOKEN :
 		| "." (["0" - "9"])+ <EXPONENT> (["f", "F", "d", "D"])?
 		| (["0" - "9"])+ <EXPONENT> (["f", "F", "d", "D"])?
 		| (["0" - "9"])+ (<EXPONENT>)? ["f", "F", "d", "D"]
+		| <MINUS>(["0" - "9"])+ "." (["0" - "9"])* (<EXPONENT>)? (["f", "F", "d", "D"])?
+		| <MINUS>(["0" - "9"])+ <EXPONENT> (["f", "F", "d", "D"])?
+		| <MINUS>(["0" - "9"])+ (<EXPONENT>)? ["f", "F", "d", "D"]
 	>
 
 |	< #EXPONENT: ["e", "E"] (["+","-"])? (["0" - "9"])+ > // Bruger vi den?
@@ -208,7 +212,8 @@ TOKEN : /* Operators */
 |	< BOOL_OP: "AND" | "OR" | "<=" | ">=" | "NOTEQUALS" | "EQUALS" | "NOT">
 |   < LT: "<" >
 |   < GT: ">" >
-|	< ADD_OP: "+" | "-" >
+|	< ADD_OP: "+" >
+|	< MINUS: "-" >
 |	< MULTIPLY: "*" >
 |	< DIVISION: "/" >
 |	< SQRT: "SQRT" >

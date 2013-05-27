@@ -6,8 +6,7 @@ end
 
 void loop() do
 	float b = 1.12312;
-	int goodf = 24 + b;
+	float goodf = -100.2131;
+	int b = 10 + goodf;
 	string he = "hello";
-
-	int b = 12 + 12^(2 + 3) + 234;
 end
