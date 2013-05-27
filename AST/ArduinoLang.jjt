@@ -358,6 +358,7 @@ void Declaration() #Declaration : {Token t; String name; Token value; String str
 * @accepts TERM ^ EXPRESSION, power a number e.g. 2^2
 * @accepts TERM (EXPRESSION), parenthesis can be used
 * @accepts TERM % EXPRESSION, the modulus operation
+* @accepts TERM SQRT(POSITIVENUMBER) | SQRT(POSITIVENUMBER), the square root operation
 * @param Token t, this is the token that is sent to the PrintVisitor
 **/
 void Expression() #Expression : {Token t;}
@@ -377,11 +378,21 @@ void Expression() #Expression : {Token t;}
 	)
 }
 
+
+/**
+* Divide operation
+* @accepts /NUMBER (besides 0)
+* @hint This is used fir the Expression method
+*/
 void Divide_op() #Divide_op : {Token t;}
 {
 	(t = <DIVISION> [Expression()]){jjtThis.value = t.image;}
 }
 
+/**
+* @accepts "("POSITIVENUMBER")" (also 0)
+* @hint This is ised in the Expression
+*/
 void Sqrt_op() #Sqrt_op : {Token t;}
 {
 	(<SQRT> t =<POSITIVENUMBER> [Expression()]){jjtThis.value = t.image;}
