@@ -74,7 +74,10 @@ public class TypeCheckVisitor implements ArduinoLangVisitor {
 		return DataType.Declaration;
 	}
 
-
+	/**
+	* Declaration
+	* @hint Checks for type errors between child on and child two, and sends the error to the property errorMessage
+	**/
 	public Object visit(ASTDeclaration node, Object data) {
 		PrintVisitor pv = new PrintVisitor();
 
@@ -172,48 +175,58 @@ public class TypeCheckVisitor implements ArduinoLangVisitor {
 		return DataType.Declaration;
 	}
 
-	// Gets the type of the identifier
+	// Gets the type of the identifier and returns et as a DataType
     public Object visit(ASTIdentifier node, Object data) {
-     	//System.out.print("BALLADLASLDALD");
     	Hashtable ST = (Hashtable) data;
     	STC hashTableEntry;
 
     	hashTableEntry = (STC)ST.get(node.value);
 
-    	//System.out.println(" TYPE: " + hashTableEntry.type);
-
     	if(hashTableEntry.type == "int") {
-    		
     		return DataType.TypeInteger;
+
     	} else if(hashTableEntry.type == "float") {
     		return DataType.TypeFloat;
+    
     	} else if(hashTableEntry.type == "string") {
     		return DataType.TypeString;
+    
     	} else if(hashTableEntry.type == "boolean") {
     		return DataType.TypeBoolean;
+    
     	} else {
-    		return DataType.TypeUnknown; // Type unkown her normalt
+    		return DataType.TypeUnknown;
     	}
     }
 
     public Object visit(ASTStringText node, Object data) {
-    	//System.out.println("BALLADLASLDALD6");
     	return DataType.TypeString;
     }
 
+    /**
+    * BooleanNumber
+    * @hint This is implemented to get the Token and analyse it to see if it is a boolean number (0) or (1) and then returns the correct value
+    **/
     public Object visit(ASTBooleanNumber node, Object data) {
     	String number = node.value.toString();
 
+    	// Checks if the value is (0) or (1)
 		if("(0)".equals(number) || "(1)".equals(number)) {
 			
 			return DataType.TypeBoolean;
 		} else {
+
+			// Print error
 			System.out.println("Type error: A boolean number has to be 1 or 0");
 			
-			return DataType.TypeNotImportant;
+			return DataType.TypeNotImportant; // Maybe TypeUnknown here?
 		}	 
     }
 
+    /**
+    * Number - Check if the number can be converted to Integer, if it can it returns DataType of integer, else it returns a DataType float
+    * @hint a "try" statement is used here, because if the integer can not be converted i will throw and exception and crash the problem (IF this exception is not catched and handled)
+    **/
     public Object visit(ASTNumber node, Object data) {
     	
     	String number = node.value.toString();
