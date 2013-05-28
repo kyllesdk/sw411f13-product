@@ -222,6 +222,13 @@ public class PrintVisitor implements ArduinoLangVisitor {
 		return data;
 	}
 
+	public Object visit(ASTFunctionCallAsExpression node, Object data) {
+		String nodeValueString = node.value.toString();
+		System.out.print(node.value);
+
+		return data;
+	}
+
 	/**
 	* ClassInstantiation
 	* @prints CLASSNAME VARIABLE((PARAMETERS,)*);
@@ -363,7 +370,14 @@ public class PrintVisitor implements ArduinoLangVisitor {
     	return data;
     }
     public Object visit(ASTBooleanNumber node, Object data) {
-    	System.out.print(node.value);
+    	String number = node.value.toString();
+
+    	// Checks if the value is (0) or (1)
+		if("[0]".equals(number)) {
+			System.out.print("0");
+		} else if("[1]".equals(number)) {
+			System.out.print("1");
+		}
 
     	return data;
     }

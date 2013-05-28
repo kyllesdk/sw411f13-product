@@ -1,13 +1,20 @@
-#include <LiquidCrystal.h>
-
 void setup() do
-	int h = 10;
+	call Serial.begin(9600);
+	call lcd.begin(8, 2);
+
+	// Print a message to the LCD.
+	call lcd.print("hello, world!");
+	call Serial.println("hello, world!");
+	call delay(2000);
 end
 
 void loop() do
-	int hello = 10 * SQRT(2) + 2.32323;
-	int i = 10 + (10 + 1);
-	if(b EQUALS b AND a EQUALS a) do
-	int h = 10;
-	end
+	call lcd.clear();
+
+	// print the number of seconds since reset:
+	int runTime = millis();
+	int time = runTime/1000;
+	call lcd.print(time);
+	call Serial.println(time);
+	call delay(1000);
 end

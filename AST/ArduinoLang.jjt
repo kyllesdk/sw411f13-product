@@ -220,7 +220,7 @@ TOKEN : /* Operators */
 		"/" ["1"-"9"] (["0" - "9"])* 
 		| "/" <MINUS>["1"-"9"] (["0" - "9"])* >
 |	< SQRT: "SQRT" >
-|	< POSITIVENUMBER: "("["0"-"9"] (["0" - "9"])*")" >
+|	< POSITIVENUMBER: "["["0"-"9"] (["0" - "9"])*"]" >
 |	< MOD: "%" >
 | 	< POW: "^" >
 |	< HASHTAG: "#" >
@@ -239,6 +239,7 @@ TOKEN : /* Seperators */
 |	< COMMA: "," >
 |	< DOT: "." > 
 |	< ID: ["a"-"z","A"-"Z","."] ( ["a"-"z","A"-"Z","0"-"9", "."] )* >
+|	< FUNCTIONCALLNAME: ["a"-"z","A"-"Z"] ( ["a"-"z","A"-"Z","0"-"9"] )* "()" >
 }
 
 /*********************************************
@@ -361,6 +362,7 @@ void Declaration() #Declaration : {Token t; String name; Token value; String str
 void Expression() #Expression : {Token t;}
 {
 	(<LPAREN> Expression() <RPAREN>
+	|	FunctionCallAsExpression()
 	|	Sqrt_op()
 	|	Term()(
 			(t = <ADD_OP> Expression()){jjtThis.value = t.image;} #Add_op(2)
@@ -370,11 +372,16 @@ void Expression() #Expression : {Token t;}
 			| (t = <POW><LPAREN>Expression()<RPAREN>){jjtThis.value = t.image;} #Add_op(2)
 			| (t = <LPAREN> Expression()<RPAREN> {jjtThis.value = t.image;} #Add_op(2))
 			| (t = <MOD> Expression()){jjtThis.value = t.image;} #Add_op(2)
-			| Sqrt_op()
+			| Sqrt_op() [Expression()]
+			| FunctionCallAsExpression()
 	)*
 	)
 }
 
+void FunctionCallAsExpression() #FunctionCallAsExpression : {Token t;}
+{
+	(t = <FUNCTIONCALLNAME>[Expression()]) {jjtThis.value = t.image;}
+}
 
 /**
 * Divide operation

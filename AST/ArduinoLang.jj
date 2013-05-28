@@ -224,7 +224,7 @@ TOKEN : /* Operators */
 		"/" ["1"-"9"] (["0" - "9"])* 
 		| "/" <MINUS>["1"-"9"] (["0" - "9"])* >
 |	< SQRT: "SQRT" >
-|	< POSITIVENUMBER: "("["0"-"9"] (["0" - "9"])*")" >
+|	< POSITIVENUMBER: "["["0"-"9"] (["0" - "9"])*"]" >
 |	< MOD: "%" >
 | 	< POW: "^" >
 |	< HASHTAG: "#" >
@@ -243,6 +243,7 @@ TOKEN : /* Seperators */
 |	< COMMA: "," >
 |	< DOT: "." > 
 |	< ID: ["a"-"z","A"-"Z","."] ( ["a"-"z","A"-"Z","0"-"9", "."] )* >
+|	< FUNCTIONCALLNAME: ["a"-"z","A"-"Z"] ( ["a"-"z","A"-"Z","0"-"9"] )* "()" >
 }
 
 /*********************************************
@@ -581,6 +582,7 @@ void Expression()             : {/*@bgen(jjtree) Expression */
         try {
 /*@egen*/
 	(<LPAREN> Expression() <RPAREN>
+	|	FunctionCallAsExpression()
 	|	Sqrt_op()
 	|	Term()(
 			(t = <ADD_OP> Expression())/*@bgen(jjtree) #Add_op( 2) */
@@ -698,7 +700,8 @@ void Expression()             : {/*@bgen(jjtree) Expression */
                                                     }
                                                   }
 /*@egen*/           
-			| Sqrt_op()
+			| Sqrt_op() [Expression()]
+			| FunctionCallAsExpression()
 	)*
 	)/*@bgen(jjtree)*/
         } catch (Throwable jjte000) {
@@ -723,6 +726,41 @@ void Expression()             : {/*@bgen(jjtree) Expression */
 /*@egen*/
 }
 
+void FunctionCallAsExpression()                           : {/*@bgen(jjtree) FunctionCallAsExpression */
+                                                             ASTFunctionCallAsExpression jjtn000 = new ASTFunctionCallAsExpression(JJTFUNCTIONCALLASEXPRESSION);
+                                                             boolean jjtc000 = true;
+                                                             jjtree.openNodeScope(jjtn000);
+/*@egen*/Token t;}
+{/*@bgen(jjtree) FunctionCallAsExpression */
+        try {
+/*@egen*/
+	(t = <FUNCTIONCALLNAME>[Expression()])/*@bgen(jjtree)*/
+                                               {
+                                                 jjtree.closeNodeScope(jjtn000, true);
+                                                 jjtc000 = false;
+                                               }
+/*@egen*/ {jjtn000.value = t.image;}/*@bgen(jjtree)*/
+        } catch (Throwable jjte000) {
+          if (jjtc000) {
+            jjtree.clearNodeScope(jjtn000);
+            jjtc000 = false;
+          } else {
+            jjtree.popNode();
+          }
+          if (jjte000 instanceof RuntimeException) {
+            throw (RuntimeException)jjte000;
+          }
+          if (jjte000 instanceof ParseException) {
+            throw (ParseException)jjte000;
+          }
+          throw (Error)jjte000;
+        } finally {
+          if (jjtc000) {
+            jjtree.closeNodeScope(jjtn000, true);
+          }
+        }
+/*@egen*/
+}
 
 /**
 * Divide operation

@@ -74,6 +74,10 @@ public class TypeCheckVisitor implements ArduinoLangVisitor {
 		return DataType.TypeNotImportant;
 	}
 
+	public Object visit(ASTFunctionCallAsExpression node, Object data) {
+		return DataType.TypeNotImportant;
+	}
+
 	/**
 	* Declaration
 	* @hint Checks for type errors between child on and child two, and sends the error to the property errorMessage
@@ -211,7 +215,7 @@ public class TypeCheckVisitor implements ArduinoLangVisitor {
     	String number = node.value.toString();
 
     	// Checks if the value is (0) or (1)
-		if("(0)".equals(number) || "(1)".equals(number)) {
+		if("[0]".equals(number) || "[1]".equals(number)) {
 			
 			return DataType.TypeBoolean;
 		} else {
