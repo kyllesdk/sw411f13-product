@@ -59,19 +59,19 @@ public class TypeCheckVisitor implements ArduinoLangVisitor {
 	}
 
 	public Object visit(ASTIf_stm node, Object data) {
-		return DataType.Declaration;
+		return DataType.TypeNotImportant;
 	}
 
 	public Object visit(ASTEls_stm node, Object data) {
-		return DataType.Declaration;
+		return DataType.TypeNotImportant;
 	}
 
 	public Object visit(ASTElsIf_stm node, Object data) {
-		return DataType.Declaration;
+		return DataType.TypeNotImportant;
 	}
 
 	public Object visit(ASTWhileStatement node, Object data) {
-		return DataType.Declaration;
+		return DataType.TypeNotImportant;
 	}
 
 	/**

@@ -46,19 +46,14 @@ public class ArduinoLang/*@bgen(jjtree)*/implements ArduinoLangTreeConstants/*@e
 		while (t.hasMoreElements()) {
 			temp = (String)t.nextElement();
 			temp2 = (STC)ST.get(temp);
+			System.out.print("Name: ");
 			System.out.println(temp); // DOC HERE PLEASE
 
 			if(temp2.type != null) {
 				System.out.println(" type = " + temp2.type); // Print the type of the element
 			}
 
-			if(temp2.value != null) {
-				System.out.println(" value = " + temp2.value); // Print the value of the element
-			}
-
-			if(temp2.stringValue != null) {
-				System.out.println(" value = " + temp2.stringValue); // Print the value of the element if it is a string
-			}
+			System.out.println("");
 		}
 		
 		System.out.println("=========================================="); // New line
@@ -67,6 +62,8 @@ public class ArduinoLang/*@bgen(jjtree)*/implements ArduinoLangTreeConstants/*@e
 		PrintVisitor pv = new PrintVisitor(); // Instantiate the print visitor
 		root.jjtAccept(pv, null); // Print out the program
 
+
+		System.out.println("=========================================="); // New line
 		System.out.println();
 		System.out.println("Type Checking:");
 		TypeCheckVisitor tc = new TypeCheckVisitor();
@@ -513,7 +510,7 @@ void Declaration()              : {/*@bgen(jjtree) Declaration */
 {/*@bgen(jjtree) Declaration */
         try {
 /*@egen*/
-	t = <INT> name = Identifier() <ASSIGN> (Expression())* <SEMICOLON>/*@bgen(jjtree)*/
+	t = <INT>  name =Identifier() <ASSIGN> (Expression())* <SEMICOLON>/*@bgen(jjtree)*/
                                                                            {
                                                                              jjtree.closeNodeScope(jjtn000, true);
                                                                              jjtc000 = false;
@@ -572,6 +569,7 @@ void Declaration()              : {/*@bgen(jjtree) Declaration */
 * @accepts TERM ^ EXPRESSION, power a number e.g. 2^2
 * @accepts TERM (EXPRESSION), parenthesis can be used
 * @accepts TERM % EXPRESSION, the modulus operation
+* @accepts TERM SQRT(POSITIVENUMBER) | SQRT(POSITIVENUMBER), the square root operation
 * @param Token t, this is the token that is sent to the PrintVisitor
 **/
 void Expression()             : {/*@bgen(jjtree) Expression */
@@ -725,6 +723,12 @@ void Expression()             : {/*@bgen(jjtree) Expression */
 /*@egen*/
 }
 
+
+/**
+* Divide operation
+* @accepts /NUMBER (besides 0)
+* @hint This is used fir the Expression method
+*/
 void Divide_op()            : {/*@bgen(jjtree) Divide_op */
                                ASTDivide_op jjtn000 = new ASTDivide_op(JJTDIVIDE_OP);
                                boolean jjtc000 = true;
@@ -761,6 +765,10 @@ void Divide_op()            : {/*@bgen(jjtree) Divide_op */
 /*@egen*/
 }
 
+/**
+* @accepts "("POSITIVENUMBER")" (also 0)
+* @hint This is ised in the Expression
+*/
 void Sqrt_op()          : {/*@bgen(jjtree) Sqrt_op */
                            ASTSqrt_op jjtn000 = new ASTSqrt_op(JJTSQRT_OP);
                            boolean jjtc000 = true;

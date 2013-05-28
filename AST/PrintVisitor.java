@@ -346,8 +346,6 @@ public class PrintVisitor implements ArduinoLangVisitor {
 		int i = node.jjtGetNumChildren();
 		if(i > 1) {
 			node.jjtGetChild(1).jjtAccept(this, data);
-		} else {
-			node.jjtGetChild(1).jjtAccept(this, data);
 		}
 
 		return data;		

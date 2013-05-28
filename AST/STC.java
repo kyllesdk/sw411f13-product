@@ -16,7 +16,7 @@ public class STC extends Object {
 		stringValue = iValue;
 	}
 
-	public STC(String iType, String iName,  Token iValue) {
+	/*public STC(String iType, String iName,  Token iValue) {
 		type = iType;
 		name = iName;
 		value = iValue;
@@ -26,5 +26,5 @@ public class STC extends Object {
 		type = iType;
 		name = iName;
 		stringValue = iStringValue;
-	}
+	}*/
 }
